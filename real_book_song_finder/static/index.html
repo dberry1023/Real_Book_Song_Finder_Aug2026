@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Real Book Song Finder</title>
+<style>
+  :root {
+    --bg: #14161d; --panel: #1c1f29; --panel2: #232736;
+    --text: #e8e6df; --dim: #9a97a8; --accent: #e8b44a; --accent2: #7aa2f7;
+    --border: #303446;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Segoe UI", system-ui, sans-serif;
+    background: var(--bg); color: var(--text);
+    height: 100vh; display: flex; flex-direction: column; overflow: hidden;
+  }
+  header {
+    display: flex; align-items: center; gap: 14px;
+    padding: 10px 18px; background: var(--panel);
+    border-bottom: 1px solid var(--border); flex: 0 0 auto;
+  }
+  header h1 { font-size: 19px; font-weight: 700; letter-spacing: .5px; }
+  header h1 .accent { color: var(--accent); }
+  header .stats { color: var(--dim); font-size: 13px; }
+  header .spacer { flex: 1; }
+  button {
+    background: var(--panel2); color: var(--text); border: 1px solid var(--border);
+    border-radius: 7px; padding: 6px 12px; font-size: 13px; cursor: pointer;
+  }
+  button:hover { border-color: var(--accent); }
+  button.active { background: var(--accent); color: #1a1405; font-weight: 600; border-color: var(--accent); }
+  #layout { display: flex; flex: 1 1 auto; min-height: 0; }
+
+  /* ---------- sidebar ---------- */
+  #sidebar {
+    width: 360px; flex: 0 0 auto; display: flex; flex-direction: column;
+    background: var(--panel); border-right: 1px solid var(--border); min-height: 0;
+  }
+  #searchWrap { padding: 12px 12px 8px; }
+  #filters {
+    padding: 0 12px 10px; border-bottom: 1px solid var(--border);
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  #bookChips { display: flex; flex-wrap: wrap; gap: 5px; }
+  .chip {
+    font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 11px;
+    border: 1px solid var(--border); background: var(--panel2); color: var(--dim);
+    cursor: pointer; user-select: none;
+  }
+  .chip:hover { border-color: var(--accent); }
+  .chip.on { color: #14161d; border-color: transparent; }
+  .chip.on.c-bk1 { background: #e8b44a; } .chip.on.c-bk2 { background: #f2a25c; }
+  .chip.on.c-bk3 { background: #a8c7fa; } .chip.on.c-bk4 { background: #7ee0b8; }
+  .chip.on.c-bk5 { background: #d4c063; } .chip.on.c-bk6 { background: #f28ca8; }
+  .chip.on.c-xmas { background: #8ce99a; }
+  #filterRow2 { display: flex; gap: 6px; align-items: center; }
+  #keySel, #composerBox {
+    background: var(--panel2); color: var(--text);
+    border: 1px solid var(--border); border-radius: 7px;
+    padding: 5px 8px; font-size: 12px; outline: none;
+  }
+  #keySel:focus, #composerBox:focus { border-color: var(--accent); }
+  #keySel { flex: 0 0 auto; }
+  #composerBox { flex: 1 1 auto; min-width: 0; }
+  #clearFilters { display: none; font-size: 11px; padding: 4px 9px; }
+  #clearFilters.show { display: inline-block; }
+  #search {
+    width: 100%; padding: 10px 13px; font-size: 15px;
+    background: var(--panel2); color: var(--text);
+    border: 1px solid var(--border); border-radius: 9px; outline: none;
+  }
+  #search:focus { border-color: var(--accent); }
+  #resultInfo { padding: 6px 14px; font-size: 12px; color: var(--dim); }
+  #list { flex: 1 1 auto; overflow-y: auto; min-height: 0; }
+  .item {
+    padding: 9px 14px; cursor: pointer; border-bottom: 1px solid #20232e;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .item:hover { background: var(--panel2); }
+  .item.sel { background: #2c3046; box-shadow: inset 3px 0 0 var(--accent); }
+  .item .tw { flex: 1; min-width: 0; }
+  .item .t { display: block; font-size: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .item .sub { display: block; font-size: 11px; color: var(--dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .badge {
+    font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 5px;
+    color: #14161d; flex: 0 0 auto;
+  }
+  .b-bk1 { background: #e8b44a; } .b-bk2 { background: #f2a25c; }
+  .b-bk3 { background: #a8c7fa; } .b-bk4 { background: #7ee0b8; }
+  .b-bk5 { background: #d4c063; } .b-bk6 { background: #f28ca8; }
+  .b-xmas { background: #8ce99a; }
+
+  /* ---------- viewer ---------- */
+  #main { flex: 1 1 auto; display: flex; flex-direction: column; min-width: 0; min-height: 0; }
+  #toolbar {
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    padding: 8px 14px; background: var(--panel); border-bottom: 1px solid var(--border);
+  }
+  #songTitle { font-size: 16px; font-weight: 600; margin-right: 6px; }
+  #srcTabs { display: flex; gap: 6px; flex-wrap: wrap; }
+  #pageCtl { display: flex; align-items: center; gap: 6px; margin-left: auto; }
+  #pageLabel { font-size: 13px; color: var(--dim); min-width: 130px; text-align: center; }
+  #viewer {
+    flex: 1 1 auto; overflow: auto; background: #0d0e13;
+    display: flex; justify-content: center; align-items: flex-start; padding: 14px;
+  }
+  #pageImg {
+    background: #fff; border-radius: 4px; box-shadow: 0 4px 30px rgba(0,0,0,.6);
+    display: none;
+  }
+  #welcome { color: var(--dim); margin-top: 12vh; text-align: center; line-height: 2; font-size: 15px; }
+  #welcome .big { font-size: 44px; }
+  kbd {
+    background: var(--panel2); border: 1px solid var(--border); border-radius: 4px;
+    padding: 1px 6px; font-size: 12px;
+  }
+  #spinner { display: none; color: var(--accent); margin-top: 10vh; font-size: 15px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>&#119070; Real Book <span class="accent">Song Finder</span></h1>
+  <span class="stats" id="stats"></span>
+  <span class="spacer"></span>
+  <button id="randomBtn" title="Open a random song">&#127922; Random song</button>
+</header>
+
+<div id="layout">
+  <div id="sidebar">
+    <div id="searchWrap">
+      <input id="search" type="search" placeholder="Song or composer&hellip;  (press / to focus)"
+             autocomplete="off" autofocus>
+    </div>
+    <div id="filters">
+      <div id="bookChips"></div>
+      <div id="filterRow2">
+        <select id="keySel"><option value="">Any key</option></select>
+        <input id="composerBox" type="search" placeholder="Filter by composer&hellip;"
+               autocomplete="off" list="composerList">
+        <datalist id="composerList"></datalist>
+        <button id="clearFilters" title="Clear all filters">&times; Clear</button>
+      </div>
+    </div>
+    <div id="resultInfo"></div>
+    <div id="list"></div>
+  </div>
+
+  <div id="main">
+    <div id="toolbar">
+      <span id="songTitle"></span>
+      <span id="srcTabs"></span>
+      <span id="pageCtl" style="display:none">
+        <button id="zoomOut" title="Zoom out (press -)">&minus;</button>
+        <button id="zoomFit" title="Fit width (press 0)">Fit</button>
+        <button id="zoomIn" title="Zoom in (press +)">+</button>
+        <button id="prevPg" title="Previous page (&larr;)">&#9664;</button>
+        <span id="pageLabel"></span>
+        <button id="nextPg" title="Next page (&rarr;)">&#9654;</button>
+      </span>
+    </div>
+    <div id="viewer">
+      <div id="welcome">
+        <div class="big">&#127927;</div>
+        Search for any of the songs in your Real Books,<br>
+        or click one in the list to display its sheet music.<br><br>
+        <kbd>/</kbd> search &nbsp; <kbd>&larr;</kbd><kbd>&rarr;</kbd> flip pages &nbsp;
+        <kbd>Enter</kbd> open first match &nbsp; <kbd>+</kbd><kbd>&minus;</kbd> zoom &nbsp;
+        <kbd>0</kbd> fit width
+      </div>
+      <div id="spinner">Loading page&hellip;</div>
+      <img id="pageImg" alt="sheet music page">
+    </div>
+  </div>
+</div>
+
+<script>
+"use strict";
+const BOOK_SHORT = {bk1:"RB1", bk2:"RB2", bk3:"RB3", bk4:"RB4", bk5:"5th Ed", bk6:"6th Ed", xmas:"Xmas"};
+const KEY_ORDER = ["C","Db","D","Eb","E","F","F#","Gb","G","Ab","A","Bb","B",
+                   "Cm","C#m","Dm","Ebm","Em","Fm","F#m","Gm","G#m","Am","Bbm","Bm"];
+let DB = null, songs = [], filtered = [], selId = null, cur = null;
+let bookFilter = new Set();  // empty = all books
+// cur = {song, srcIdx, pdfPage, zoom}   zoom: 0 = fit width, else px width
+
+const $ = id => document.getElementById(id);
+
+function norm(s) {
+  return s.toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g, "")
+          .replace(/[^a-z0-9 ]+/g, " ").replace(/\s+/g, " ").trim();
+}
+
+function rank(song, q) {
+  // lower is better; -1 = no match
+  const t = song._n;
+  if (t === q) return 0;
+  if (t.startsWith(q)) return 1;
+  const noArt = t.replace(/^(the|a|an) /, "");
+  if (noArt.startsWith(q)) return 2;
+  const wb = t.indexOf(" " + q);
+  if (wb >= 0) return 3 + wb / 1000;
+  const sub = t.indexOf(q);
+  if (sub >= 0) return 5 + sub / 1000;
+  // all query words appear somewhere (any order)
+  const words = q.split(" ");
+  if (words.length > 1 && words.every(w => t.includes(w))) return 8;
+  return -1;
+}
+
+function applyFilter() {
+  const q = norm($("search").value);
+  const key = $("keySel").value;
+  const comp = norm($("composerBox").value);
+
+  let pool = songs;
+  if (bookFilter.size)
+    pool = pool.filter(s => s.sources.some(x => bookFilter.has(x.book)));
+  if (key)
+    pool = pool.filter(s => s.key === key);
+  if (comp)
+    pool = pool.filter(s => s._c.includes(comp));
+
+  if (!q) {
+    filtered = pool;
+  } else {
+    // rank by title match; a composer match counts as a weak match
+    filtered = pool.map(s => {
+      let r = rank(s, q);
+      if (r < 0 && s._c.includes(q)) r = 20;
+      return [r, s];
+    }).filter(x => x[0] >= 0)
+      .sort((a, b) => a[0] - b[0] || a[1]._n.localeCompare(b[1]._n))
+      .map(x => x[1]);
+  }
+
+  const active = q || key || comp || bookFilter.size;
+  $("clearFilters").classList.toggle("show", !!active);
+  $("resultInfo").textContent = active
+      ? `${filtered.length} match${filtered.length === 1 ? "" : "es"}`
+      : `${songs.length} songs`;
+  renderList();
+}
+
+function buildFilterControls() {
+  const chips = $("bookChips");
+  for (const bid of Object.keys(DB.books)) {
+    const c = document.createElement("span");
+    c.className = `chip c-${bid}`;
+    c.textContent = BOOK_SHORT[bid];
+    c.title = DB.books[bid].label;
+    c.onclick = () => {
+      bookFilter.has(bid) ? bookFilter.delete(bid) : bookFilter.add(bid);
+      c.classList.toggle("on", bookFilter.has(bid));
+      applyFilter();
+    };
+    chips.appendChild(c);
+  }
+  const keysPresent = new Set(songs.map(s => s.key).filter(k => k && k !== "unknown"));
+  for (const k of KEY_ORDER) {
+    if (!keysPresent.has(k)) continue;
+    const o = document.createElement("option");
+    o.value = k; o.textContent = k;
+    $("keySel").appendChild(o);
+  }
+  const composers = [...new Set(songs.map(s => s.composer)
+      .filter(c => c && c !== "unknown"))].sort();
+  const dl = $("composerList");
+  for (const c of composers) {
+    const o = document.createElement("option");
+    o.value = c;
+    dl.appendChild(o);
+  }
+}
+
+function renderList() {
+  const list = $("list");
+  list.innerHTML = "";
+  const frag = document.createDocumentFragment();
+  const cap = Math.min(filtered.length, 400);
+  for (let i = 0; i < cap; i++) {
+    const s = filtered[i];
+    const div = document.createElement("div");
+    div.className = "item" + (s.id === selId ? " sel" : "");
+    div.dataset.id = s.id;
+    const badges = s.sources.map(x =>
+      `<span class="badge b-${x.book}">${BOOK_SHORT[x.book]}</span>`).join("");
+    div.innerHTML = `<span class="tw"><span class="t"></span><span class="sub"></span></span>${badges}`;
+    div.querySelector(".t").textContent = s.title;
+    const bits = [];
+    if (s.composer && s.composer !== "unknown") bits.push(s.composer);
+    if (s.key && s.key !== "unknown") bits.push(s.key);
+    div.querySelector(".sub").textContent = bits.join(" · ");
+    div.onclick = () => openSong(s, 0);
+    frag.appendChild(div);
+  }
+  if (filtered.length > cap) {
+    const more = document.createElement("div");
+    more.className = "item"; more.style.color = "var(--dim)";
+    more.textContent = `… ${filtered.length - cap} more — keep typing to narrow down`;
+    frag.appendChild(more);
+  }
+  list.appendChild(frag);
+}
+
+function openSong(song, srcIdx) {
+  selId = song.id;
+  cur = { song, srcIdx, pdfPage: song.sources[srcIdx].pdf_page, zoom: 0 };
+  document.querySelectorAll(".item.sel").forEach(e => e.classList.remove("sel"));
+  const el = document.querySelector(`.item[data-id="${CSS.escape(song.id)}"]`);
+  if (el) { el.classList.add("sel"); el.scrollIntoView({block:"nearest"}); }
+  renderViewer();
+}
+
+function renderViewer() {
+  const { song, srcIdx } = cur;
+  $("welcome").style.display = "none";
+  $("songTitle").textContent = song.title;
+  $("pageCtl").style.display = "flex";
+  const tabs = song.sources.map((x, i) => {
+    const lbl = `${DB.books[x.book].label.replace("Real Book ", "")} · p.${x.printed}`;
+    return `<button class="${i === srcIdx ? "active" : ""}" data-i="${i}">${lbl}</button>`;
+  }).join("");
+  $("srcTabs").innerHTML = tabs;
+  $("srcTabs").querySelectorAll("button").forEach(b =>
+    b.onclick = () => openSong(cur.song, +b.dataset.i));
+  loadPage();
+}
+
+function loadPage() {
+  const { song, srcIdx, pdfPage } = cur;
+  const src = song.sources[srcIdx];
+  const img = $("pageImg");
+  img.style.display = "none";
+  $("spinner").style.display = "block";
+  img.onload = () => {
+    $("spinner").style.display = "none";
+    img.style.display = "block";
+    applyZoom();
+  };
+  img.src = `/api/page/${src.book}/${pdfPage}`;
+  const printedNow = src.printed + (pdfPage - src.pdf_page);
+  $("pageLabel").textContent =
+    `${BOOK_SHORT[src.book]} — page ${printedNow}`;
+  $("prevPg").disabled = pdfPage <= 1;
+  $("nextPg").disabled = pdfPage >= DB.books[src.book].pages;
+}
+
+function applyZoom() {
+  const img = $("pageImg"), viewer = $("viewer");
+  if (cur.zoom === 0) img.style.width = Math.min(viewer.clientWidth - 30, 1100) + "px";
+  else img.style.width = cur.zoom + "px";
+}
+
+function flip(delta) {
+  if (!cur) return;
+  const maxPg = DB.books[cur.song.sources[cur.srcIdx].book].pages;
+  const np = cur.pdfPage + delta;
+  if (np >= 1 && np <= maxPg) { cur.pdfPage = np; loadPage(); }
+}
+
+// ---------- events ----------
+$("search").addEventListener("input", applyFilter);
+$("keySel").addEventListener("change", applyFilter);
+$("composerBox").addEventListener("input", applyFilter);
+$("clearFilters").onclick = () => {
+  $("search").value = ""; $("keySel").value = ""; $("composerBox").value = "";
+  bookFilter.clear();
+  document.querySelectorAll("#bookChips .chip").forEach(c => c.classList.remove("on"));
+  applyFilter();
+};
+$("search").addEventListener("keydown", e => {
+  if (e.key === "Enter" && filtered.length) openSong(filtered[0], 0);
+});
+$("prevPg").onclick = () => flip(-1);
+$("nextPg").onclick = () => flip(1);
+const ZOOM_MIN = 320, ZOOM_MAX = 2600;
+function zoomIn() {
+  if (!cur) return;
+  cur.zoom = Math.min($("pageImg").clientWidth * 1.2, ZOOM_MAX);
+  applyZoom();
+}
+function zoomOut() {
+  if (!cur) return;
+  cur.zoom = Math.max($("pageImg").clientWidth * 0.83, ZOOM_MIN);
+  applyZoom();
+}
+function zoomFit() { if (!cur) return; cur.zoom = 0; applyZoom(); }
+$("zoomIn").onclick = zoomIn;
+$("zoomOut").onclick = zoomOut;
+$("zoomFit").onclick = zoomFit;
+$("randomBtn").onclick = () => {
+  // respect active filters: pick a random song from the current list
+  const pool = filtered.length ? filtered : songs;
+  const s = pool[Math.floor(Math.random() * pool.length)];
+  openSong(s, 0);
+};
+document.addEventListener("keydown", e => {
+  if (e.target.tagName === "INPUT" || e.target.tagName === "SELECT") {
+    if (e.key === "Escape") e.target.blur();
+    return;
+  }
+  if (e.key === "/") { e.preventDefault(); $("search").focus(); $("search").select(); }
+  else if (e.key === "ArrowLeft") flip(-1);
+  else if (e.key === "ArrowRight") flip(1);
+  else if (e.key === "+" || e.key === "=") { e.preventDefault(); zoomIn(); }
+  else if (e.key === "-" || e.key === "_") { e.preventDefault(); zoomOut(); }
+  else if (e.key === "0") { e.preventDefault(); zoomFit(); }
+});
+window.addEventListener("resize", () => { if (cur && cur.zoom === 0) applyZoom(); });
+
+// ---------- init ----------
+fetch("/api/songs").then(r => r.json()).then(db => {
+  DB = db;
+  songs = db.songs;
+  songs.forEach(s => {
+    s._n = norm(s.title);
+    s._c = norm(s.composer || "");
+  });
+  const nSrc = songs.reduce((a, s) => a + s.sources.length, 0);
+  $("stats").textContent = `${songs.length} songs · ${nSrc} charts · 7 books`;
+  buildFilterControls();
+  applyFilter();
+});
+</script>
+</body>
+</html>

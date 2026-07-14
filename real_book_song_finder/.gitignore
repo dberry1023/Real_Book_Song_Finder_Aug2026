@@ -1,0 +1,14 @@
+# Secrets - never commit these
+data/.access_token
+data/.session_secret
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db

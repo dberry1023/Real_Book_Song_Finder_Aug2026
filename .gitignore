@@ -23,3 +23,7 @@ Thumbs.db
 # Personal documents
 *.pdf
 *.docx
+
+# Real Book Song Finder - local tokens
+real_book_song_finder/data/.access_token
+real_book_song_finder/data/.session_secret
