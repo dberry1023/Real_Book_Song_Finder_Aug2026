@@ -1,13 +1,18 @@
 {
  "500 miles high": {
-  "composer": "Chick Corea / Neville Potter",
-  "key": "E",
-  "seen_title": "500 Miles High"
+  "composer": "James Rowles",
+  "key": "Am",
+  "seen_title": "502 BLUES",
+  "sig": "none",
+  "last_chord": "unknown",
+  "page_mismatch": true
  },
  "1 n naima": {
   "composer": "John Coltrane",
-  "key": "Eb",
-  "seen_title": "Naima"
+  "key": "Ab",
+  "seen_title": "NAIMA",
+  "sig": "4 flats",
+  "last_chord": "Abmaj9"
  },
  "12 4 2 4 duplicities": {
   "composer": "Jack Stick",
@@ -15,1484 +20,2124 @@
   "seen_title": "12-4 2-4/DUPLICITIES"
  },
  "34 skidoo": {
-  "composer": "Bill Evans",
-  "key": "D",
-  "seen_title": "34 Skidoo"
+  "composer": "BILL EVANS",
+  "key": "Dm",
+  "seen_title": "34 SKIDOO",
+  "sig": "none",
+  "last_chord": "Bb-7"
  },
  "502 blues": {
-  "composer": "James Rowles",
-  "key": "A",
-  "seen_title": "502 Blues"
+  "composer": "JAMES ROWLES",
+  "key": "Am",
+  "seen_title": "502 BLUES",
+  "sig": "none",
+  "last_chord": "Db7"
  },
  "ablution": {
-  "composer": "unknown",
-  "key": "Ab",
-  "seen_title": "ABLUTION"
+  "composer": "Lennie Tristano",
+  "key": "Fm",
+  "seen_title": "ABLUTION",
+  "sig": "4 flats",
+  "last_chord": "G"
  },
  "728": {
-  "composer": "Clifford Brown",
+  "composer": "CLIFFORD BROWN",
   "key": "Eb",
-  "seen_title": "Sandu"
+  "seen_title": "SANDU",
+  "sig": "3 flats",
+  "last_chord": "F7(#9)",
+  "page_mismatch": true
  },
  "52nd street theme": {
-  "composer": "Thelonious Monk",
+  "composer": "TH. MONK",
   "key": "C",
-  "seen_title": "52nd Street Theme"
+  "seen_title": "52ND STREET THEME",
+  "sig": "none",
+  "last_chord": "C"
  },
  "64 bars on wilshire": {
   "composer": "Barney Kessel",
-  "key": "A",
-  "seen_title": "64 Bars on Wilshire"
+  "key": "Am",
+  "seen_title": "64 BARS ON WILSHIRE",
+  "sig": "1 sharp",
+  "last_chord": "A-7"
  },
  "adios": {
   "composer": "Eddie Woods / Enric Madriguera",
-  "key": "Gm",
-  "seen_title": "Adios"
+  "key": "F",
+  "seen_title": "ADIOS",
+  "sig": "1 flat",
+  "last_chord": "F6"
  },
  "affirmation": {
-  "composer": "J. Feliciano",
-  "key": "Bb",
-  "seen_title": "Affirmation"
+  "composer": "J. FELICIANO",
+  "key": "Bm",
+  "seen_title": "AFFIRMATION",
+  "sig": "2 sharps",
+  "last_chord": "Bmi7/D"
  },
  "additions alfie": {
-  "composer": "SUN RA",
-  "key": "Bb",
-  "seen_title": "A CALL FOR ALL DEMONS"
+  "composer": "Sun Ra",
+  "key": "D",
+  "seen_title": "A Call for All Demons",
+  "sig": "2 sharps",
+  "last_chord": "unknown",
+  "page_mismatch": true
  },
  "across the alley from the alamo": {
-  "composer": "Joe Greene",
+  "composer": "JOE GREENE",
   "key": "F",
-  "seen_title": "Across the Alley from the Alamo"
+  "seen_title": "ACROSS THE ALLEY FROM THE ALAMO",
+  "sig": "1 flat",
+  "last_chord": "F6"
  },
  "african flower": {
   "composer": "Duke Ellington",
-  "key": "Eb",
-  "seen_title": "African Flower (Petite Fleur Africaine)"
+  "key": "Cm",
+  "seen_title": "AFRICAN FLOWER (PETITE FLEUR AFRICAINE)",
+  "sig": "3 flats",
+  "last_chord": "Eb-7"
  },
  "after the rain": {
-  "composer": "John Coltrane",
-  "key": "Eb",
-  "seen_title": "After the Rain"
+  "composer": "Eddie Woods / Enric Madriguera",
+  "key": "F",
+  "seen_title": "ADIOS",
+  "sig": "1 flat",
+  "last_chord": "F6",
+  "page_mismatch": true
  },
  "afro blue": {
-  "composer": "Mongo Santa Maria",
-  "key": "F",
-  "seen_title": "Afro Blue"
+  "composer": "Mongo Santamaria",
+  "key": "Fm",
+  "seen_title": "AFRO BLUE",
+  "sig": "4 flats",
+  "last_chord": "F-7"
  },
  "after you": {
-  "composer": "MIKE STERN",
-  "key": "G",
-  "seen_title": "AFTER YOU"
+  "composer": "HENRY CREAMER / TURNER LAYTON",
+  "key": "C",
+  "seen_title": "AFTER YOU'VE GONE",
+  "sig": "none",
+  "last_chord": "CΔ7"
  },
  "afternoon in paris": {
   "composer": "John Lewis",
-  "key": "Cm",
-  "seen_title": "Afternoon in Paris"
+  "key": "C",
+  "seen_title": "AFTERNOON IN PARIS",
+  "sig": "none",
+  "last_chord": "Cmaj7"
  },
  "after you ve gone": {
-  "composer": "Henry Creamer / Turner Layton",
+  "composer": "HENRY CREAMER / TURNER LAYTON",
   "key": "C",
-  "seen_title": "After You've Gone"
+  "seen_title": "AFTER YOU'VE GONE",
+  "sig": "none",
+  "last_chord": "CΔ7"
  },
  "aguas de marco": {
   "composer": "Antonio Carlos Jobim",
   "key": "Bb",
-  "seen_title": "Águas de Março"
+  "seen_title": "ÁGUAS DE MARÇO (WATERS OF MARCH)",
+  "sig": "2 flats",
+  "last_chord": "Eb-6"
  },
  "agua de beber": {
   "composer": "Antonio Carlos Jobim / Norman Gimbel / Vinicius de Moraes",
-  "key": "A",
-  "seen_title": "Agua de Beber"
+  "key": "Am",
+  "seen_title": "AGUA DE BEBER",
+  "sig": "none",
+  "last_chord": "A-7"
  },
  "airegin": {
-  "composer": "Sonny Rollins",
-  "key": "F",
-  "seen_title": "Airegin"
+  "composer": "Antonio Carlos Jobim / Norman Gimbel / Vinicius de Moraes",
+  "key": "Am",
+  "seen_title": "AGUA DE BEBER",
+  "sig": "none",
+  "last_chord": "A-7",
+  "page_mismatch": true
  },
  "ain t misbehavin": {
   "composer": "\"Fats\" Waller / Harry Brooks / Andy Razaf",
   "key": "Eb",
-  "seen_title": "Ain't Misbehavin'"
+  "seen_title": "AIN'T MISBEHAVIN'",
+  "sig": "3 flats",
+  "last_chord": "Eb6/9"
  },
  "airmail special": {
-  "composer": "C. Chestean",
+  "composer": "C. CHRISTIAN",
   "key": "C",
-  "seen_title": "AIRMAIL SPECIAL"
+  "seen_title": "AIRMAIL SPECIAL",
+  "sig": "none",
+  "last_chord": "C"
  },
  "alfie": {
-  "composer": "Burt Bacharach / Hal David",
+  "composer": "SAMMY FAIN / BOB HILLIARD",
   "key": "C",
-  "seen_title": "ALFIE"
+  "seen_title": "ALICE IN WONDERLAND",
+  "sig": "none",
+  "last_chord": "Cmaj7",
+  "page_mismatch": true
  },
  "alice in wonderland": {
   "composer": "Sammy Fain / Bob Hilliard",
-  "key": "D",
-  "seen_title": "Alice in Wonderland"
+  "key": "C",
+  "seen_title": "Alice in Wonderland",
+  "sig": "none",
+  "last_chord": "Cmaj7"
  },
  "alfie s theme": {
-  "composer": "Sonny Rollins",
-  "key": "Bb",
-  "seen_title": "Alfie's Theme"
+  "composer": "Mal Waldron",
+  "key": "Bm",
+  "seen_title": "ALL ALONE",
+  "sig": "2 sharps",
+  "last_chord": "unknown",
+  "page_mismatch": true
  },
  "alanjuneally": {
-  "composer": "KENNY WERNER",
-  "key": "G",
-  "seen_title": "ALANJUNEALLY"
+  "composer": "BENNY GOLSON",
+  "key": "Bbm",
+  "seen_title": "ALONG CAME BETTY",
+  "sig": "none",
+  "last_chord": "AbΔ7",
+  "page_mismatch": true
  },
  "all alone": {
-  "composer": "Mal Waldron",
-  "key": "E",
-  "seen_title": "All Alone"
+  "composer": "MAL WALDRON",
+  "key": "Bm",
+  "seen_title": "ALL ALONE",
+  "sig": "2 sharps",
+  "last_chord": "unknown"
  },
  "all by myself": {
-  "composer": "Irving Berlin",
+  "composer": "IRVING BERLIN",
   "key": "C",
-  "seen_title": "ALL BY MYSELF"
+  "seen_title": "ALL BY MYSELF",
+  "sig": "none",
+  "last_chord": "C6"
  },
  "all blues": {
   "composer": "Miles Davis",
   "key": "G",
-  "seen_title": "All Blues"
+  "seen_title": "ALL BLUES",
+  "sig": "1 sharp",
+  "last_chord": "unknown"
  },
  "all god s chillun got rhythm": {
-  "composer": "unknown",
+  "composer": "Kahn / Kaper",
   "key": "F",
-  "seen_title": "All God's Chillun Got Rhythm"
+  "seen_title": "ALL GODS CHILLUN GOT RHYTHM",
+  "sig": "1 flat",
+  "last_chord": "FMaj7"
  },
  "all i want for christmas is you": {
   "composer": "Mariah Carey / Walter Afanasieff",
   "key": "G",
-  "seen_title": "All I Want for Christmas Is You"
+  "seen_title": "ALL I WANT FOR CHRISTMAS IS YOU",
+  "sig": "1 sharp",
+  "last_chord": "E7"
  },
  "all in love is fair": {
-  "composer": "Stevie Wonder",
-  "key": "D",
-  "seen_title": "All In Love Is Fair"
+  "composer": "STEVIE WONDER",
+  "key": "Dm",
+  "seen_title": "ALL IN LOVE IS FAIR",
+  "sig": "1 flat",
+  "last_chord": "D-"
  },
  "all my tomorrows": {
-  "composer": "unknown",
-  "key": "A",
-  "seen_title": "ALL MY TOMORROWS"
+  "composer": "Cahn / Van Heusen",
+  "key": "Am",
+  "seen_title": "ALL MY TOMORROWS",
+  "sig": "2 sharps",
+  "last_chord": "G6"
  },
  "all night long": {
-  "composer": "Kenny Burrell",
+  "composer": "KENNY BURRELL",
   "key": "G",
-  "seen_title": "All Night Long"
+  "seen_title": "ALL NIGHT LONG",
+  "sig": "1 sharp",
+  "last_chord": "G7"
  },
  "all of me": {
   "composer": "Seymour Simons / Gerald Marks",
   "key": "C",
-  "seen_title": "All of Me"
+  "seen_title": "ALL OF ME",
+  "sig": "none",
+  "last_chord": "G7"
  },
  "all of you": {
   "composer": "Cole Porter",
-  "key": "Ab",
-  "seen_title": "All of You"
+  "key": "Eb",
+  "seen_title": "ALL OF YOU",
+  "sig": "3 flats",
+  "last_chord": "Eb6"
  },
  "all or nothing at al": {
-  "composer": "Jack Lawrence / Arthur Altman",
+  "composer": "JACK LAWRENCE / ARTHUR ALTMAN",
   "key": "Am",
-  "seen_title": "All or Nothing at All"
+  "seen_title": "ALL OR NOTHING AT ALL",
+  "sig": "none",
+  "last_chord": "Ebo7"
  },
  "all too soon": {
   "composer": "Duke Ellington / Carl Sigman",
   "key": "Db",
-  "seen_title": "All Too Soon"
+  "seen_title": "ALL TOO SOON",
+  "sig": "5 flats",
+  "last_chord": "Db6"
  },
  "all the things you are": {
   "composer": "Jerome Kern / Oscar Hammerstein II",
-  "key": "Db",
-  "seen_title": "All The Things You Are"
+  "key": "Ab",
+  "seen_title": "ALL THE THINGS YOU ARE",
+  "sig": "4 flats",
+  "last_chord": "B°7"
  },
  "allen s alley": {
   "composer": "Denzil DeCosta Best",
   "key": "Bb",
-  "seen_title": "Allen's Alley"
+  "seen_title": "ALLEN'S ALLEY",
+  "sig": "2 flats",
+  "last_chord": "Bb"
  },
  "almost day": {
   "composer": "Huddie Ledbetter",
   "key": "G",
-  "seen_title": "Almost Day"
+  "seen_title": "ALMOST DAY",
+  "sig": "1 sharp",
+  "last_chord": "Gmaj7"
  },
  "alone together": {
-  "composer": "Jim Hall - Bud Carter Duo",
-  "key": "D",
-  "seen_title": "ALONE TOGETHER"
+  "composer": "Dietz & Schwartz",
+  "key": "Dm",
+  "seen_title": "ALONE TOGETHER",
+  "sig": "1 flat",
+  "last_chord": "D-"
  },
  "along came betty": {
-  "composer": "Benny Golson",
-  "key": "Bbm",
-  "seen_title": "Along Came Betty"
+  "composer": "BENNY GOLSON",
+  "key": "Ab",
+  "seen_title": "ALONG CAME BETTY",
+  "sig": "none",
+  "last_chord": "AbΔ7"
  },
  "altoitis": {
-  "composer": "Oliver Nelson",
-  "key": "Bb",
-  "seen_title": "Al Toitls"
+  "composer": "Stevie Wonder",
+  "key": "Fm",
+  "seen_title": "Another Star",
+  "sig": "4 flats",
+  "last_chord": "C7(b9)",
+  "page_mismatch": true
  },
  "alright okay you win": {
   "composer": "Mayme Watts / Sid Wyche",
   "key": "Eb",
-  "seen_title": "Alright Okay, You Win"
+  "seen_title": "ALRIGHT, OKAY, YOU WIN",
+  "sig": "3 flats",
+  "last_chord": "Bb7"
  },
  "always": {
   "composer": "Irving Berlin",
   "key": "F",
-  "seen_title": "ALWAYS"
+  "seen_title": "ALWAYS",
+  "sig": "1 flat",
+  "last_chord": "Fmaj7"
  },
  "always and forever": {
   "composer": "PAT METHENY",
   "key": "Am",
-  "seen_title": "ALWAYS AND FOREVER"
+  "seen_title": "ALWAYS AND FOREVER",
+  "sig": "none",
+  "last_chord": "Am"
  },
  "ana maria": {
-  "composer": "Wayne Shorter",
-  "key": "Cm",
-  "seen_title": "Ana Maria"
+  "composer": "WAYNE SHORTER",
+  "key": "G",
+  "seen_title": "ANA MARIA",
+  "sig": "none",
+  "last_chord": "Db7sus4"
  },
  "always true to you in my fashion": {
   "composer": "Cole Porter",
   "key": "C",
-  "seen_title": "Always True to You in My Fashion"
+  "seen_title": "ALWAYS TRUE TO YOU IN MY FASHION",
+  "sig": "none",
+  "last_chord": "C"
  },
  "and all that jazz": {
   "composer": "Fred Ebb / John Kander",
-  "key": "C",
-  "seen_title": "And All That Jazz"
+  "key": "F",
+  "seen_title": "AND ALL THAT JAZZ",
+  "sig": "1 flat",
+  "last_chord": "Db"
  },
  "and now the queen": {
   "composer": "Carla Bley",
-  "key": "F",
-  "seen_title": "And Now, The Queen"
+  "key": "C",
+  "seen_title": "AND NOW, THE QUEEN",
+  "sig": "none",
+  "last_chord": "unknown"
  },
  "angel eyes": {
   "composer": "Matt Dennis / Earl Brent",
-  "key": "Db",
-  "seen_title": "Angel Eyes"
+  "key": "Cm",
+  "seen_title": "ANGEL EYES",
+  "sig": "3 flats",
+  "last_chord": "C-6"
  },
  "angela": {
   "composer": "Bob James",
   "key": "Eb",
-  "seen_title": "Angela"
+  "seen_title": "ANGELA",
+  "sig": "3 flats",
+  "last_chord": "A-7"
  },
  "and on the third day": {
-  "composer": "Gary Burton",
-  "key": "D",
-  "seen_title": "AND ON THE THIRD DAY"
+  "composer": "Michael Gibbs",
+  "key": "Dm",
+  "seen_title": "AND ON THE THIRD DAY",
+  "sig": "2 sharps",
+  "last_chord": "Dm"
  },
  "angels from the realms of glory": {
-  "composer": "Henry T. Smart / James Montgomery",
-  "key": "G",
-  "seen_title": "Angels from the Realms of Glory"
+  "composer": "Traditional French Carol / James Chadwick",
+  "key": "F",
+  "seen_title": "ANGELS WE HAVE HEARD ON HIGH",
+  "sig": "1 flat",
+  "last_chord": "C7",
+  "page_mismatch": true
  },
  "another star": {
-  "composer": "Stevie Wonder",
-  "key": "Cm",
-  "seen_title": "Another Star"
+  "composer": "STEVIE WONDER",
+  "key": "Fm",
+  "seen_title": "ANOTHER STAR",
+  "sig": "4 flats",
+  "last_chord": "C7(b9)"
  },
  "angels we have heard on high": {
   "composer": "Traditional French Carol / James Chadwick",
   "key": "F",
-  "seen_title": "Angels We Have Heard on High"
+  "seen_title": "ANGELS WE HAVE HEARD ON HIGH",
+  "sig": "1 flat",
+  "last_chord": "C7"
  },
  "anthropology": {
   "composer": "Charlie Parker / Dizzy Gillespie",
   "key": "Bb",
-  "seen_title": "Anthropology"
+  "seen_title": "ANTHROPOLOGY",
+  "sig": "2 flats",
+  "last_chord": "unknown"
  },
  "april": {
-  "composer": "LENNIE TRISTANO",
+  "composer": "Buddy Collette",
   "key": "G",
-  "seen_title": "APRIL"
+  "seen_title": "APRIL SKIES",
+  "sig": "1 sharp",
+  "last_chord": "GMaj7"
  },
  "apple honey": {
   "composer": "Woody Herman",
   "key": "Bb",
-  "seen_title": "Apple Honey"
+  "seen_title": "APPLE HONEY",
+  "sig": "2 flats",
+  "last_chord": "Bb6"
  },
  "april in paris": {
-  "composer": "Vernon Duke / E.Y. Harburg",
+  "composer": "VERNON DUKE / E.Y. HARBURG",
   "key": "C",
-  "seen_title": "April in Paris"
+  "seen_title": "APRIL IN PARIS",
+  "sig": "none",
+  "last_chord": "C6"
  },
  "apple core": {
   "composer": "Gerry Mulligan",
-  "key": "unknown",
-  "seen_title": "Apple Core"
+  "key": "Ab",
+  "seen_title": "APPLE CORE",
+  "sig": "4 flats",
+  "last_chord": "Abmaj7"
  },
  "april joy": {
-  "composer": "Pat Metheny",
-  "key": "unknown",
-  "seen_title": "April Joy"
+  "composer": "PAT METHENY",
+  "key": "Bb",
+  "seen_title": "APRIL JOY",
+  "sig": "2 flats",
+  "last_chord": "unknown"
  },
  "april skids": {
   "composer": "Buddy Collette",
   "key": "G",
-  "seen_title": "April Skies"
+  "seen_title": "APRIL SKIES",
+  "sig": "1 sharp",
+  "last_chord": "GMaj7"
  },
  "are you real": {
-  "composer": "Benny Golson",
-  "key": "Db",
-  "seen_title": "Are You Real"
+  "composer": "LIONEL BART",
+  "key": "F",
+  "seen_title": "AS LONG AS HE NEEDS ME",
+  "sig": "1 flat",
+  "last_chord": "F",
+  "page_mismatch": true
  },
  "arise her eyes": {
-  "composer": "Steve Swallow",
-  "key": "Db",
-  "seen_title": "Arise, Her Eyes"
+  "composer": "STEVE SWALLOW",
+  "key": "C",
+  "seen_title": "ARISE, HER EYES",
+  "sig": "none",
+  "last_chord": "Gb"
  },
  "armando s rhumba": {
-  "composer": "Chick Corea",
+  "composer": "CHICK COREA",
   "key": "Cm",
-  "seen_title": "Armando's Rhumba"
+  "seen_title": "ARMANDO'S RHUMBA",
+  "sig": "3 flats",
+  "last_chord": "Abm/Bb"
  },
  "armageddon": {
-  "composer": "Wayne Shorter",
-  "key": "Bb",
-  "seen_title": "Armageddon"
+  "composer": "WAYNE SHORTER",
+  "key": "Bbm",
+  "seen_title": "ARMAGEDDON",
+  "sig": "none",
+  "last_chord": "unknown"
  },
  "around again": {
   "composer": "Carla Bley",
-  "key": "Bb",
-  "seen_title": "And Now, The Queen"
+  "key": "unknown",
+  "seen_title": "AND NOW, THE QUEEN",
+  "sig": "none",
+  "last_chord": "unknown",
+  "page_mismatch": true
  },
  "as long as he needs me": {
-  "composer": "Lionel Bart",
+  "composer": "LIONEL BART",
   "key": "F",
-  "seen_title": "As Long As He Needs Me"
+  "seen_title": "AS LONG AS HE NEEDS ME",
+  "sig": "1 flat",
+  "last_chord": "F"
  },
  "as time goes by": {
-  "composer": "Herman Ruffolo",
-  "key": "F",
-  "seen_title": "AS TIME GOES BY"
+  "composer": "VERNON DUKE",
+  "key": "Gm",
+  "seen_title": "AUTUMN IN NEW YORK",
+  "sig": "2 flats",
+  "last_chord": "F-",
+  "page_mismatch": true
  },
  "as long as there s christmas": {
-  "composer": "Rachel Fortman / Don Black",
+  "composer": "Rachel Portman / Don Black",
   "key": "Bb",
-  "seen_title": "AS LONG AS THERE'S CHRISTMAS"
+  "seen_title": "AS LONG AS THERE'S CHRISTMAS",
+  "sig": "2 flats",
+  "last_chord": "Bbadd9/D"
  },
  "ashes to ashes": {
-  "composer": "Joe Sample",
-  "key": "Bb",
-  "seen_title": "ASHES TO ASHES"
+  "composer": "unknown",
+  "key": "unknown",
+  "seen_title": "unknown",
+  "sig": "none",
+  "last_chord": "Eb/F",
+  "page_mismatch": true
  },
  "as we speak": {
   "composer": "Michael Sambello / David Sanborn",
-  "key": "Bb",
-  "seen_title": "AS WE SPEAK"
+  "key": "G",
+  "seen_title": "AS WE SPEAK",
+  "sig": "1 sharp",
+  "last_chord": "A-7"
  },
  "au privave": {
   "composer": "Charlie Parker",
   "key": "F",
-  "seen_title": "Au Privave"
+  "seen_title": "AU PRIVAVE",
+  "sig": "1 flat",
+  "last_chord": "unknown"
  },
  "auld lang syne": {
   "composer": "Traditional Scottish Melody / Robert Burns",
   "key": "F",
-  "seen_title": "Auld Lang Syne"
+  "seen_title": "AULD LANG SYNE",
+  "sig": "1 flat",
+  "last_chord": "F6"
  },
  "aunt hagar s blues": {
   "composer": "J. Tim Brymn / W.C. Handy",
   "key": "F",
-  "seen_title": "AUNT HAGAR'S BLUES"
+  "seen_title": "AUNT HAGAR'S BLUES",
+  "sig": "1 flat",
+  "last_chord": "F7"
  },
  "ask me now": {
-  "composer": "Th. Monk",
-  "key": "Eb",
-  "seen_title": "ASK ME NOW"
+  "composer": "TH. MONK",
+  "key": "Db",
+  "seen_title": "ASK ME NOW",
+  "sig": "none",
+  "last_chord": "Db"
  },
  "autumn in 3": {
   "composer": "KENNY WERNER",
-  "key": "G",
-  "seen_title": "AUTUMN IN 3"
+  "key": "Em",
+  "seen_title": "AUTUMN IN 3",
+  "sig": "1 sharp",
+  "last_chord": "Em"
  },
  "autumn nocturne": {
   "composer": "KIM GANNON / JOSEF MYROW",
   "key": "C",
-  "seen_title": "AUTUMN NOCTURNE"
+  "seen_title": "AUTUMN NOCTURNE",
+  "sig": "none",
+  "last_chord": "C6/9"
  },
  "autumn leaves": {
-  "composer": "Joseph Kosma / Donny Mercer / Jacques Prevert",
-  "key": "E",
-  "seen_title": "Autumn Leaves"
+  "composer": "Joseph Kosma / Johnny Mercer / Jacques Prevert",
+  "key": "Em",
+  "seen_title": "AUTUMN LEAVES",
+  "sig": "1 sharp",
+  "last_chord": "E-"
  },
  "avalon": {
-  "composer": "Talgau Rose",
-  "key": "F",
-  "seen_title": "Avalon"
+  "composer": "Jolson-Rose",
+  "key": "Bb",
+  "seen_title": "AVALON",
+  "sig": "2 flats",
+  "last_chord": "Bb"
  },
  "autumn in new york": {
-  "composer": "Vernon Drake",
+  "composer": "VERNON DUKE",
   "key": "Gm",
-  "seen_title": "Autumn in New York"
+  "seen_title": "AUTUMN IN NEW YORK",
+  "sig": "2 flats",
+  "last_chord": "F-"
  },
  "avalon place": {
-  "composer": "Jack Zucker",
-  "key": "Dm",
-  "seen_title": "Avalon Place"
+  "composer": "JACK ZUCKER",
+  "key": "unknown",
+  "seen_title": "AVALON PLACE",
+  "sig": "none",
+  "last_chord": "Ebm7b5"
  },
  "ay arriba": {
-  "composer": "Stu Balcomb",
-  "key": "Bb",
-  "seen_title": "¡Ay, Arriba!"
+  "composer": "STU BALCOMB",
+  "key": "C",
+  "seen_title": "¡AY, ARRIBA!",
+  "sig": "none",
+  "last_chord": "Cmaj7"
  },
  "azure te": {
-  "composer": "Bill David/Don Wolfe",
-  "key": "Eb",
-  "seen_title": "Azure-Te (Paris Blues)"
+  "composer": "Bill David / Don Wolfe",
+  "key": "Ab",
+  "seen_title": "AZURE-TE (PARIS BLUES)",
+  "sig": "4 flats",
+  "last_chord": "unknown"
  },
  "away in a manger": {
   "composer": "Jonathan E. Spillman / John T. McFarland",
   "key": "G",
-  "seen_title": "Away in a Manger"
+  "seen_title": "AWAY IN A MANGER",
+  "sig": "1 sharp",
+  "last_chord": "G6"
  },
  "baby just come home to me": {
-  "composer": "John Pizzarelli",
+  "composer": "JOHN PIZZARELLI",
   "key": "Ab",
-  "seen_title": "Baby Just Come Home to Me"
+  "seen_title": "BABY JUST COME HOME TO ME",
+  "sig": "4 flats",
+  "last_chord": "Ab6/9"
  },
  "baby it s cold outside": {
   "composer": "Frank Loesser",
   "key": "F",
-  "seen_title": "Baby, It's Cold Outside"
+  "seen_title": "Baby, It's Cold Outside",
+  "sig": "1 flat",
+  "last_chord": "G7"
  },
  "ba lue bolivar ba lues are": {
-  "composer": "T.J. Monk",
+  "composer": "Th. Monk",
   "key": "Bb",
-  "seen_title": "Blue Bolivar Blues Are"
+  "seen_title": "BA-LUE BOLIVAR BA-LUES-ARE",
+  "sig": "2 flats",
+  "last_chord": "D7(#9)"
  },
  "baby elephant walk": {
-  "composer": "Henry Mancini",
+  "composer": "HENRY MANCINI",
   "key": "F",
-  "seen_title": "Baby Elephant Walk"
+  "seen_title": "BABY ELEPHANT WALK",
+  "sig": "1 flat",
+  "last_chord": "F13(#11)"
  },
  "backstage sally": {
   "composer": "Wayne Shorter",
-  "key": "Eb",
-  "seen_title": "Backstage Sally"
+  "key": "Fm",
+  "seen_title": "BACKSTAGE SALLY",
+  "sig": "4 flats",
+  "last_chord": "unknown"
  },
  "back in your own backyard": {
-  "composer": "Al Jilson / Billy Rose / Dave Dreyer",
+  "composer": "Al Jolson / Billy Rose / Dave Dreyer",
   "key": "G",
-  "seen_title": "Back In Your Own Backyard"
+  "seen_title": "BACK IN YOUR OWN BACKYARD",
+  "sig": "1 sharp",
+  "last_chord": "G6"
  },
  "bag s new groove": {
   "composer": "Milt Jackson",
-  "key": "C",
-  "seen_title": "Bag's New Groove"
+  "key": "F",
+  "seen_title": "Bag's New Groove",
+  "sig": "none",
+  "last_chord": "A7#5"
  },
  "bags and trane": {
-  "composer": "Matt Jackson",
-  "key": "Cm",
-  "seen_title": "BAGS AND IRANE"
+  "composer": "Milt Jackson",
+  "key": "Gm",
+  "seen_title": "BAGS AND TRANE",
+  "sig": "2 flats",
+  "last_chord": "unknown"
  },
  "bags groove": {
   "composer": "Milt Jackson",
   "key": "F",
-  "seen_title": "Bags Groove"
+  "seen_title": "BAGS' GROOVE",
+  "sig": "1 flat",
+  "last_chord": "unknown"
  },
  "ballad for anita": {
   "composer": "BOB FRASER",
-  "key": "Bb",
-  "seen_title": "BALLAD FOR ANITA"
+  "key": "F",
+  "seen_title": "BALLAD FOR ANITA",
+  "sig": "none",
+  "last_chord": "FΔ7"
  },
  "bad powell": {
-  "composer": "Chick Corea",
-  "key": "Bb",
-  "seen_title": "Bud Powell"
+  "composer": "CHICK COREA",
+  "key": "F",
+  "seen_title": "BUD POWELL",
+  "sig": "1 flat",
+  "last_chord": "F#7b9"
  },
  "ballad for trane": {
   "composer": "KENNY WERNER",
   "key": "Eb",
-  "seen_title": "BALLAD FOR TRANE"
+  "seen_title": "BALLAD FOR TRANE",
+  "sig": "3 flats",
+  "last_chord": "Ebmaj7"
  },
  "ballet": {
   "composer": "Michael Gibbs",
-  "key": "Eb",
-  "seen_title": "BALLET"
+  "key": "Cm",
+  "seen_title": "BALLET",
+  "sig": "3 flats",
+  "last_chord": "E7"
  },
  "ballin the jack": {
   "composer": "Jim Burris / Chris Smith",
   "key": "Bb",
-  "seen_title": "Ballin' the Jack"
+  "seen_title": "BALLIN' THE JACK",
+  "sig": "1 flat",
+  "last_chord": "Bb"
  },
  "bandstand boogie": {
   "composer": "Barry Manilow / Bruce Sussman / Charles Albertine",
   "key": "Bb",
-  "seen_title": "Bandstand Boogie"
+  "seen_title": "BANDSTAND BOOGIE",
+  "sig": "2 flats",
+  "last_chord": "Bb7"
  },
  "barbara": {
-  "composer": "Horace Silver",
+  "composer": "S. WILLIAMS",
   "key": "Bb",
-  "seen_title": "Barbarra"
+  "seen_title": "BASIN ST. BLUES",
+  "sig": "2 flats",
+  "last_chord": "C7",
+  "page_mismatch": true
  },
  "barbados": {
   "composer": "Charlie Parker",
   "key": "F",
-  "seen_title": "Barbados"
+  "seen_title": "BARBADOS",
+  "sig": "1 flat",
+  "last_chord": "unknown"
  },
  "basin street blues": {
-  "composer": "S. Williams",
+  "composer": "S. WILLIAMS",
   "key": "Bb",
-  "seen_title": "Basin St Blues"
+  "seen_title": "BASIN ST. BLUES",
+  "sig": "2 flats",
+  "last_chord": "C7"
  },
  "batterie": {
   "composer": "Carla Bley",
   "key": "unknown",
-  "seen_title": "Batterie"
+  "seen_title": "BATTERIE",
+  "sig": "none",
+  "last_chord": "unknown"
  },
  "be bop": {
-  "composer": "Dizzy Gillespie",
-  "key": "Bb",
-  "seen_title": "BEBOP"
+  "composer": "DIZZY GILLESPIE",
+  "key": "Fm",
+  "seen_title": "BEBOP",
+  "sig": "4 flats",
+  "last_chord": "Fmi"
  },
  "be my love": {
-  "composer": "Sammy Cahn / Nicholas Brodszky",
+  "composer": "SAMMY CAHN / NICHOLAS BRODSZKY",
   "key": "C",
-  "seen_title": "BE MY LOVE"
+  "seen_title": "BE MY LOVE",
+  "sig": "none",
+  "last_chord": "C6/9"
  },
  "beautiful friendship": {
-  "composer": "Stanley Styne / Donald Kahn",
+  "composer": "STANLEY STYNE / DONALD KAHN",
   "key": "Eb",
-  "seen_title": "Beautiful Friendship"
+  "seen_title": "BEAUTIFUL FRIENDSHIP",
+  "sig": "3 flats",
+  "last_chord": "Eb6/9"
  },
  "beauty and the beast": {
-  "composer": "Wayne Shorter",
+  "composer": "WAYNE SHORTER",
   "key": "F",
-  "seen_title": "Beauty and the Beast"
+  "seen_title": "BEAUTY AND THE BEAST",
+  "sig": "none",
+  "last_chord": "F13"
  },
  "beautiful love": {
-  "composer": "Victor Young / Wayne King / Egbert Van Alstyne / Haven Gillespie",
-  "key": "D",
-  "seen_title": "Beautiful Love"
+  "composer": "Victor Young",
+  "key": "Dm",
+  "seen_title": "BEAUTIFUL LOVE",
+  "sig": "2 sharps",
+  "last_chord": "Dm"
  },
  "beauty and the blast": {
   "composer": "Wayne Shorter",
-  "key": "F",
-  "seen_title": "Beauty and the Beast"
+  "key": "C",
+  "seen_title": "BEAUTY AND THE BEAST",
+  "sig": "none",
+  "last_chord": "F7"
  },
  "because it s christmas": {
   "composer": "Barry Manilow / Bruce Sussman / Jack Feldman",
   "key": "C",
-  "seen_title": "Because It's Christmas (For All the Children)"
+  "seen_title": "BECAUSE IT'S CHRISTMAS (FOR ALL THE CHILDREN)",
+  "sig": "none",
+  "last_chord": "G7"
  },
  "beneath it all": {
   "composer": "Gary Anderson",
-  "key": "F",
-  "seen_title": "Beneath It All"
+  "key": "Ab",
+  "seen_title": "BENEATH IT ALL",
+  "sig": "4 flats",
+  "last_chord": "Db Maj7#11"
  },
  "berrie s tune": {
-  "composer": "Bernie Miller",
+  "composer": "BERNIE MILLER",
   "key": "Dm",
-  "seen_title": "Bernie's Tune"
+  "seen_title": "BERNIE'S TUNE",
+  "sig": "1 flat",
+  "last_chord": "Dm7"
  },
  "beethoven s blue 3rd": {
-  "composer": "T.J. Mank",
+  "composer": "Th. Monk",
   "key": "Bb",
-  "seen_title": "Blue Bolinas / Blue's Are"
+  "seen_title": "BA-LUE BOLIVAR BA-LUES-ARE",
+  "sig": "2 flats",
+  "last_chord": "D7(#9)",
+  "page_mismatch": true
  },
  "bessie s blues": {
   "composer": "John Coltrane",
   "key": "Eb",
-  "seen_title": "Bessie's Blues"
+  "seen_title": "BESSIE'S BLUES",
+  "sig": "3 flats",
+  "last_chord": "unknown"
  },
  "beside myself": {
-  "composer": "Chip Stephens",
-  "key": "Gm",
-  "seen_title": "Beside Myself"
+  "composer": "unknown",
+  "key": "C",
+  "seen_title": "BE MY LOVE",
+  "sig": "none",
+  "last_chord": "G7",
+  "page_mismatch": true
  },
  "bess you is my woman now": {
-  "composer": "DuBose Heyward / Ira Gershwin / George Gershwin",
-  "key": "Bb",
-  "seen_title": "Bess, You Is My Woman Now"
+  "composer": "BERNIE MILLER",
+  "key": "Dm",
+  "seen_title": "BERNIE'S TUNE",
+  "sig": "1 flat",
+  "last_chord": "Dm7",
+  "page_mismatch": true
  },
  "best is yet to come": {
   "composer": "Cy Coleman / Carolyn Leigh",
   "key": "Ab",
-  "seen_title": "The Best Is Yet to Come"
+  "seen_title": "THE BEST IS YET TO COME",
+  "sig": "4 flats",
+  "last_chord": "Ab"
  },
  "better git it in your soul": {
-  "composer": "C. Mingus",
+  "composer": "C. MINGUS",
   "key": "F",
-  "seen_title": "Better Get It In Your Soul"
+  "seen_title": "BETTER GIT IT IN YOUR SOUL",
+  "sig": "2 flats",
+  "last_chord": "F7"
  },
  "best thing for you is me": {
-  "composer": "Irving Berlin",
+  "composer": "IRVING BERLIN",
   "key": "C",
-  "seen_title": "The Best Thing For You Is Me"
+  "seen_title": "THE BEST THING FOR YOU IS ME",
+  "sig": "none",
+  "last_chord": "C6/9"
  },
  "bewitched": {
-  "composer": "Richard Rodgers / Lorenz Hart",
+  "composer": "Rodgers & Hart",
   "key": "C",
-  "seen_title": "Bewitched"
+  "seen_title": "BEWITCHED",
+  "sig": "none",
+  "last_chord": "C6"
  },
  "beyond all limits": {
   "composer": "Woody Shaw",
-  "key": "Cm",
-  "seen_title": "Beyond All Limits"
+  "key": "Fm",
+  "seen_title": "BEYOND ALL LIMITS",
+  "sig": "none",
+  "last_chord": "Fmi7"
  },
  "beyond the bluebird": {
   "composer": "TOMMY FLANAGAN",
   "key": "G",
-  "seen_title": "BEYOND THE BLUEBIRD"
+  "seen_title": "BEYOND THE BLUEBIRD",
+  "sig": "1 sharp",
+  "last_chord": "unknown"
  },
  "big nick": {
-  "composer": "John Coltrane",
+  "composer": "JOHN COLTRANE",
   "key": "G",
-  "seen_title": "Big Nick"
+  "seen_title": "BIG NICK",
+  "sig": "1 sharp",
+  "last_chord": "D7"
  },
  "big p": {
-  "composer": "Timan Weatm",
-  "key": "D",
-  "seen_title": "BIG \"P\""
+  "composer": "Jimmy Heath",
+  "key": "Dm",
+  "seen_title": "BIG \"P\"",
+  "sig": "none",
+  "last_chord": "A7"
  },
  "billie s bounce": {
   "composer": "Charlie Parker",
   "key": "F",
-  "seen_title": "Billie's Bounce"
+  "seen_title": "Billie's Bounce",
+  "sig": "none",
+  "last_chord": "C7"
  },
  "bills hit tune": {
   "composer": "Bill Evans",
-  "key": "D",
-  "seen_title": "Bill's Hit Tune"
+  "key": "Cm",
+  "seen_title": "Bill's Hit Tune",
+  "sig": "none",
+  "last_chord": "C-7"
  },
  "bill": {
-  "composer": "Jerome Kern / P.G. Wodehouse / Oscar Hammerstein II",
+  "composer": "Jerome Kern / P. G. Wodehouse / Oscar Hammerstein II",
   "key": "Bb",
-  "seen_title": "BILL"
+  "seen_title": "BILL",
+  "sig": "2 flats",
+  "last_chord": "Bb6"
  },
  "bimbom": {
-  "composer": "João Gilberto",
-  "key": "B",
-  "seen_title": "BIM-BOM"
+  "composer": "JOAO GILBERTO",
+  "key": "A",
+  "seen_title": "BIM-BOM",
+  "sig": "3 sharps",
+  "last_chord": "Amaj9#11"
  },
  "bird song": {
-  "composer": "Thad Jones",
+  "composer": "THAD JONES",
   "key": "Bb",
-  "seen_title": "Bird Song"
+  "seen_title": "BIRD SONG",
+  "sig": "2 flats",
+  "last_chord": "Bb"
  },
  "birdland": {
-  "composer": "Joe Zawinul",
-  "key": "F",
-  "seen_title": "Birdland"
+  "composer": "unknown",
+  "key": "G",
+  "seen_title": "Birdland",
+  "sig": "1 sharp",
+  "last_chord": "D7(sus4)"
  },
  "birk s works": {
-  "composer": "Dizzy Gillespie / Bud Powell",
-  "key": "F",
-  "seen_title": "Birk's Works / Buster Rides Again"
+  "composer": "Dizzy Gillespie",
+  "key": "Fm",
+  "seen_title": "BIRK'S WORKS",
+  "sig": "4 flats",
+  "last_chord": "G7"
  },
  "birth of the blues": {
-  "composer": "Ray Henderson",
-  "key": "C",
-  "seen_title": "Birth of the Blues"
+  "composer": "JOE ZAWINUL",
+  "key": "G",
+  "seen_title": "BIRDLAND",
+  "sig": "1 sharp",
+  "last_chord": "G",
+  "page_mismatch": true
  },
  "bitter suite in the ozone": {
   "composer": "Bob Moses",
-  "key": "Db",
-  "seen_title": "Bitter Suite in the Ozone"
+  "key": "D",
+  "seen_title": "Bitter Suite in the Ozone",
+  "sig": "2 sharps",
+  "last_chord": "unknown"
  },
  "birds of a feather": {
-  "composer": "Gerry Mulligan",
+  "composer": "GERRY MULLIGAN",
   "key": "Bb",
-  "seen_title": "Birds of a Feather"
+  "seen_title": "BIRDS OF A FEATHER",
+  "sig": "2 flats",
+  "last_chord": "F7#9"
  },
  "black and tan fantasy": {
-  "composer": "Duke Ellington / Barber Miley",
-  "key": "Bb",
-  "seen_title": "Black and Tan Fantasy"
+  "composer": "DUKE ELLINGTON / BUBBER MILEY",
+  "key": "Bbm",
+  "seen_title": "BLACK AND TAN FANTASY",
+  "sig": "5 flats",
+  "last_chord": "unknown"
  },
  "black byrd": {
   "composer": "Larry Mizell",
-  "key": "C",
-  "seen_title": "BLACK BYRD"
+  "key": "Cm",
+  "seen_title": "BLACK BYRD",
+  "sig": "3 flats",
+  "last_chord": "unknown"
  },
  "black coffee": {
-  "composer": "Paul Franck Webster / Sonny Burke",
+  "composer": "PAUL FRANCIS WEBSTER / SONNY BURKE",
   "key": "F",
-  "seen_title": "Black Coffee"
+  "seen_title": "BLACK COFFEE",
+  "sig": "1 flat",
+  "last_chord": "Fmaj7"
  },
  "black narcissus": {
-  "composer": "Joe Henderson",
-  "key": "Ab",
-  "seen_title": "Black Narcissus"
+  "composer": "Wayne Shorter",
+  "key": "Dm",
+  "seen_title": "BLACK NILE",
+  "sig": "1 flat",
+  "last_chord": "D-7",
+  "page_mismatch": true
  },
  "black diamond": {
   "composer": "Milton Sealey",
-  "key": "D",
-  "seen_title": "Black Diamond"
+  "key": "Dm",
+  "seen_title": "BLACK DIAMOND",
+  "sig": "1 flat",
+  "last_chord": "Fmaj7"
  },
  "black monday": {
-  "composer": "Thad Jones / Mel Lewis",
+  "composer": "Thad Jones",
   "key": "Bb",
-  "seen_title": "A Child Is Born"
+  "seen_title": "A CHILD IS BORN",
+  "sig": "3 flats",
+  "last_chord": "Bbmaj7",
+  "page_mismatch": true
  },
  "black nile": {
   "composer": "Wayne Shorter",
-  "key": "Bbm",
-  "seen_title": "Black Nile"
+  "key": "Dm",
+  "seen_title": "BLACK NILE",
+  "sig": "1 flat",
+  "last_chord": "D-7"
  },
  "black orpheus": {
-  "composer": "Luiz Bonfa",
+  "composer": "LUIZ BONFA",
   "key": "Am",
-  "seen_title": "Black Orpheus"
+  "seen_title": "BLACK ORPHEUS",
+  "sig": "none",
+  "last_chord": "A-"
  },
  "blackbird": {
   "composer": "John Lennon / Paul McCartney",
   "key": "G",
-  "seen_title": "Blackbird"
+  "seen_title": "BLACKBIRD",
+  "sig": "1 sharp",
+  "last_chord": "G13"
  },
  "bloomdido": {
-  "composer": "Charlie Parker",
+  "composer": "CHAS. PARKER",
   "key": "Bb",
-  "seen_title": "Bloomdido"
+  "seen_title": "BLOOMDIDO",
+  "sig": "none",
+  "last_chord": "F7"
  },
  "blessed relief": {
-  "composer": "Frank Zappa",
-  "key": "Bb",
-  "seen_title": "Blessed Relief"
+  "composer": "Kenny Dorham",
+  "key": "Cm",
+  "seen_title": "BLUE BOSSA",
+  "sig": "3 flats",
+  "last_chord": "Gm7",
+  "page_mismatch": true
  },
  "blue and sentimental": {
-  "composer": "Buck Clayton",
+  "composer": "Basie / Livingston / David",
   "key": "Eb",
-  "seen_title": "Blue and Sentimental"
+  "seen_title": "Blue and Sentimental",
+  "sig": "3 flats",
+  "last_chord": "unknown"
  },
  "blue bossa": {
-  "composer": "Kenny Durham",
-  "key": "C",
-  "seen_title": "Blue Bossa"
+  "composer": "KENNY DORHAM",
+  "key": "Cm",
+  "seen_title": "BLUE BOSSA",
+  "sig": "3 flats",
+  "last_chord": "C-"
  },
  "blue christmas": {
-  "composer": "Billy Hayes / Jay Johnson",
-  "key": "Bb",
-  "seen_title": "Blue Christmas"
+  "composer": "BILLY HAYES / JAY JOHNSON",
+  "key": "F",
+  "seen_title": "BLUE CHRISTMAS",
+  "sig": "1 flat",
+  "last_chord": "F6"
  },
  "blue a la mode": {
   "composer": "McCoy Tyner",
   "key": "Bb",
-  "seen_title": "Blues Ala Mode"
+  "seen_title": "BLUES ALAMODE",
+  "sig": "3 flats",
+  "last_chord": "Bb"
  },
  "blue daniel": {
-  "composer": "Frank Rosolino",
+  "composer": "FRANK ROSOLINO",
   "key": "D",
-  "seen_title": "Blue Daniel"
+  "seen_title": "BLUE DANIEL",
+  "sig": "2 sharps",
+  "last_chord": "unknown"
  },
  "blue comedy": {
   "composer": "Michael Gibbs",
-  "key": "Db",
-  "seen_title": "Blue Comedy"
+  "key": "Ab",
+  "seen_title": "BLUE COMEDY",
+  "sig": "4 flats",
+  "last_chord": "Bb7"
  },
  "blue friday": {
-  "composer": "Kenny Dorham",
+  "composer": "Blue Mitchell",
   "key": "Bb",
-  "seen_title": "Blue Friday"
+  "seen_title": "BLUE SOUL",
+  "sig": "2 flats",
+  "last_chord": "C7#5(#9)",
+  "page_mismatch": true
  },
  "blue in green": {
   "composer": "Miles Davis",
-  "key": "G",
-  "seen_title": "Blue in Green"
+  "key": "Dm",
+  "seen_title": "Blue in Green",
+  "sig": "none",
+  "last_chord": "D-7"
  },
  "blue monk": {
   "composer": "Thelonious Monk",
   "key": "Bb",
-  "seen_title": "Blue Monk"
+  "seen_title": "BLUE MONK",
+  "sig": "2 flats",
+  "last_chord": "F7"
  },
  "blue moon": {
   "composer": "unknown",
   "key": "Eb",
-  "seen_title": "BLUE MOON"
+  "seen_title": "BLUE MOON",
+  "sig": "3 flats",
+  "last_chord": "Eb"
  },
  "blue room": {
-  "composer": "Richard Rodgers / Lorenz Hart",
+  "composer": "Rodgers / Hart",
   "key": "F",
-  "seen_title": "The Blue Room"
+  "seen_title": "BLUE ROOM",
+  "sig": "1 flat",
+  "last_chord": "F"
  },
  "blue seven": {
   "composer": "Miles Davis",
   "key": "F",
-  "seen_title": "Blues by Five"
+  "seen_title": "Blues by Five",
+  "sig": "1 flat",
+  "last_chord": "Bb7(b5)",
+  "page_mismatch": true
  },
  "blue silver": {
-  "composer": "J. Silver",
-  "key": "Eb",
-  "seen_title": "Blue Silver"
+  "composer": "OSCAR PETTIFORD",
+  "key": "Ab",
+  "seen_title": "BLUES IN THE CLOSET",
+  "sig": "4 flats",
+  "last_chord": "Ab7",
+  "page_mismatch": true
  },
  "blue soul": {
   "composer": "Blue Mitchell",
   "key": "Bb",
-  "seen_title": "Blue Soul"
+  "seen_title": "Blue Soul",
+  "sig": "2 flats",
+  "last_chord": "C7#5(#9)"
  },
  "blue train": {
   "composer": "John Coltrane",
-  "key": "Db",
-  "seen_title": "Blue Trane"
+  "key": "Fm",
+  "seen_title": "BLUE TRANE",
+  "sig": "4 flats",
+  "last_chord": "Bb7"
  },
  "blue trane": {
   "composer": "John Coltrane",
-  "key": "Eb",
-  "seen_title": "Blue Train"
+  "key": "Ebm",
+  "seen_title": "BLUE TRAIN (BLUE TRANE)",
+  "sig": "3 flats",
+  "last_chord": "unknown"
  },
  "bluebird": {
   "composer": "CHARLIE PARKER",
   "key": "Eb",
-  "seen_title": "BLUEBIRD"
+  "seen_title": "BLUEBIRD",
+  "sig": "3 flats",
+  "last_chord": "Fm7"
  },
  "blues backstage": {
   "composer": "FRANK FOSTER",
   "key": "Bb",
-  "seen_title": "BLUES BACKSTAGE"
+  "seen_title": "BLUES BACKSTAGE",
+  "sig": "2 flats",
+  "last_chord": "unknown"
  },
  "blues by five": {
-  "composer": "Miles Davis",
-  "key": "F",
-  "seen_title": "Blues by Five"
+  "composer": "MILES DAVIS",
+  "key": "Bb",
+  "seen_title": "BLUES BY FIVE",
+  "sig": "2 flats",
+  "last_chord": "Bb7(b5)"
  },
  "blues for alice": {
-  "composer": "Charlie Parker",
+  "composer": "CHARLIE PARKER",
   "key": "F",
-  "seen_title": "Blues for Alice"
+  "seen_title": "BLUES FOR ALICE",
+  "sig": "1 flat",
+  "last_chord": "C7"
  },
  "blues for junior": {
-  "composer": "Ray Brown",
+  "composer": "RAY BROWN",
   "key": "G",
-  "seen_title": "Blues for Junior"
+  "seen_title": "BLUES FOR JUNIOR (PYRAMID)",
+  "sig": "1 sharp",
+  "last_chord": "G7"
  },
  "blues connotation": {
   "composer": "McCoy Tyner",
   "key": "Bb",
-  "seen_title": "Blues Ala Mode"
+  "seen_title": "BLUES ALAMODE",
+  "sig": "3 flats",
+  "last_chord": "Bb",
+  "page_mismatch": true
  },
  "blues for philly joe": {
-  "composer": "Sonny Rollins / Woody Shaw",
+  "composer": "Sonny Rollins",
   "key": "F",
-  "seen_title": "Blues for Philly Joe / Blues for Wood"
+  "seen_title": "BLUES FOR PHILLY JOE",
+  "sig": "none",
+  "last_chord": "Fmi"
  },
  "blues in frankie s flat": {
   "composer": "William \"Count\" Basie / Frank Foster",
   "key": "Db",
-  "seen_title": "Blues in Frankie's Flat"
+  "seen_title": "BLUES IN FRANKIE'S FLAT",
+  "sig": "5 flats",
+  "last_chord": "Ab7#5"
  },
  "blues for wood": {
-  "composer": "Sonny Rollins / Woody Shaw",
+  "composer": "Sonny Rollins",
   "key": "F",
-  "seen_title": "Blues for Philly Joe / Blues for Wood"
+  "seen_title": "BLUES FOR PHILLY JOE",
+  "sig": "none",
+  "last_chord": "Fmi",
+  "page_mismatch": true
  },
  "blues in the closet": {
-  "composer": "Oscar Pettiford",
+  "composer": "OSCAR PETTIFORD",
   "key": "Ab",
-  "seen_title": "Blues in the Closet"
+  "seen_title": "BLUES IN THE CLOSET",
+  "sig": "4 flats",
+  "last_chord": "Ab7"
  },
  "blues in time": {
-  "composer": "Paul Desmond",
+  "composer": "PAUL DESMOND",
   "key": "Bb",
-  "seen_title": "Blues in Time"
+  "seen_title": "BLUES IN TIME",
+  "sig": "2 flats",
+  "last_chord": "unknown"
  },
  "blues the most": {
   "composer": "Hampton Hawes",
   "key": "F",
-  "seen_title": "Blues the Most"
+  "seen_title": "Blues The Most",
+  "sig": "1 flat",
+  "last_chord": "F7"
  },
  "boar s head carol": {
   "composer": "TRADITIONAL ENGLISH CAROL",
   "key": "C",
-  "seen_title": "THE BOAR'S HEAD CAROL"
+  "seen_title": "THE BOAR'S HEAD CAROL",
+  "sig": "none",
+  "last_chord": "C6"
  },
  "bluesette": {
   "composer": "Jean Thielemans / Norman Gimbel",
   "key": "Bb",
-  "seen_title": "Bluesette"
+  "seen_title": "BLUESETTE",
+  "sig": "2 flats",
+  "last_chord": "Bb6"
  },
  "bohemia after dark": {
-  "composer": "Adderley",
-  "key": "G",
-  "seen_title": "BOHEMIA AFTER DARK"
+  "composer": "Bill Evans",
+  "key": "Cm",
+  "seen_title": "Bill's Hit Tune",
+  "sig": "none",
+  "last_chord": "C-7",
+  "page_mismatch": true
  },
  "body and soul": {
-  "composer": "John Green / Edward Heyman / Robert Sour / Frank Eyton",
-  "key": "Eb",
-  "seen_title": "Body and Soul"
+  "composer": "MILES DAVIS / GIL EVANS",
+  "key": "F",
+  "seen_title": "BOPLICITY (BE BOP LIVES)",
+  "sig": "1 flat",
+  "last_chord": "C7",
+  "page_mismatch": true
  },
  "boogie stop shuffle": {
-  "composer": "unknown",
+  "composer": "MINGUS",
   "key": "Bbm",
-  "seen_title": "Boogie Stop Shuffle"
+  "seen_title": "BOOGIE STOP SHUFFLE",
+  "sig": "5 flats",
+  "last_chord": "Ebm"
  },
  "bolivia": {
   "composer": "CEDAR WALTON",
   "key": "Eb",
-  "seen_title": "BOLIVIA"
+  "seen_title": "BOLIVIA",
+  "sig": "none",
+  "last_chord": "A7#9"
  },
  "bop boy": {
   "composer": "BOB MINTZER",
   "key": "F",
-  "seen_title": "BOP BOY"
+  "seen_title": "BOP BOY",
+  "sig": "1 flat",
+  "last_chord": "F7"
  },
  "boplicity": {
   "composer": "Miles Davis / Gil Evans",
-  "key": "G",
-  "seen_title": "Boplicity"
+  "key": "F",
+  "seen_title": "BOPLICITY (BE BOP LIVES)",
+  "sig": "1 flat",
+  "last_chord": "C7"
  },
  "booker s waltz": {
-  "composer": "ERROL DOLPH",
+  "composer": "ERIC DOLPHY",
   "key": "Ab",
-  "seen_title": "BOOKER'S WALTZ"
+  "seen_title": "BOOKER'S WALTZ",
+  "sig": "3 flats",
+  "last_chord": "AMaj7"
  },
  "bop shop": {
-  "composer": "Paul Ferguson",
-  "key": "Dm",
-  "seen_title": "Bop Shop"
+  "composer": "PAUL FERGUSON",
+  "key": "Em",
+  "seen_title": "BOP SHOP",
+  "sig": "1 sharp",
+  "last_chord": "D7#11"
  },
  "bopzilla": {
-  "composer": "Jon Mayer",
-  "key": "Eb",
-  "seen_title": "BORZILLA"
+  "composer": "Robert Wells / Mell Torme",
+  "key": "Cm",
+  "seen_title": "BORN TO BE BLUE",
+  "sig": "3 flats",
+  "last_chord": "C-6",
+  "page_mismatch": true
  },
  "born to be bad": {
-  "composer": "Joe Sample",
-  "key": "F",
-  "seen_title": "Born To Be Bad"
+  "composer": "JOE SAMPLE",
+  "key": "Fm",
+  "seen_title": "BORN TO BE BAD",
+  "sig": "3 flats",
+  "last_chord": "F-9"
  },
  "born to be blue": {
-  "composer": "Robert Wells/Mell Torme",
-  "key": "Db",
-  "seen_title": "Born to Be Blue"
+  "composer": "Robert Wells / Mell Torme",
+  "key": "Cm",
+  "seen_title": "BORN TO BE BLUE",
+  "sig": "3 flats",
+  "last_chord": "C-6"
  },
  "bouncing with bud": {
   "composer": "Bud Powell",
-  "key": "Bbm",
-  "seen_title": "Bouncing with Bud"
+  "key": "Bb",
+  "seen_title": "Bouncing w/Bud",
+  "sig": "2 flats",
+  "last_chord": "Gb7"
  },
  "boy meets horn": {
   "composer": "Duke Ellington / Irving Mills / Rex Stewart",
   "key": "F",
-  "seen_title": "Boy Meets Horn"
+  "seen_title": "BOY MEETS HORN",
+  "sig": "1 flat",
+  "last_chord": "C#7"
  },
  "boston marathon": {
   "composer": "Gary Burton",
-  "key": "F",
-  "seen_title": "Boston Marathon"
+  "key": "D",
+  "seen_title": "BOSTON MARATHON",
+  "sig": "2 sharps",
+  "last_chord": "unknown"
  },
  "bossa rokka": {
-  "composer": "George Benson",
+  "composer": "GEORGE BENSON",
   "key": "G",
-  "seen_title": "Bossa Rokka"
+  "seen_title": "BOSSA ROKKA",
+  "sig": "1 sharp",
+  "last_chord": "F ADD9"
  },
  "boy next door": {
-  "composer": "Hugh Martin / Ralph Blane",
+  "composer": "HUGH MARTIN / RALPH BLANE",
   "key": "Bb",
-  "seen_title": "The Boy Next Door"
+  "seen_title": "THE BOY NEXT DOOR",
+  "sig": "2 flats",
+  "last_chord": "Bb6/9"
  },
  "brazilian beat": {
-  "composer": "unknown",
-  "key": "Bb",
-  "seen_title": "BRAZILIAN BEAT"
+  "composer": "LeGrand / Bergman",
+  "key": "A",
+  "seen_title": "BRIAN'S SONG (THE HANDS OF TIME)",
+  "sig": "3 sharps",
+  "last_chord": "A",
+  "page_mismatch": true
  },
  "brainville": {
   "composer": "Sun Ra",
   "key": "Ab",
-  "seen_title": "Brainville"
+  "seen_title": "BRAINVILLE",
+  "sig": "4 flats",
+  "last_chord": "Ab-maj7"
  },
  "break out the blues": {
   "composer": "George Shearing",
   "key": "C",
-  "seen_title": "Break Out the Blues"
+  "seen_title": "BREAK OUT THE BLUES",
+  "sig": "none",
+  "last_chord": "unknown"
  },
  "brian s song": {
-  "composer": "Le Grand / Bergman",
+  "composer": "LeGrand / Bergman",
   "key": "A",
-  "seen_title": "The Hands of Time (Bryan's Song)"
+  "seen_title": "BRIAN'S SONG (THE HANDS OF TIME)",
+  "sig": "3 sharps",
+  "last_chord": "A"
  },
  "brazilian sleigh bells": {
   "composer": "Percy Faith",
   "key": "D",
-  "seen_title": "Brazilian Sleigh Bells"
+  "seen_title": "BRAZILIAN SLEIGH BELLS",
+  "sig": "2 sharps",
+  "last_chord": "D"
  },
  "bright boy": {
-  "composer": "Kendall Bright",
+  "composer": "KENDALL BRIGHT",
   "key": "Eb",
-  "seen_title": "Bright Boy"
+  "seen_title": "BRIGHT BOY",
+  "sig": "3 flats",
+  "last_chord": "Eb7(#11)"
  },
  "bright moments": {
-  "composer": "R. Kirk",
-  "key": "Gm",
-  "seen_title": "Bright Moments"
+  "composer": "R. KIRK",
+  "key": "Am",
+  "seen_title": "BRIGHT MOMENTS",
+  "sig": "none",
+  "last_chord": "A7"
  },
  "bremond s blues": {
   "composer": "Cedar Walton",
-  "key": "Eb",
-  "seen_title": "Bremnnd's Blues"
+  "key": "G",
+  "seen_title": "BREMOND'S BLUES",
+  "sig": "1 sharp",
+  "last_chord": "Gmaj7b5"
  },
  "brilliant corners": {
-  "composer": "TH. MONK",
+  "composer": "Th. Monk",
   "key": "Bb",
-  "seen_title": "BRILLIANT CORNERS"
+  "seen_title": "Brilliant Corners",
+  "sig": "2 flats",
+  "last_chord": "unknown"
  },
  "bright size life": {
   "composer": "Pat Metheny",
-  "key": "G",
-  "seen_title": "Bright Size Life"
+  "key": "D",
+  "seen_title": "BRIGHT SIZE LIFE",
+  "sig": "2 sharps",
+  "last_chord": "Dmaj7"
  },
  "broad way blues": {
-  "composer": "Ornette Coleman",
+  "composer": "Bill Byrd / Teddy McRae / Henri Woode",
   "key": "Eb",
-  "seen_title": "Broadway Blues"
+  "seen_title": "BROADWAY",
+  "sig": "3 flats",
+  "last_chord": "Ab6",
+  "page_mismatch": true
  },
  "bring a torch jeannette isabella": {
-  "composer": "17th Century French Provençal Carol",
+  "composer": "17th Century French Provencal Carol",
   "key": "G",
-  "seen_title": "Bring a Torch, Jeannette, Isabella"
+  "seen_title": "Bring a Torch, Jeannette, Isabella",
+  "sig": "1 sharp",
+  "last_chord": "G6"
  },
  "broadway": {
-  "composer": "Bill Byrd / Teddy McRae / Henry Nemo",
+  "composer": "Bill Byrd / Teddy McRae / Henri Woode",
   "key": "Eb",
-  "seen_title": "Broadway"
+  "seen_title": "BROADWAY",
+  "sig": "3 flats",
+  "last_chord": "Ebm7"
  },
  "broadway blues": {
-  "composer": "unknown",
-  "key": "F",
-  "seen_title": "BROADWAY BLUES"
+  "composer": "Ornette Coleman",
+  "key": "C",
+  "seen_title": "BROADWAY BLUES",
+  "sig": "none",
+  "last_chord": "unknown"
  },
  "brown skin girl": {
   "composer": "S. Rollins",
   "key": "D",
-  "seen_title": "Brown Skin Girl"
+  "seen_title": "Brown Skin Girl",
+  "sig": "2 sharps",
+  "last_chord": "D"
  },
  "brown hornet": {
   "composer": "Miles Davis",
   "key": "F",
-  "seen_title": "Brown Hornet"
+  "seen_title": "BROWN HORNET",
+  "sig": "1 flat",
+  "last_chord": "unknown"
  },
  "brownout": {
   "composer": "Gary Burton",
-  "key": "unknown",
-  "seen_title": "Brownout"
+  "key": "Gm",
+  "seen_title": "BROWNOUT",
+  "sig": "none",
+  "last_chord": "D7(alt)"
  },
  "bud s blues": {
   "composer": "BUD POWELL",
   "key": "Bb",
-  "seen_title": "BUD'S BLUES"
+  "seen_title": "BUD'S BLUES",
+  "sig": "2 flats",
+  "last_chord": "F7"
  },
  "budo": {
-  "composer": "Bud Powell",
+  "composer": "B. Powell",
   "key": "Bb",
-  "seen_title": "Budo"
+  "seen_title": "BUDS BUBBLE",
+  "sig": "2 flats",
+  "last_chord": "unknown",
+  "page_mismatch": true
  },
  "bud s bubble": {
-  "composer": "S. Rollins",
-  "key": "D",
-  "seen_title": "Brown Skin Girl"
+  "composer": "Bud Powell / Miles Davis",
+  "key": "Ab",
+  "seen_title": "BUDO",
+  "sig": "4 flats",
+  "last_chord": "unknown",
+  "page_mismatch": true
  },
  "bunko": {
   "composer": "Lennie Niehaus",
   "key": "F",
-  "seen_title": "Bunko"
+  "seen_title": "BUNKO",
+  "sig": "1 flat",
+  "last_chord": "F"
  },
  "burgundian carol": {
   "composer": "Oscar Brand",
-  "key": "Bb",
-  "seen_title": "Burgundian Carol"
+  "key": "Cm",
+  "seen_title": "BURGUNDIAN CAROL",
+  "sig": "3 flats",
+  "last_chord": "C-(add2)"
  },
  "buster rides again": {
-  "composer": "Dizzy Gillespie / Bud Powell",
-  "key": "F",
-  "seen_title": "Birk's Works / Buster Rides Again"
+  "composer": "Dizzy Gillespie",
+  "key": "Fm",
+  "seen_title": "BIRK'S WORKS",
+  "sig": "4 flats",
+  "last_chord": "G7",
+  "page_mismatch": true
  },
  "busch wacked": {
-  "composer": "Jack Zucker",
+  "composer": "JACK ZUCKER",
   "key": "Bb",
-  "seen_title": "Busch-Wacked"
+  "seen_title": "BUSCH - WACKED",
+  "sig": "2 flats",
+  "last_chord": "F+7#9"
  },
  "buster s last stand": {
   "composer": "Gil Evans / Claude Thornhill",
   "key": "Gm",
-  "seen_title": "Buster's Last Stand"
+  "seen_title": "Buster's Last Stand",
+  "sig": "2 flats",
+  "last_chord": "F6"
  },
  "but not for he": {
-  "composer": "G. Gershwin",
-  "key": "G",
-  "seen_title": "But Not For Me"
+  "composer": "Dixon / Henderson",
+  "key": "F",
+  "seen_title": "BYE BYE BLACKBIRD",
+  "sig": "1 flat",
+  "last_chord": "F",
+  "page_mismatch": true
  },
  "but beautiful": {
   "composer": "Jimmy Van Heusen / Johnny Burke",
-  "key": "A",
-  "seen_title": "But Beautiful"
+  "key": "G",
+  "seen_title": "But Beautiful",
+  "sig": "1 sharp",
+  "last_chord": "D7"
  },
  "but she s my buddy s chick": {
   "composer": "Sy Oliver / Charles S. Atkinson",
-  "key": "G",
-  "seen_title": "But She's My Buddy's Chick"
+  "key": "F",
+  "seen_title": "BUT SHE'S MY BUDDY'S CHICK",
+  "sig": "1 flat",
+  "last_chord": "F6"
  },
  "butterfly": {
   "composer": "Herbie Hancock / Bennie Maupin",
-  "key": "F",
-  "seen_title": "Butterfly"
+  "key": "Fm",
+  "seen_title": "BUTTERFLY",
+  "sig": "1 flat",
+  "last_chord": "F-7"
  },
  "buzzy": {
   "composer": "CHARLIE PARKER",
   "key": "Bb",
-  "seen_title": "BUZZY"
+  "seen_title": "BUZZY",
+  "sig": "2 flats",
+  "last_chord": "unknown"
  },
  "by myself": {
-  "composer": "Hugh Martin / Ralph Blane",
-  "key": "Em",
-  "seen_title": "By Myself"
+  "composer": "HUGH MARTIN / RALPH BLANE",
+  "key": "F",
+  "seen_title": "BY MYSELF",
+  "sig": "1 flat",
+  "last_chord": "F6/9"
  },
  "bye bye blackbird": {
-  "composer": "Deon Henderson",
-  "key": "Gm",
-  "seen_title": "Bye Bye Blackbird"
+  "composer": "Dixon / Henderson",
+  "key": "F",
+  "seen_title": "BYE BYE BLACKBIRD",
+  "sig": "1 flat",
+  "last_chord": "F"
  },
  "bye bye baby": {
-  "composer": "Leo Robin / Jule Styne",
-  "key": "Bbm",
-  "seen_title": "Bye Bye Baby"
+  "composer": "LEO ROBIN / JULE STYNE",
+  "key": "Bb",
+  "seen_title": "BYE BYE BABY",
+  "sig": "2 flats",
+  "last_chord": "Bb6/9"
  },
  "button up your overcoat": {
-  "composer": "B.G. DeSylva / Lew Brown / Ray Henderson",
+  "composer": "B.G. DESYLVA / LEW BROWN / RAY HENDERSON",
   "key": "G",
-  "seen_title": "Button Up Your Overcoat"
+  "seen_title": "BUTTON UP YOUR OVERCOAT",
+  "sig": "1 sharp",
+  "last_chord": "G6"
  },
  "byrd like": {
-  "composer": "Freddie Hubbard",
-  "key": "F",
-  "seen_title": "Byrd Like"
+  "composer": "FREDDIE HUBBARD",
+  "key": "Dm",
+  "seen_title": "BYRD LIKE",
+  "sig": "1 flat",
+  "last_chord": "F7#9"
  },
  "c h r i s t m a s": {
   "composer": "Eddy Arnold / Jenny Lou Carson",
   "key": "C",
-  "seen_title": "C-H-R-I-S-T-M-A-S"
+  "seen_title": "C-H-R-I-S-T-M-A-S",
+  "sig": "none",
+  "last_chord": "Cmaj7"
  },
  "c est si bon": {
-  "composer": "Henri Betti / Jerry Seelen, André Hornez",
-  "key": "Cm",
-  "seen_title": "C'Est Si Bon (It's So Good)"
+  "composer": "Henri Betti / Jerry Seeley / Andre Hornez",
+  "key": "Bb",
+  "seen_title": "C'EST SI BON (IT'S SO GOOD)",
+  "sig": "2 flats",
+  "last_chord": "Bb6"
  },
  "c jam blues": {
-  "composer": "Duke Ellington",
+  "composer": "unknown",
   "key": "F",
-  "seen_title": "Careless Love"
+  "seen_title": "CARELESS LOVE",
+  "sig": "1 flat",
+  "last_chord": "F",
+  "page_mismatch": true
  },
  "byrdlike": {
-  "composer": "F. Hubbard",
-  "key": "Dm",
-  "seen_title": "HI-FLY"
+  "composer": "Sonny Rollins",
+  "key": "Fm",
+  "seen_title": "Decision",
+  "sig": "4 flats",
+  "last_chord": "Gbmaj7",
+  "page_mismatch": true
  },
  "cake walking babies from home": {
   "composer": "Henry Troy / Chris Smith / Clarence Williams",
-  "key": "E",
-  "seen_title": "Cake Walking Babies From Home"
+  "key": "A",
+  "seen_title": "CAKE WALKING BABIES FROM HOME",
+  "sig": "3 sharps",
+  "last_chord": "A7"
  },
  "call me": {
-  "composer": "Tony Hatch",
+  "composer": "TONY HATCH",
   "key": "C",
-  "seen_title": "Call Me"
+  "seen_title": "CALL ME",
+  "sig": "none",
+  "last_chord": "Cmaj7"
  },
  "call for all demons": {
-  "composer": "SUN RA",
-  "key": "Bb",
-  "seen_title": "A CALL FOR ALL DEMONS"
+  "composer": "Sun Ra",
+  "key": "D",
+  "seen_title": "A CALL FOR ALL DEMONS",
+  "sig": "2 sharps",
+  "last_chord": "unknown"
  },
  "can t buy me love": {
-  "composer": "John Lennon / Paul McCartney",
-  "key": "Eb",
-  "seen_title": "Can't Buy Me Love"
+  "composer": "Henry Troy / Chris Smith / Clarence Williams",
+  "key": "A",
+  "seen_title": "CAKE WALKING BABIES FROM HOME",
+  "sig": "3 sharps",
+  "last_chord": "A7",
+  "page_mismatch": true
  },
  "call me irresponsible": {
   "composer": "James Van Heusen / Sammy Cahn",
   "key": "F",
-  "seen_title": "Call Me Irresponsible"
+  "seen_title": "Call Me Irresponsible",
+  "sig": "1 flat",
+  "last_chord": "F6"
  },
  "can t get started with you": {
   "composer": "Vernon Duke / Ira Gershwin",
-  "key": "Cm",
-  "seen_title": "I CAN'T GET STARTED WITH YOU"
+  "key": "C",
+  "seen_title": "I CAN'T GET STARTED WITH YOU",
+  "sig": "none",
+  "last_chord": "Dmaj7"
  },
  "can t help lovin dat man": {
   "composer": "Jerome Kern / Oscar Hammerstein II",
   "key": "Eb",
-  "seen_title": "Can't Help Lovin' Dat Man"
+  "seen_title": "Can't Help Lovin' Dat Man",
+  "sig": "3 flats",
+  "last_chord": "Eb6"
  },
  "can t we be friends": {
-  "composer": "Jones/Swift",
+  "composer": "Dixon / Henderson",
   "key": "F",
-  "seen_title": "Can We Be Friends"
+  "seen_title": "BYE BYE BLACKBIRD",
+  "sig": "1 flat",
+  "last_chord": "F",
+  "page_mismatch": true
  },
  "canyon song": {
   "composer": "Ralph Towner",
-  "key": "G",
-  "seen_title": "Canyon Song"
+  "key": "Gm",
+  "seen_title": "CANYON SONG",
+  "sig": "2 flats",
+  "last_chord": "D7sus4"
  },
  "caravan": {
-  "composer": "Duke Ellington",
-  "key": "G",
-  "seen_title": "Caravan"
+  "composer": "JIM HALL",
+  "key": "A",
+  "seen_title": "CAREFUL",
+  "sig": "3 sharps",
+  "last_chord": "unknown",
+  "page_mismatch": true
  },
  "captain marvel": {
-  "composer": "Chick Corea",
-  "key": "Eb",
-  "seen_title": "Captain Marvel"
+  "composer": "CHICK COREA",
+  "key": "Am",
+  "seen_title": "CAPTAIN MARVEL",
+  "sig": "none",
+  "last_chord": "Ab"
  },
  "caroling caroling": {
-  "composer": "Alfred Burt / Wihla Hutson",
-  "key": "A",
-  "seen_title": "Caroling, Caroling"
+  "composer": "Ross Bagdasarian",
+  "key": "C",
+  "seen_title": "THE CHIPMUNK SONG",
+  "sig": "none",
+  "last_chord": "C6",
+  "page_mismatch": true
  },
  "carol of the bells": {
   "composer": "unknown",
-  "key": "G",
-  "seen_title": "CAROL OF THE BELLS"
+  "key": "Gm",
+  "seen_title": "CAROL OF THE BELLS",
+  "sig": "2 flats",
+  "last_chord": "G-"
  },
  "careful": {
   "composer": "Jim Hall",
-  "key": "Ab",
-  "seen_title": "Careful"
+  "key": "A",
+  "seen_title": "CAREFUL",
+  "sig": "3 sharps",
+  "last_chord": "unknown"
  },
  "caroling we go": {
   "composer": "Johnny Marks",
   "key": "C",
-  "seen_title": "A Caroling We Go"
+  "seen_title": "A Caroling We Go",
+  "sig": "none",
+  "last_chord": "C6"
  },
  "central park west": {
   "composer": "John Coltrane",
-  "key": "C#m",
-  "seen_title": "Central Park West"
+  "key": "B",
+  "seen_title": "CENTRAL PARK WEST",
+  "sig": "5 sharps",
+  "last_chord": "Bmaj7"
  },
  "ceora": {
-  "composer": "Lee Morgan",
-  "key": "Db",
-  "seen_title": "Cedra"
+  "composer": "LEE MORGAN",
+  "key": "Ab",
+  "seen_title": "CEORA",
+  "sig": "4 flats",
+  "last_chord": "Abmaj7"
  },
  "cape verdean blues": {
-  "composer": "Horace Silver",
-  "key": "C",
-  "seen_title": "The Cape Verdean Blues"
+  "composer": "HORACE SILVER",
+  "key": "Cm",
+  "seen_title": "THE CAPE VERDEAN BLUES",
+  "sig": "3 flats",
+  "last_chord": "C-7"
  },
  "charade": {
-  "composer": "Henry Mancini",
+  "composer": "HENRY MANCINI",
   "key": "Am",
-  "seen_title": "Charade"
+  "seen_title": "CHARADE",
+  "sig": "1 flat",
+  "last_chord": "A-"
  },
  "change of season": {
-  "composer": "John Patitucci",
-  "key": "C",
-  "seen_title": "Change of Season"
+  "composer": "Alfred James Ellis",
+  "key": "Bb",
+  "seen_title": "THE CHICKEN",
+  "sig": "2 flats",
+  "last_chord": "Bb7",
+  "page_mismatch": true
  },
  "chasing the bird": {
   "composer": "Charlie Parker",
   "key": "F",
-  "seen_title": "Chasing the Bird"
+  "seen_title": "CHASING THE BIRD",
+  "sig": "1 flat",
+  "last_chord": "C7"
  },
  "cheek to cheek": {
-  "composer": "Irving Berlin",
-  "key": "C",
-  "seen_title": "Cheek to Cheek"
+  "composer": "unknown",
+  "key": "Cm",
+  "seen_title": "CHEEK TO CHEEK (P.2)",
+  "sig": "none",
+  "last_chord": "Dm7"
  },
  "cheese cake": {
-  "composer": "Dexter Gordon",
+  "composer": "DEXTER GORDON",
   "key": "Cm",
-  "seen_title": "Cheese Cake"
+  "seen_title": "CHEESE CAKE",
+  "sig": "3 flats",
+  "last_chord": "Cmi69"
  },
  "chelsea bridge": {
   "composer": "Billy Strayhorn",
-  "key": "Eb",
-  "seen_title": "Chelsea Bridge"
+  "key": "Ab",
+  "seen_title": "CHELSEA BRIDGE",
+  "sig": "4 flats",
+  "last_chord": "E7"
  },
  "chelsea bells": {
-  "composer": "Steve Swallow",
-  "key": "Bb",
-  "seen_title": "Chelsea Bells"
+  "composer": "ANTONIO CARLOS JOBIM / VINICIUS DE MORAES",
+  "key": "Dm",
+  "seen_title": "CHEGA DE SAUDADE (NO MORE BLUES)",
+  "sig": "1 flat",
+  "last_chord": "E-7",
+  "page_mismatch": true
  },
  "chega de saudade": {
   "composer": "Antonio Carlos Jobim / Vinicius de Moraes",
   "key": "Dm",
-  "seen_title": "Chega de Saudade (No More Blues)"
+  "seen_title": "CHEGA DE SAUDADE (NO MORE BLUES)",
+  "sig": "1 flat",
+  "last_chord": "E-7"
  },
  "cherokee": {
-  "composer": "Ray Noble",
+  "composer": "RAY NOBLE",
   "key": "Bb",
-  "seen_title": "Cherokee (Indian Love Song)"
+  "seen_title": "CHEROKEE (INDIAN LOVE SONG)",
+  "sig": "2 flats",
+  "last_chord": "Bb6"
  },
  "cheryl": {
-  "composer": "Charlie Parker",
+  "composer": "CHARLIE PARKER",
   "key": "C",
-  "seen_title": "Cheryl"
+  "seen_title": "CHERYL",
+  "sig": "none",
+  "last_chord": "C"
  },
  "cherry pink and apple blossom white": {
-  "composer": "Louwgy / Jacques Larue / Marc David",
+  "composer": "Louiguy / Jacque Larue / Mack David",
   "key": "Eb",
-  "seen_title": "Cherry Pink and Appleblossom White"
+  "seen_title": "CHERRY PINK AND APPLE BLOSSOM WHITE",
+  "sig": "3 flats",
+  "last_chord": "Eb6"
  },
  "chicken feathers": {
   "composer": "Steve Kuhn",
-  "key": "G",
-  "seen_title": "Chicken Feathers"
+  "key": "Gm",
+  "seen_title": "CHICKEN FEATHERS",
+  "sig": "2 flats",
+  "last_chord": "unknown"
  },
  "child is born": {
-  "composer": "Thad Jones",
+  "composer": "THAD JONES",
   "key": "Bb",
-  "seen_title": "A Child Is Born"
+  "seen_title": "A CHILD IS BORN",
+  "sig": "2 flats",
+  "last_chord": "Bbmaj7"
  },
  "children of the night": {
-  "composer": "Wayne Shorter",
-  "key": "B",
-  "seen_title": "Children of the Night"
+  "composer": "unknown",
+  "key": "unknown",
+  "seen_title": "unknown",
+  "sig": "none",
+  "last_chord": "E7",
+  "page_mismatch": true
  },
  "children s song": {
   "composer": "Chick Corea",
-  "key": "F",
-  "seen_title": "CHILDREN'S SONG"
+  "key": "C",
+  "seen_title": "CHILDREN'S SONG",
+  "sig": "none",
+  "last_chord": "unknown"
  },
  "chipmunk song": {
-  "composer": "Rose Bagdasarian",
+  "composer": "Ross Bagdasarian",
   "key": "C",
-  "seen_title": "The Chipmunk Song"
+  "seen_title": "THE CHIPMUNK SONG",
+  "sig": "none",
+  "last_chord": "C6"
  },
  "chippie": {
   "composer": "Ornette Coleman",
   "key": "F",
-  "seen_title": "CHIPPIE"
+  "seen_title": "CHIPPIE",
+  "sig": "1 flat",
+  "last_chord": "C7"
  },
  "chitlins con carne": {
   "composer": "Kenny Burrell",
   "key": "C",
-  "seen_title": "Chitins Con Carne"
+  "seen_title": "CHITLINS CON CARNE",
+  "sig": "none",
+  "last_chord": "C7#9"
  },
  "christ was born on christmas day": {
   "composer": "TRADITIONAL",
   "key": "F",
-  "seen_title": "CHRIST WAS BORN ON CHRISTMAS DAY"
+  "seen_title": "CHRIST WAS BORN ON CHRISTMAS DAY",
+  "sig": "1 flat",
+  "last_chord": "unknown"
  },
  "christmas is": {
   "composer": "Percy Faith / Spence Maxwell",
   "key": "Eb",
-  "seen_title": "Christmas Is"
+  "seen_title": "CHRISTMAS IS",
+  "sig": "3 flats",
+  "last_chord": "Eb6"
  },
  "christmas is a comin": {
   "composer": "Frank Luther",
   "key": "Eb",
-  "seen_title": "Christmas Is A-Comin'"
+  "seen_title": "CHRISTMAS IS A-COMIN' (MAY GOD BLESS YOU)",
+  "sig": "3 flats",
+  "last_chord": "Bb7"
  },
  "chicken": {
   "composer": "Alfred James Ellis",
   "key": "Bb",
-  "seen_title": "The Chicken"
+  "seen_title": "THE CHICKEN",
+  "sig": "2 flats",
+  "last_chord": "Bb7"
  },
  "christmas is the time to say i love you": {
-  "composer": "Billy Sauier",
-  "key": "C",
-  "seen_title": "Christmas is the Time to Say I Love You"
+  "composer": "Billy Squier",
+  "key": "F",
+  "seen_title": "CHRISTMAS IS THE TIME TO SAY I LOVE YOU",
+  "sig": "1 flat",
+  "last_chord": "C7"
  },
  "christmas song": {
-  "composer": "Mel Tormé / Robert Wells",
+  "composer": "Mel Torme / Robert Wells",
   "key": "Eb",
-  "seen_title": "The Christmas Song (Chestnuts Roasting on an Open Fire)"
+  "seen_title": "THE CHRISTMAS SONG (CHESTNUTS ROASTING ON AN OPEN FIRE)",
+  "sig": "3 flats",
+  "last_chord": "Eb6"
  },
  "christmas waltz": {
   "composer": "Jule Styne / Sammy Cahn",
-  "key": "C",
-  "seen_title": "THE CHRISTMAS WALTZ"
+  "key": "F",
+  "seen_title": "THE CHRISTMAS WALTZ",
+  "sig": "1 flat",
+  "last_chord": "C7"
  },
  "christmas time is here": {
   "composer": "Lee Mendelson / Vince Guaraldi",
   "key": "F",
-  "seen_title": "Christmas Time Is Here"
+  "seen_title": "CHRISTMAS TIME IS HERE",
+  "sig": "1 flat",
+  "last_chord": "Fmaj9"
  },
  "christopher columbus": {
   "composer": "Andy Razaf / Leon Berry",
   "key": "F",
-  "seen_title": "Christopher Columbus"
+  "seen_title": "CHRISTOPHER COLUMBUS",
+  "sig": "1 flat",
+  "last_chord": "F"
  },
  "chromozone": {
-  "composer": "Mike Stern",
-  "key": "unknown",
-  "seen_title": "Chromozone"
+  "composer": "GEORGE BENSON",
+  "key": "G",
+  "seen_title": "CLOCKWISE",
+  "sig": "1 sharp",
+  "last_chord": "D7",
+  "page_mismatch": true
  },
  "circle": {
-  "composer": "Miles Davis",
-  "key": "D",
-  "seen_title": "CIRCLE"
+  "composer": "J. COLTRANE",
+  "key": "F",
+  "seen_title": "CHASIN' THE TRAIN",
+  "sig": "1 flat",
+  "last_chord": "F",
+  "page_mismatch": true
  },
  "clear day": {
-  "composer": "Lane/Garnier",
-  "key": "G",
-  "seen_title": "ON A CLEAR DAY"
+  "composer": "Lane / Learner",
+  "key": "D",
+  "seen_title": "ON A CLEAR DAY",
+  "sig": "2 sharps",
+  "last_chord": "GMaj7"
  },
  "clinoqui valley": {
-  "composer": "Duke Ellington",
-  "key": "Bb",
-  "seen_title": "African Flower"
+  "composer": "M. Santamaria",
+  "key": "Fm",
+  "seen_title": "AFRO BLUE",
+  "sig": "4 flats",
+  "last_chord": "F-7",
+  "page_mismatch": true
  },
  "close enough for love": {
-  "composer": "Paul Williams / Johnny Mandel",
+  "composer": "PAUL WILLIAMS / JOHNNY MANDEL",
   "key": "Gm",
-  "seen_title": "Close Enough for Love"
+  "seen_title": "CLOSE ENOUGH FOR LOVE",
+  "sig": "2 flats",
+  "last_chord": "Gm6/9"
  },
  "clockwise": {
-  "composer": "George Benson",
+  "composer": "GEORGE BENSON",
   "key": "G",
-  "seen_title": "Clockwise"
+  "seen_title": "CLOCKWISE",
+  "sig": "1 sharp",
+  "last_chord": "D7"
  },
  "cocktails for two": {
   "composer": "Arthur Johnston / Sam Coslow",
   "key": "D",
-  "seen_title": "Cocktails for Two"
+  "seen_title": "COCKTAILS FOR TWO",
+  "sig": "2 sharps",
+  "last_chord": "D"
  },
  "close as pages in a book": {
   "composer": "Dorothy Fields / Sigmund Romberg",
   "key": "Eb",
-  "seen_title": "Close As Pages In A Book"
+  "seen_title": "CLOSE AS PAGES IN A BOOK",
+  "sig": "3 flats",
+  "last_chord": "Eb6"
  },
  "colors of chloe": {
   "composer": "Eberhard Weber",
   "key": "D",
-  "seen_title": "Colors of Chloë"
+  "seen_title": "COLORS OF CHLOË",
+  "sig": "2 sharps",
+  "last_chord": "unknown"
  },
  "cold december nights": {
-  "composer": "Michael McCary / Shawn Stockman",
-  "key": "A",
-  "seen_title": "Cold December Nights"
+  "composer": "unknown",
+  "key": "Am",
+  "seen_title": "unknown",
+  "sig": "none",
+  "last_chord": "A-9",
+  "page_mismatch": true
  },
  "come dance with me": {
   "composer": "Sammy Cahn / James Van Heusen",
   "key": "G",
-  "seen_title": "Come Dance With Me"
+  "seen_title": "COME DANCE WITH ME",
+  "sig": "1 sharp",
+  "last_chord": "G7/B"
  },
  "come candellia": {
   "composer": "Mongo Santamaria",
-  "key": "A",
-  "seen_title": "Come Candellia"
+  "key": "Gm",
+  "seen_title": "COME CANDELLIA",
+  "sig": "2 flats",
+  "last_chord": "G-"
  },
  "come rain or come shine": {
   "composer": "Mercer / Arlen",
   "key": "F",
-  "seen_title": "Come Rain Or Come Shine"
+  "seen_title": "Come Rain Or Come Shine",
+  "sig": "1 flat",
+  "last_chord": "unknown"
  },
  "comes love": {
   "composer": "Lew Brown / Sam H. Stept / Charlie Tobias",
-  "key": "A",
-  "seen_title": "Comes Love"
+  "key": "Am",
+  "seen_title": "COMES LOVE",
+  "sig": "none",
+  "last_chord": "Am"
  },
  "comin home baby": {
-  "composer": "Earl Hagan",
-  "key": "G",
-  "seen_title": "Comin' Home Baby"
+  "composer": "EARL HAGEN",
+  "key": "Gm",
+  "seen_title": "COMIN' HOME BABY",
+  "sig": "2 flats",
+  "last_chord": "Bb"
  },
  "como en vietnam": {
-  "composer": "Steve Swallow",
-  "key": "Bb",
-  "seen_title": "Como en Vietnam"
+  "composer": "STEVE SWALLOW",
+  "key": "Bbm",
+  "seen_title": "COMO EN VIETNAM",
+  "sig": "5 flats",
+  "last_chord": "Bb-"
  },
  "come sunday": {
   "composer": "Duke Ellington",
-  "key": "C",
-  "seen_title": "Come Sunday"
+  "key": "Bb",
+  "seen_title": "COME SUNDAY",
+  "sig": "2 flats",
+  "last_chord": "F7#5"
  },
  "compared to what": {
-  "composer": "Eugene McDaniels",
+  "composer": "EUGENE McDANIELS",
   "key": "F",
-  "seen_title": "Compared To What"
+  "seen_title": "COMPARED TO WHAT",
+  "sig": "1 flat",
+  "last_chord": "N.C."
  },
  "compensation": {
   "composer": "KENNY WERNER",
-  "key": "Ab",
-  "seen_title": "COMPENSATION"
+  "key": "Gm",
+  "seen_title": "COMPENSATION",
+  "sig": "none",
+  "last_chord": "D7#11"
  },
  "conception": {
   "composer": "George Shearing",
@@ -1501,28 +2146,38 @@
  },
  "con alma": {
   "composer": "John \"Dizzy\" Gillespie",
-  "key": "Eb",
-  "seen_title": "Con Alma"
+  "key": "E",
+  "seen_title": "CON ALMA",
+  "sig": "4 sharps",
+  "last_chord": "Cmaj7"
  },
  "conference of the birds": {
-  "composer": "Dave Milian",
-  "key": "D",
-  "seen_title": "Conference of the Birds"
+  "composer": "Dave Holland",
+  "key": "Dm",
+  "seen_title": "CONFERENCE OF THE BIRDS",
+  "sig": "none",
+  "last_chord": "Dm"
  },
  "confirmation": {
   "composer": "Charlie Parker",
   "key": "F",
-  "seen_title": "Confirmation"
+  "seen_title": "CONFIRMATION",
+  "sig": "1 flat",
+  "last_chord": "F"
  },
  "confessin": {
   "composer": "unknown",
   "key": "G",
-  "seen_title": "Confessin' (I'm in Love You)"
+  "seen_title": "CONFESSIN' (THAT I LOVE YOU)",
+  "sig": "1 sharp",
+  "last_chord": "G"
  },
  "contemplation": {
   "composer": "McCoy Tyner",
   "key": "Cm",
-  "seen_title": "Contemplation"
+  "seen_title": "CONTEMPLATION",
+  "sig": "3 flats",
+  "last_chord": "unknown"
  },
  "cookin": {
   "composer": "Lou Donaldson",
@@ -1531,8 +2186,10 @@
  },
  "cool eyes": {
   "composer": "HORACE SILVER",
-  "key": "Bb",
-  "seen_title": "COOL EYES"
+  "key": "Gm",
+  "seen_title": "COOL EYES",
+  "sig": "2 flats",
+  "last_chord": "Gm7"
  },
  "cool blues": {
   "composer": "Earl Hagan",
@@ -1547,7 +2204,9 @@
  "cool shade of blue": {
   "composer": "Henry Mancini",
   "key": "Ab",
-  "seen_title": "A Cool Shade of Blue"
+  "seen_title": "A Cool Shade of Blue",
+  "sig": "4 flats",
+  "last_chord": "Bb6"
  },
  "corcovado": {
   "composer": "John",
@@ -1937,7 +2596,9 @@
  "dolores": {
   "composer": "Wayne Shorter",
   "key": "Dm",
-  "seen_title": "Dolores"
+  "seen_title": "DOLORES",
+  "sig": "1 flat",
+  "last_chord": "Dbmaj7"
  },
  "don t you know i care": {
   "composer": "Mark David / Duke Ellington",
@@ -6711,8 +7372,10 @@
  },
  "seven steps to heaven": {
   "composer": "Miles Davis / Victor Feldman",
-  "key": "Eb",
-  "seen_title": "Seven Steps to Heaven"
+  "key": "F",
+  "seen_title": "SEVEN STEPS TO HEAVEN",
+  "sig": "none",
+  "last_chord": "F6"
  },
  "seven come eleven": {
   "composer": "Benny Goodman / Charlie Christian",
@@ -8050,9 +8713,11 @@
   "seen_title": "TUNE 88"
  },
  "tune up": {
-  "composer": "Miles Davis",
-  "key": "E",
-  "seen_title": "Tune Up"
+  "composer": "MILES DAVIS",
+  "key": "D",
+  "seen_title": "TUNE UP",
+  "sig": "2 sharps",
+  "last_chord": "unknown"
  },
  "tricrotism": {
   "composer": "OSCAR PETTIFORD",

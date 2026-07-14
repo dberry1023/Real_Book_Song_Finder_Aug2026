@@ -40,7 +40,7 @@ if _META_PATH.exists():
     _meta = json.loads(_META_PATH.read_text(encoding="utf-8"))
     for _s in DB["songs"]:
         _m = _meta.get(_s["id"])
-        if _m:
+        if _m and not _m.get("page_mismatch"):
             _s["composer"] = _m.get("composer", "unknown")
             _s["key"] = _m.get("key", "unknown")
 
