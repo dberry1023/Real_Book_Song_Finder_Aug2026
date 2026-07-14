@@ -1,11 +1,10 @@
 {
  "500 miles high": {
-  "composer": "James Rowles",
-  "key": "Am",
-  "seen_title": "502 BLUES",
-  "sig": "none",
-  "last_chord": "unknown",
-  "page_mismatch": true
+  "composer": "CHICK COREA / NEVILLE POTTER",
+  "key": "Dm",
+  "seen_title": "500 MILES HIGH",
+  "sig": "1 flat",
+  "last_chord": "E-7"
  },
  "1 n naima": {
   "composer": "John Coltrane",
@@ -15,12 +14,11 @@
   "last_chord": "Abmaj9"
  },
  "12 4 2 4 duplicities": {
-  "composer": "Robin / Rainger",
-  "key": "F",
-  "seen_title": "EASY LIVING",
-  "sig": "1 flat",
-  "last_chord": "unknown",
-  "page_mismatch": true
+  "composer": "Jack Stock",
+  "key": "Am",
+  "seen_title": "12-4 2-4/DUPLICITIES",
+  "sig": "none",
+  "last_chord": "G7sus"
  },
  "34 skidoo": {
   "composer": "BILL EVANS",
@@ -82,7 +80,7 @@
  "additions alfie": {
   "composer": "Sun Ra",
   "key": "D",
-  "seen_title": "A Call for All Demons",
+  "seen_title": "A Call For All Demons",
   "sig": "2 sharps",
   "last_chord": "unknown",
   "page_mismatch": true
@@ -102,12 +100,11 @@
   "last_chord": "Eb-7"
  },
  "after the rain": {
-  "composer": "Eddie Woods / Enric Madriguera",
-  "key": "F",
-  "seen_title": "ADIOS",
-  "sig": "1 flat",
-  "last_chord": "F6",
-  "page_mismatch": true
+  "composer": "JOHN COLTRANE",
+  "key": "Ab",
+  "seen_title": "AFTER THE RAIN",
+  "sig": "3 flats",
+  "last_chord": "Abmaj7"
  },
  "afro blue": {
   "composer": "Mongo Santamaria",
@@ -152,12 +149,11 @@
   "last_chord": "A-7"
  },
  "airegin": {
-  "composer": "Antonio Carlos Jobim / Norman Gimbel / Vinicius de Moraes",
-  "key": "Am",
-  "seen_title": "AGUA DE BEBER",
-  "sig": "none",
-  "last_chord": "A-7",
-  "page_mismatch": true
+  "composer": "Sonny Rollins",
+  "key": "Fm",
+  "seen_title": "AIREGIN",
+  "sig": "4 flats",
+  "last_chord": "unknown"
  },
  "ain t misbehavin": {
   "composer": "\"Fats\" Waller / Harry Brooks / Andy Razaf",
@@ -174,12 +170,11 @@
   "last_chord": "C"
  },
  "alfie": {
-  "composer": "SAMMY FAIN / BOB HILLIARD",
+  "composer": "Burt Bacharach / Hal David",
   "key": "C",
-  "seen_title": "ALICE IN WONDERLAND",
-  "sig": "none",
-  "last_chord": "Cmaj7",
-  "page_mismatch": true
+  "seen_title": "ALFIE",
+  "sig": "1 flat",
+  "last_chord": "Cmaj7"
  },
  "alice in wonderland": {
   "composer": "Sammy Fain / Bob Hilliard",
@@ -189,20 +184,18 @@
   "last_chord": "Cmaj7"
  },
  "alfie s theme": {
-  "composer": "Mal Waldron",
-  "key": "Bm",
-  "seen_title": "ALL ALONE",
-  "sig": "2 sharps",
-  "last_chord": "unknown",
-  "page_mismatch": true
+  "composer": "Sonny Rollins",
+  "key": "Bbm",
+  "seen_title": "ALFIE'S THEME",
+  "sig": "5 flats",
+  "last_chord": "unknown"
  },
  "alanjuneally": {
-  "composer": "BENNY GOLSON",
-  "key": "Bbm",
-  "seen_title": "ALONG CAME BETTY",
-  "sig": "none",
-  "last_chord": "AbΔ7",
-  "page_mismatch": true
+  "composer": "Kenny Werner",
+  "key": "D",
+  "seen_title": "ALANJUNEALLY",
+  "sig": "2 sharps",
+  "last_chord": "Dbsus"
  },
  "all alone": {
   "composer": "MAL WALDRON",
@@ -324,12 +317,11 @@
   "last_chord": "AbΔ7"
  },
  "altoitis": {
-  "composer": "Stevie Wonder",
-  "key": "Fm",
-  "seen_title": "Another Star",
-  "sig": "4 flats",
-  "last_chord": "C7(b9)",
-  "page_mismatch": true
+  "composer": "Oliver Nelson",
+  "key": "Bb",
+  "seen_title": "Altoitis",
+  "sig": "2 flats",
+  "last_chord": "unknown"
  },
  "alright okay you win": {
   "composer": "Mayme Watts / Sid Wyche",
@@ -402,12 +394,11 @@
   "last_chord": "Dm"
  },
  "angels from the realms of glory": {
-  "composer": "Traditional French Carol / James Chadwick",
-  "key": "F",
-  "seen_title": "ANGELS WE HAVE HEARD ON HIGH",
-  "sig": "1 flat",
-  "last_chord": "C7",
-  "page_mismatch": true
+  "composer": "Henry T. Smart / James Montgomery",
+  "key": "C",
+  "seen_title": "ANGELS FROM THE REALMS OF GLORY",
+  "sig": "none",
+  "last_chord": "G7/F"
  },
  "another star": {
   "composer": "STEVIE WONDER",
@@ -473,12 +464,11 @@
   "last_chord": "GMaj7"
  },
  "are you real": {
-  "composer": "LIONEL BART",
-  "key": "F",
-  "seen_title": "AS LONG AS HE NEEDS ME",
-  "sig": "1 flat",
-  "last_chord": "F",
-  "page_mismatch": true
+  "composer": "BENNY GOLSON",
+  "key": "Cm",
+  "seen_title": "ARE YOU REAL",
+  "sig": "3 flats",
+  "last_chord": "G7b9"
  },
  "arise her eyes": {
   "composer": "STEVE SWALLOW",
@@ -517,12 +507,11 @@
   "last_chord": "F"
  },
  "as time goes by": {
-  "composer": "VERNON DUKE",
-  "key": "Gm",
-  "seen_title": "AUTUMN IN NEW YORK",
-  "sig": "2 flats",
-  "last_chord": "F-",
-  "page_mismatch": true
+  "composer": "Herman Hupfeld",
+  "key": "Eb",
+  "seen_title": "AS TIME GOES BY",
+  "sig": "3 flats",
+  "last_chord": "Bb7"
  },
  "as long as there s christmas": {
   "composer": "Rachel Portman / Don Black",
@@ -532,12 +521,11 @@
   "last_chord": "Bbadd9/D"
  },
  "ashes to ashes": {
-  "composer": "unknown",
-  "key": "unknown",
-  "seen_title": "unknown",
-  "sig": "none",
-  "last_chord": "Eb/F",
-  "page_mismatch": true
+  "composer": "Joe Sample",
+  "key": "Bbm",
+  "seen_title": "ASHES TO ASHES",
+  "sig": "4 flats",
+  "last_chord": "E-/G"
  },
  "as we speak": {
   "composer": "Michael Sambello / David Sanborn",
@@ -743,12 +731,11 @@
   "last_chord": "Bb7"
  },
  "barbara": {
-  "composer": "S. WILLIAMS",
-  "key": "Bb",
-  "seen_title": "BASIN ST. BLUES",
-  "sig": "2 flats",
-  "last_chord": "C7",
-  "page_mismatch": true
+  "composer": "Horace Silver",
+  "key": "Gb",
+  "seen_title": "BARBARA",
+  "sig": "6 flats",
+  "last_chord": "DbMaj9"
  },
  "barbados": {
   "composer": "Charlie Parker",
@@ -835,7 +822,7 @@
   "last_chord": "Dm7"
  },
  "beethoven s blue 3rd": {
-  "composer": "Th. Monk",
+  "composer": "TH. MONK",
   "key": "Bb",
   "seen_title": "BA-LUE BOLIVAR BA-LUES-ARE",
   "sig": "2 flats",
@@ -850,20 +837,18 @@
   "last_chord": "unknown"
  },
  "beside myself": {
-  "composer": "unknown",
-  "key": "C",
-  "seen_title": "BE MY LOVE",
+  "composer": "CHIP STEPHENS",
+  "key": "Gm",
+  "seen_title": "BESIDE MYSELF",
   "sig": "none",
-  "last_chord": "G7",
-  "page_mismatch": true
+  "last_chord": "A7"
  },
  "bess you is my woman now": {
-  "composer": "BERNIE MILLER",
-  "key": "Dm",
-  "seen_title": "BERNIE'S TUNE",
-  "sig": "1 flat",
-  "last_chord": "Dm7",
-  "page_mismatch": true
+  "composer": "DuBose Heyward / Ira Gershwin / George Gershwin",
+  "key": "Bb",
+  "seen_title": "BESS, YOU IS MY WOMAN NOW",
+  "sig": "2 flats",
+  "last_chord": "Gm7"
  },
  "best is yet to come": {
   "composer": "Cy Coleman / Carolyn Leigh",
@@ -971,12 +956,11 @@
   "last_chord": "G7"
  },
  "birth of the blues": {
-  "composer": "JOE ZAWINUL",
-  "key": "G",
-  "seen_title": "BIRDLAND",
-  "sig": "1 sharp",
-  "last_chord": "G",
-  "page_mismatch": true
+  "composer": "Ray Henderson",
+  "key": "C",
+  "seen_title": "Birth of the Blues",
+  "sig": "none",
+  "last_chord": "unknown"
  },
  "bitter suite in the ozone": {
   "composer": "Bob Moses",
@@ -1014,12 +998,11 @@
   "last_chord": "Fmaj7"
  },
  "black narcissus": {
-  "composer": "Wayne Shorter",
-  "key": "Dm",
-  "seen_title": "BLACK NILE",
-  "sig": "1 flat",
-  "last_chord": "D-7",
-  "page_mismatch": true
+  "composer": "Joe Henderson",
+  "key": "unknown",
+  "seen_title": "BLACK NARCISSUS",
+  "sig": "none",
+  "last_chord": "unknown"
  },
  "black diamond": {
   "composer": "Milton Sealey",
@@ -1065,12 +1048,11 @@
   "last_chord": "F7"
  },
  "blessed relief": {
-  "composer": "Kenny Dorham",
-  "key": "Cm",
-  "seen_title": "BLUE BOSSA",
-  "sig": "3 flats",
-  "last_chord": "Gm7",
-  "page_mismatch": true
+  "composer": "Frank Zappa",
+  "key": "Bb",
+  "seen_title": "BLESSED RELIEF",
+  "sig": "none",
+  "last_chord": "G-7"
  },
  "blue and sentimental": {
   "composer": "Basie / Livingston / David",
@@ -1115,12 +1097,11 @@
   "last_chord": "Bb7"
  },
  "blue friday": {
-  "composer": "Blue Mitchell",
-  "key": "Bb",
-  "seen_title": "BLUE SOUL",
-  "sig": "2 flats",
-  "last_chord": "C7#5(#9)",
-  "page_mismatch": true
+  "composer": "KENNY DORHAM",
+  "key": "Bbm",
+  "seen_title": "BLUE FRIDAY",
+  "sig": "4 flats",
+  "last_chord": "Bb-7"
  },
  "blue in green": {
   "composer": "Miles Davis",
@@ -1151,20 +1132,19 @@
   "last_chord": "F"
  },
  "blue seven": {
-  "composer": "Miles Davis",
+  "composer": "MILES DAVIS",
   "key": "F",
-  "seen_title": "Blues by Five",
+  "seen_title": "BLUES BY FIVE",
   "sig": "1 flat",
   "last_chord": "Bb7(b5)",
   "page_mismatch": true
  },
  "blue silver": {
-  "composer": "OSCAR PETTIFORD",
-  "key": "Ab",
-  "seen_title": "BLUES IN THE CLOSET",
+  "composer": "H. Silver",
+  "key": "Ebm",
+  "seen_title": "BLUE SILVER",
   "sig": "4 flats",
-  "last_chord": "Ab7",
-  "page_mismatch": true
+  "last_chord": "Ebmi7"
  },
  "blue soul": {
   "composer": "Blue Mitchell",
@@ -1224,7 +1204,7 @@
  },
  "blues connotation": {
   "composer": "McCoy Tyner",
-  "key": "Bb",
+  "key": "Eb",
   "seen_title": "BLUES ALAMODE",
   "sig": "3 flats",
   "last_chord": "Bb",
@@ -1288,20 +1268,18 @@
   "last_chord": "Bb6"
  },
  "bohemia after dark": {
-  "composer": "Bill Evans",
-  "key": "Cm",
-  "seen_title": "Bill's Hit Tune",
+  "composer": "ADDERLEY",
+  "key": "Gm",
+  "seen_title": "BOHEMIA AFTER DARK",
   "sig": "none",
-  "last_chord": "C-7",
-  "page_mismatch": true
+  "last_chord": "G-7"
  },
  "body and soul": {
-  "composer": "MILES DAVIS / GIL EVANS",
-  "key": "F",
-  "seen_title": "BOPLICITY (BE BOP LIVES)",
-  "sig": "1 flat",
-  "last_chord": "C7",
-  "page_mismatch": true
+  "composer": "John Green / Edward Heyman / Robert Sour / Frank Eyton",
+  "key": "Db",
+  "seen_title": "Body and Soul",
+  "sig": "5 flats",
+  "last_chord": "Dmaj7"
  },
  "boogie stop shuffle": {
   "composer": "MINGUS",
@@ -1346,12 +1324,11 @@
   "last_chord": "D7#11"
  },
  "bopzilla": {
-  "composer": "Robert Wells / Mell Torme",
-  "key": "Cm",
-  "seen_title": "BORN TO BE BLUE",
-  "sig": "3 flats",
-  "last_chord": "C-6",
-  "page_mismatch": true
+  "composer": "Jon Mayer",
+  "key": "G",
+  "seen_title": "BOPZILLA",
+  "sig": "1 flat",
+  "last_chord": "Gmaj7"
  },
  "born to be bad": {
   "composer": "JOE SAMPLE",
@@ -1403,12 +1380,11 @@
   "last_chord": "Bb6/9"
  },
  "brazilian beat": {
-  "composer": "LeGrand / Bergman",
-  "key": "A",
-  "seen_title": "BRIAN'S SONG (THE HANDS OF TIME)",
-  "sig": "3 sharps",
-  "last_chord": "A",
-  "page_mismatch": true
+  "composer": "B. Kessel",
+  "key": "Bbm",
+  "seen_title": "BRAZILIAN BEAT",
+  "sig": "2 flats",
+  "last_chord": "Bbmi7"
  },
  "brainville": {
   "composer": "Sun Ra",
@@ -1474,12 +1450,11 @@
   "last_chord": "Dmaj7"
  },
  "broad way blues": {
-  "composer": "Bill Byrd / Teddy McRae / Henri Woode",
+  "composer": "Ornette Coleman",
   "key": "Eb",
-  "seen_title": "BROADWAY",
+  "seen_title": "BROADWAY BLUES",
   "sig": "3 flats",
-  "last_chord": "Ab6",
-  "page_mismatch": true
+  "last_chord": "unknown"
  },
  "bring a torch jeannette isabella": {
   "composer": "17th Century French Provencal Carol",
@@ -1531,20 +1506,18 @@
   "last_chord": "F7"
  },
  "budo": {
-  "composer": "B. Powell",
-  "key": "Bb",
-  "seen_title": "BUDS BUBBLE",
-  "sig": "2 flats",
-  "last_chord": "unknown",
-  "page_mismatch": true
- },
- "bud s bubble": {
   "composer": "Bud Powell / Miles Davis",
   "key": "Ab",
   "seen_title": "BUDO",
   "sig": "4 flats",
-  "last_chord": "unknown",
-  "page_mismatch": true
+  "last_chord": "unknown"
+ },
+ "bud s bubble": {
+  "composer": "B. Powell",
+  "key": "Bb",
+  "seen_title": "BUD'S BUBBLE",
+  "sig": "2 flats",
+  "last_chord": "F7"
  },
  "bunko": {
   "composer": "Lennie Niehaus",
@@ -1563,7 +1536,7 @@
  "buster rides again": {
   "composer": "Dizzy Gillespie",
   "key": "Fm",
-  "seen_title": "BIRK'S WORKS",
+  "seen_title": "Birk's Works",
   "sig": "4 flats",
   "last_chord": "G7",
   "page_mismatch": true
@@ -1583,12 +1556,11 @@
   "last_chord": "F6"
  },
  "but not for he": {
-  "composer": "Dixon / Henderson",
+  "composer": "G. Gershwin",
   "key": "F",
-  "seen_title": "BYE BYE BLACKBIRD",
+  "seen_title": "But Not For Me",
   "sig": "1 flat",
-  "last_chord": "F",
-  "page_mismatch": true
+  "last_chord": "unknown"
  },
  "but beautiful": {
   "composer": "Jimmy Van Heusen / Johnny Burke",
@@ -1676,11 +1648,11 @@
   "page_mismatch": true
  },
  "byrdlike": {
-  "composer": "Sonny Rollins",
-  "key": "Fm",
-  "seen_title": "Decision",
-  "sig": "4 flats",
-  "last_chord": "Gbmaj7",
+  "composer": "Randy Weston",
+  "key": "F",
+  "seen_title": "HI-FLY",
+  "sig": "2 flats",
+  "last_chord": "C7",
   "page_mismatch": true
  },
  "cake walking babies from home": {
@@ -1705,12 +1677,11 @@
   "last_chord": "unknown"
  },
  "can t buy me love": {
-  "composer": "Henry Troy / Chris Smith / Clarence Williams",
-  "key": "A",
-  "seen_title": "CAKE WALKING BABIES FROM HOME",
-  "sig": "3 sharps",
-  "last_chord": "A7",
-  "page_mismatch": true
+  "composer": "John Lennon / Paul McCartney",
+  "key": "C",
+  "seen_title": "Can't Buy Me Love",
+  "sig": "none",
+  "last_chord": "C7"
  },
  "call me irresponsible": {
   "composer": "James Van Heusen / Sammy Cahn",
@@ -1734,12 +1705,11 @@
   "last_chord": "Eb6"
  },
  "can t we be friends": {
-  "composer": "Dixon / Henderson",
-  "key": "F",
-  "seen_title": "BYE BYE BLACKBIRD",
-  "sig": "1 flat",
-  "last_chord": "F",
-  "page_mismatch": true
+  "composer": "Jones / Swift",
+  "key": "Eb",
+  "seen_title": "Can't We Be Friends",
+  "sig": "3 flats",
+  "last_chord": "unknown"
  },
  "canyon song": {
   "composer": "Ralph Towner",
@@ -1749,12 +1719,11 @@
   "last_chord": "D7sus4"
  },
  "caravan": {
-  "composer": "JIM HALL",
-  "key": "A",
-  "seen_title": "CAREFUL",
-  "sig": "3 sharps",
-  "last_chord": "unknown",
-  "page_mismatch": true
+  "composer": "Duke Ellington",
+  "key": "Fm",
+  "seen_title": "CARAVAN",
+  "sig": "4 flats",
+  "last_chord": "C7"
  },
  "captain marvel": {
   "composer": "CHICK COREA",
@@ -1764,12 +1733,11 @@
   "last_chord": "Ab"
  },
  "caroling caroling": {
-  "composer": "Ross Bagdasarian",
-  "key": "C",
-  "seen_title": "THE CHIPMUNK SONG",
-  "sig": "none",
-  "last_chord": "C6",
-  "page_mismatch": true
+  "composer": "Alfred Burt / Wihla Hutson",
+  "key": "G",
+  "seen_title": "CAROLING, CAROLING",
+  "sig": "1 sharp",
+  "last_chord": "Gb"
  },
  "carol of the bells": {
   "composer": "unknown",
@@ -1821,12 +1789,11 @@
   "last_chord": "A-"
  },
  "change of season": {
-  "composer": "Alfred James Ellis",
-  "key": "Bb",
-  "seen_title": "THE CHICKEN",
-  "sig": "2 flats",
-  "last_chord": "Bb7",
-  "page_mismatch": true
+  "composer": "John Patitucci",
+  "key": "Cm",
+  "seen_title": "CHANGE OF SEASON",
+  "sig": "none",
+  "last_chord": "C-11"
  },
  "chasing the bird": {
   "composer": "Charlie Parker",
@@ -1857,12 +1824,11 @@
   "last_chord": "E7"
  },
  "chelsea bells": {
-  "composer": "ANTONIO CARLOS JOBIM / VINICIUS DE MORAES",
-  "key": "Dm",
-  "seen_title": "CHEGA DE SAUDADE (NO MORE BLUES)",
-  "sig": "1 flat",
-  "last_chord": "E-7",
-  "page_mismatch": true
+  "composer": "Steve Swallow",
+  "key": "unknown",
+  "seen_title": "CHELSEA BELLS",
+  "sig": "none",
+  "last_chord": "unknown"
  },
  "chega de saudade": {
   "composer": "Antonio Carlos Jobim / Vinicius de Moraes",
@@ -1907,12 +1873,11 @@
   "last_chord": "Bbmaj7"
  },
  "children of the night": {
-  "composer": "unknown",
-  "key": "unknown",
-  "seen_title": "unknown",
+  "composer": "Wayne Shorter",
+  "key": "Am",
+  "seen_title": "CHILDREN OF THE NIGHT",
   "sig": "none",
-  "last_chord": "E7",
-  "page_mismatch": true
+  "last_chord": "E7#5"
  },
  "children s song": {
   "composer": "Chick Corea",
@@ -2006,20 +1971,18 @@
   "last_chord": "F"
  },
  "chromozone": {
-  "composer": "GEORGE BENSON",
-  "key": "G",
-  "seen_title": "CLOCKWISE",
-  "sig": "1 sharp",
-  "last_chord": "D7",
-  "page_mismatch": true
+  "composer": "Mike Stern",
+  "key": "Dm",
+  "seen_title": "CHROMOZONE",
+  "sig": "2 sharps",
+  "last_chord": "A7"
  },
  "circle": {
-  "composer": "J. COLTRANE",
-  "key": "F",
-  "seen_title": "CHASIN' THE TRAIN",
-  "sig": "1 flat",
-  "last_chord": "F",
-  "page_mismatch": true
+  "composer": "MILES DAVIS",
+  "key": "Gm",
+  "seen_title": "CIRCLE",
+  "sig": "none",
+  "last_chord": "Gmi7"
  },
  "clear day": {
   "composer": "Lane / Learner",
@@ -2029,11 +1992,11 @@
   "last_chord": "GMaj7"
  },
  "clinoqui valley": {
-  "composer": "M. Santamaria",
-  "key": "Fm",
-  "seen_title": "AFRO BLUE",
-  "sig": "4 flats",
-  "last_chord": "F-7",
+  "composer": "Duke Ellington",
+  "key": "Ebm",
+  "seen_title": "AFRICAN FLOWER",
+  "sig": "3 flats",
+  "last_chord": "Eb-7",
   "page_mismatch": true
  },
  "close enough for love": {
@@ -2072,12 +2035,11 @@
   "last_chord": "unknown"
  },
  "cold december nights": {
-  "composer": "unknown",
-  "key": "Am",
-  "seen_title": "unknown",
+  "composer": "Michael McCary / Shawn Stockman",
+  "key": "F",
+  "seen_title": "COLD DECEMBER NIGHTS",
   "sig": "none",
-  "last_chord": "A-9",
-  "page_mismatch": true
+  "last_chord": "Fmaj7"
  },
  "come dance with me": {
   "composer": "Sammy Cahn / James Van Heusen",
@@ -2185,12 +2147,11 @@
   "last_chord": "unknown"
  },
  "cookin": {
-  "composer": "BUD POWELL",
+  "composer": "Lou Donaldson",
   "key": "Bb",
-  "seen_title": "CRAZEOLOGY",
+  "seen_title": "COOKIN'",
   "sig": "2 flats",
-  "last_chord": "unknown",
-  "page_mismatch": true
+  "last_chord": "EMaj7(b5)"
  },
  "cool eyes": {
   "composer": "HORACE SILVER",
@@ -2202,7 +2163,7 @@
  "cool blues": {
   "composer": "Earl Hagan",
   "key": "Gm",
-  "seen_title": "Comin' Home Baby",
+  "seen_title": "COMIN' HOME BABY",
   "sig": "2 flats",
   "last_chord": "Bb",
   "page_mismatch": true
@@ -2229,11 +2190,11 @@
   "last_chord": "C6"
  },
  "core": {
-  "composer": "Bud Powell",
+  "composer": "Lou Donaldson",
   "key": "Bb",
-  "seen_title": "CRAZEOLOGY",
+  "seen_title": "COOKIN'",
   "sig": "2 flats",
-  "last_chord": "unknown",
+  "last_chord": "EMaj7(b5)",
   "page_mismatch": true
  },
  "cork n bib": {
@@ -2259,12 +2220,11 @@
   "last_chord": "D7b9"
  },
  "countdown": {
-  "composer": "JOHN COLTRANE",
-  "key": "Cm",
-  "seen_title": "CRESCENT",
-  "sig": "3 flats",
-  "last_chord": "C-7",
-  "page_mismatch": true
+  "composer": "John Coltrane",
+  "key": "unknown",
+  "seen_title": "COUNTDOWN",
+  "sig": "none",
+  "last_chord": "unknown"
  },
  "cotton tail": {
   "composer": "Duke Ellington",
@@ -2309,7 +2269,7 @@
   "last_chord": "F7"
  },
  "cousin mary": {
-  "composer": "J. COLTRANE",
+  "composer": "J. Coltrane",
   "key": "F",
   "seen_title": "CHASIN' THE TRAIN",
   "sig": "1 flat",
@@ -2317,12 +2277,11 @@
   "page_mismatch": true
  },
  "curves ahead": {
-  "composer": "unknown",
-  "key": "F",
-  "seen_title": "unknown",
-  "sig": "1 flat",
-  "last_chord": "Fmaj7",
-  "page_mismatch": true
+  "composer": "Russ Freeman",
+  "key": "C",
+  "seen_title": "CURVES AHEAD",
+  "sig": "none",
+  "last_chord": "Cmaj9"
  },
  "crystal silence": {
   "composer": "CHICK COREA",
@@ -2339,12 +2298,11 @@
   "last_chord": "unknown"
  },
  "daahoud": {
-  "composer": "John L. (Wes) Montgomery",
-  "key": "D",
-  "seen_title": "D NATURAL BLUES",
-  "sig": "2 sharps",
-  "last_chord": "A7",
-  "page_mismatch": true
+  "composer": "Clifford Brown",
+  "key": "Eb",
+  "seen_title": "DAAHOUD",
+  "sig": "3 flats",
+  "last_chord": "Db7"
  },
  "d natural blues": {
   "composer": "John L. (Wes) Montgomery",
@@ -2375,12 +2333,11 @@
   "last_chord": "G9"
  },
  "dance only with me": {
-  "composer": "Johnny Mercer / Henry Mancini",
-  "key": "F",
-  "seen_title": "THE DAYS OF WINE AND ROSES",
-  "sig": "1 flat",
-  "last_chord": "F6",
-  "page_mismatch": true
+  "composer": "Betty Comden / Adolph Green / Jule Styne",
+  "key": "Gm",
+  "seen_title": "DANCE ONLY WITH ME",
+  "sig": "2 flats",
+  "last_chord": "F6"
  },
  "dance of the sugar plum fairy": {
   "composer": "Pyotr Il'yich Tchaikovsky",
@@ -2468,11 +2425,10 @@
  },
  "de pois de amor o vazio": {
   "composer": "Wayne Shorter",
-  "key": "Dm",
-  "seen_title": "DELORES",
-  "sig": "none",
-  "last_chord": "Dbmaj7",
-  "page_mismatch": true
+  "key": "Eb",
+  "seen_title": "DEPOIS DO AMOR O VAZIO",
+  "sig": "3 flats",
+  "last_chord": "F7"
  },
  "dear old stockholm": {
   "composer": "VARMELAND",
@@ -2489,11 +2445,11 @@
   "last_chord": "unknown"
  },
  "decision": {
-  "composer": "B. Kessel",
-  "key": "Bbm",
-  "seen_title": "BRAZILIAN BEAT",
+  "composer": "Bud Powell",
+  "key": "Bb",
+  "seen_title": "BOUNCING W/BUD",
   "sig": "2 flats",
-  "last_chord": "Bbmi7",
+  "last_chord": "Gb7",
   "page_mismatch": true
  },
  "dedicated to you": {
@@ -2546,12 +2502,11 @@
   "last_chord": "F6"
  },
  "devil may care": {
-  "composer": "unknown",
-  "key": "Db",
-  "seen_title": "unknown",
-  "sig": "none",
-  "last_chord": "F7",
-  "page_mismatch": true
+  "composer": "Robert Dorough / Terrell Kirk, Jr.",
+  "key": "Fm",
+  "seen_title": "Devil May Care",
+  "sig": "4 flats",
+  "last_chord": "Ab7"
  },
  "detour ahead": {
   "composer": "Herb Ellis / John Frigo / Lou Carter",
@@ -2659,12 +2614,11 @@
   "last_chord": "C6"
  },
  "do nothing till you hear from me": {
-  "composer": "Freddie Green",
-  "key": "Bb",
-  "seen_title": "Down For Double",
-  "sig": "2 flats",
-  "last_chord": "Bb",
-  "page_mismatch": true
+  "composer": "Ellington / Russell",
+  "key": "G",
+  "seen_title": "Do Nothing Till You Hear From Me",
+  "sig": "1 sharp",
+  "last_chord": "G"
  },
  "do you know what it means to miss new oi": {
   "composer": "DeLange",
@@ -2884,25 +2838,23 @@
   "last_chord": "Bb"
  },
  "duke the": {
-  "composer": "Jack Stock",
-  "key": "Am",
-  "seen_title": "12-4 2-4/DUPLICITIES",
-  "sig": "none",
-  "last_chord": "G7sus4",
-  "page_mismatch": true
+  "composer": "Dave Brubeck",
+  "key": "D",
+  "seen_title": "THE DUKE",
+  "sig": "2 sharps",
+  "last_chord": "unknown"
  },
  "duke s place": {
-  "composer": "MEL POWELL",
-  "key": "F",
-  "seen_title": "THE EARL",
-  "sig": "2 flats",
-  "last_chord": "F6",
-  "page_mismatch": true
+  "composer": "Duke Ellington / William Katz / Robert Thiele / Ruth Roberts",
+  "key": "Ab",
+  "seen_title": "DUKE'S PLACE",
+  "sig": "4 flats",
+  "last_chord": "unknown"
  },
  "e k s blues": {
-  "composer": "Ron Carter",
+  "composer": "RON CARTER",
   "key": "Bb",
-  "seen_title": "Einbahnstrasse",
+  "seen_title": "EINBAHNSTRASSE",
   "sig": "2 flats",
   "last_chord": "C7",
   "page_mismatch": true
@@ -2915,12 +2867,11 @@
   "last_chord": "F6"
  },
  "early autumn": {
-  "composer": "O. Nelson",
-  "key": "C",
-  "seen_title": "THE DRIVE",
-  "sig": "none",
-  "last_chord": "G7",
-  "page_mismatch": true
+  "composer": "RALPH BURNS",
+  "key": "Bb",
+  "seen_title": "EARLY AUTUMN",
+  "sig": "2 flats",
+  "last_chord": "Bb"
  },
  "e s p": {
   "composer": "Wayne Shorter",
@@ -2951,12 +2902,11 @@
   "last_chord": "Ab7"
  },
  "easy to love": {
-  "composer": "Charles Mingus",
-  "key": "F",
-  "seen_title": "ECCLUSIASTICS",
-  "sig": "1 flat",
-  "last_chord": "unknown",
-  "page_mismatch": true
+  "composer": "COLE PORTER",
+  "key": "C",
+  "seen_title": "EASY TO LOVE",
+  "sig": "none",
+  "last_chord": "Ebo7"
  },
  "ecclusiastics": {
   "composer": "Charles Mingus",
@@ -2973,12 +2923,11 @@
   "last_chord": "unknown"
  },
  "eiderdown": {
-  "composer": "Charles Mingus",
-  "key": "F",
-  "seen_title": "Ecclusiastics",
-  "sig": "none",
-  "last_chord": "unknown",
-  "page_mismatch": true
+  "composer": "Steve Swallow",
+  "key": "Bb",
+  "seen_title": "EIDERDOWN",
+  "sig": "2 flats",
+  "last_chord": "Ebmaj7"
  },
  "eighty one": {
   "composer": "Miles Davis / Ronald Carter",
@@ -2988,12 +2937,11 @@
   "last_chord": "Bb9sus4"
  },
  "einbahnstrasse": {
-  "composer": "Th. Monk",
-  "key": "C",
-  "seen_title": "52nd STREET THEME",
-  "sig": "none",
-  "last_chord": "C",
-  "page_mismatch": true
+  "composer": "Ron Carter",
+  "key": "Eb",
+  "seen_title": "Einbahnstrasse",
+  "sig": "3 flats",
+  "last_chord": "C7"
  },
  "el gaucho": {
   "composer": "WAYNE SHORTER",
@@ -3010,12 +2958,11 @@
   "last_chord": "unknown"
  },
  "el hombre": {
-  "composer": "GERRY MULLIGAN / ELLIOT LAWRENCE",
-  "key": "Eb",
-  "seen_title": "ELEVATION",
-  "sig": "3 flats",
-  "last_chord": "Eb13#11",
-  "page_mismatch": true
+  "composer": "Pat Martino",
+  "key": "F",
+  "seen_title": "EL HOMBRE",
+  "sig": "1 flat",
+  "last_chord": "Gsus"
  },
  "elevation": {
   "composer": "Gerry Mulligan / Elliot Lawrence",
@@ -3025,12 +2972,11 @@
   "last_chord": "Eb13#11"
  },
  "elizete": {
-  "composer": "Richard Niles",
-  "key": "G",
-  "seen_title": "EMPATHY",
-  "sig": "none",
-  "last_chord": "G lyd.",
-  "page_mismatch": true
+  "composer": "Clare Fisher",
+  "key": "Bm",
+  "seen_title": "ELIZETE",
+  "sig": "2 sharps",
+  "last_chord": "E7#9"
  },
  "emanon": {
   "composer": "DIZZY GILLESPIE",
@@ -3040,12 +2986,11 @@
   "last_chord": "F7"
  },
  "elora": {
-  "composer": "G. GERSHWIN",
-  "key": "G",
-  "seen_title": "EMBRACEABLE YOU",
-  "sig": "1 sharp",
-  "last_chord": "G6",
-  "page_mismatch": true
+  "composer": "J.J. Johnson",
+  "key": "Cm",
+  "seen_title": "ELDRA",
+  "sig": "3 flats",
+  "last_chord": "C7"
  },
  "embraceable you": {
   "composer": "G. GERSHWIN",
@@ -3069,12 +3014,11 @@
   "last_chord": "F6/9"
  },
  "empathy": {
-  "composer": "Monk",
-  "key": "C#m",
-  "seen_title": "EPISTROPHY",
-  "sig": "4 sharps",
-  "last_chord": "Gb7#11",
-  "page_mismatch": true
+  "composer": "Richard Niles",
+  "key": "G",
+  "seen_title": "EMPATHY",
+  "sig": "none",
+  "last_chord": "G lyd."
  },
  "endlessly": {
   "composer": "MICHAEL ASHER",
@@ -3084,12 +3028,11 @@
   "last_chord": "E7"
  },
  "enchance": {
-  "composer": "B. EVANS",
-  "key": "Cm",
-  "seen_title": "EPILOGUE",
-  "sig": "3 flats",
-  "last_chord": "Cmi7(11)",
-  "page_mismatch": true
+  "composer": "JoAnne Brackeen",
+  "key": "C",
+  "seen_title": "ENCHANCE",
+  "sig": "none",
+  "last_chord": "A7"
  },
  "epistrophy": {
   "composer": "Monk",
@@ -3099,12 +3042,11 @@
   "last_chord": "Gb7#11"
  },
  "epilogue": {
-  "composer": "J. Brackeen",
-  "key": "Em",
-  "seen_title": "Evening in Concert",
-  "sig": "none",
-  "last_chord": "unknown",
-  "page_mismatch": true
+  "composer": "B. EVANS",
+  "key": "Eb",
+  "seen_title": "EPILOGUE",
+  "sig": "3 flats",
+  "last_chord": "Cmi7(11)"
  },
  "equipoise": {
   "composer": "Stanley Cowell",
@@ -3240,12 +3182,11 @@
   "last_chord": "Bmaj7#11"
  },
  "family joy": {
-  "composer": "Gary Burton",
-  "key": "Ab",
-  "seen_title": "Country Roads",
-  "sig": "4 flats",
-  "last_chord": "Db7",
-  "page_mismatch": true
+  "composer": "Michael Gibbs",
+  "key": "C",
+  "seen_title": "A Family Joy",
+  "sig": "none",
+  "last_chord": "Ab7sus4"
  },
  "federico": {
   "composer": "MONGO SANTAMARIA",
@@ -3276,20 +3217,18 @@
   "last_chord": "F-"
  },
  "feelings and things": {
-  "composer": "Rodgers / Hart",
-  "key": "Bb",
-  "seen_title": "FALLING IN LOVE WITH LOVE",
-  "sig": "2 flats",
-  "last_chord": "Bbmaj7",
-  "page_mismatch": true
+  "composer": "Michael Gibbs",
+  "key": "F#m",
+  "seen_title": "FEELINGS AND THINGS",
+  "sig": "3 sharps",
+  "last_chord": "E7#9"
  },
  "fields we know": {
-  "composer": "WAYNE SHORTER",
+  "composer": "K. Jarrett",
   "key": "unknown",
-  "seen_title": "502 BLUES",
+  "seen_title": "THE FIELDS WE KNOW",
   "sig": "none",
-  "last_chord": "E-7",
-  "page_mismatch": true
+  "last_chord": "Dmaj7"
  },
  "fine romance": {
   "composer": "Kern / Fields",
@@ -3306,12 +3245,11 @@
   "last_chord": "Dmi7"
  },
  "first noel": {
-  "composer": "Traditional English Carol",
-  "key": "Eb",
-  "seen_title": "THE FRIENDLY BEASTS",
-  "sig": "3 flats",
-  "last_chord": "G-7",
-  "page_mismatch": true
+  "composer": "W. Sandys' Christmas Carols / 17th Century English Carol",
+  "key": "D",
+  "seen_title": "THE FIRST NOËL",
+  "sig": "3 sharps",
+  "last_chord": "unknown"
  },
  "first trip": {
   "composer": "RON CARTER",
@@ -3328,11 +3266,11 @@
   "last_chord": "A7"
  },
  "five hundred miles high": {
-  "composer": "WAYNE SHORTER",
-  "key": "Am",
-  "seen_title": "502 BLUES",
-  "sig": "none",
-  "last_chord": "Em7",
+  "composer": "Chick Corea",
+  "key": "Bm",
+  "seen_title": "500 Miles High",
+  "sig": "2 sharps",
+  "last_chord": "C-11",
   "page_mismatch": true
  },
  "flags": {
@@ -3350,12 +3288,11 @@
   "last_chord": "F7"
  },
  "flim flam": {
-  "composer": "Bryson / Goldberg",
-  "key": "Bb",
-  "seen_title": "Flintstone's Theme",
-  "sig": "2 flats",
-  "last_chord": "BbMaj7",
-  "page_mismatch": true
+  "composer": "Mike Wofford",
+  "key": "G",
+  "seen_title": "FLIM FLAM",
+  "sig": "none",
+  "last_chord": "unknown"
  },
  "flintstone s theme": {
   "composer": "Bryson / Goldberg",
@@ -3386,20 +3323,18 @@
   "last_chord": "Bb7(#9)"
  },
  "fly by night": {
-  "composer": "Benny Golson",
-  "key": "Bm",
-  "seen_title": "Five Spot After Dark",
-  "sig": "2 sharps",
-  "last_chord": "F7",
-  "page_mismatch": true
+  "composer": "DAVE GRUSIN",
+  "key": "Bb",
+  "seen_title": "FLY BY NIGHT",
+  "sig": "none",
+  "last_chord": "BbMaj7"
  },
  "flower is a lonesome thing": {
-  "composer": "Bryson / Goldberg",
-  "key": "Bb",
-  "seen_title": "Flintstone's Theme",
-  "sig": "2 flats",
-  "last_chord": "BbMaj7",
-  "page_mismatch": true
+  "composer": "B. Strayhorn",
+  "key": "Ab",
+  "seen_title": "A FLOWER IS A LONESOME THING",
+  "sig": "4 flats",
+  "last_chord": "unknown"
  },
  "follow your heart": {
   "composer": "John McLaughlin",
@@ -3500,12 +3435,11 @@
   "last_chord": "Db7"
  },
  "four brothers": {
-  "composer": "J.J. Johnson",
+  "composer": "Jimmy Giuffre",
   "key": "Ab",
-  "seen_title": "FOX HUNT",
+  "seen_title": "FOUR BROTHERS",
   "sig": "4 flats",
-  "last_chord": "unknown",
-  "page_mismatch": true
+  "last_chord": "Ab"
  },
  "freddie freeloader": {
   "composer": "MILES DAVIS",
@@ -3544,12 +3478,11 @@
   "page_mismatch": true
  },
  "freddie froo": {
-  "composer": "C. Mingus",
-  "key": "Gb",
-  "seen_title": "Free Cell Block \"F\", 'Tis Nazi U.S.A.",
-  "sig": "6 flats",
-  "last_chord": "DMaj7",
-  "page_mismatch": true
+  "composer": "Pepper Adams",
+  "key": "Bb",
+  "seen_title": "FREDDIE FROO",
+  "sig": "2 flats",
+  "last_chord": "unknown"
  },
  "freddie the freeloader": {
   "composer": "Miles Davis",
@@ -3566,12 +3499,11 @@
   "last_chord": "unknown"
  },
  "free cell block f": {
-  "composer": "Charles Mingus",
-  "key": "Fm",
-  "seen_title": "Changes Two",
-  "sig": "5 flats",
-  "last_chord": "unknown",
-  "page_mismatch": true
+  "composer": "C. MINGUS",
+  "key": "Eb",
+  "seen_title": "FREE CELL BLOCK \"F\", TIS NAZI U.S.A.",
+  "sig": "3 flats",
+  "last_chord": "DMaj7"
  },
  "freight trane": {
   "composer": "TOMMY FLANAGAN",
@@ -3581,12 +3513,11 @@
   "last_chord": "unknown"
  },
  "french waltz": {
-  "composer": "THELONIUS MONK",
-  "key": "G",
-  "seen_title": "FRIDAY THE 13th",
+  "composer": "DUDLEY MOORE",
+  "key": "Em",
+  "seen_title": "FRENCH WALTZ",
   "sig": "1 sharp",
-  "last_chord": "D7",
-  "page_mismatch": true
+  "last_chord": "A13"
  },
  "friday the 13th": {
   "composer": "JoAnne Brackeen",
@@ -3617,12 +3548,11 @@
   "last_chord": "Bb/C"
  },
  "from heaven above to earth i come": {
-  "composer": "Steve Nelson / Jack Rollins",
-  "key": "C",
-  "seen_title": "Frosty the Snow Man",
-  "sig": "none",
-  "last_chord": "Gmaj7",
-  "page_mismatch": true
+  "composer": "Geistliche Lieder, 1539 / Martin Luther",
+  "key": "Dm",
+  "seen_title": "From Heaven Above to Earth I Come",
+  "sig": "1 flat",
+  "last_chord": "unknown"
  },
  "from the heart": {
   "composer": "GARY APRILE",
@@ -3639,20 +3569,18 @@
   "last_chord": "AbΔ7"
  },
  "fuchsia swing song": {
-  "composer": "Jimmy Heath",
-  "key": "Bb",
-  "seen_title": "Ginger Bread Boy",
-  "sig": "2 flats",
-  "last_chord": "N.C.",
-  "page_mismatch": true
+  "composer": "Sam Rivers",
+  "key": "Eb",
+  "seen_title": "FUCHSIA SWING SONG",
+  "sig": "3 flats",
+  "last_chord": "unknown"
  },
  "full house": {
-  "composer": "Don Redman / Andy Razaf",
-  "key": "Eb",
-  "seen_title": "GEE BABY, AIN'T I GOOD TO YOU",
-  "sig": "3 flats",
-  "last_chord": "Eb7",
-  "page_mismatch": true
+  "composer": "John L. (Wes) Montgomery",
+  "key": "Fm",
+  "seen_title": "FULL HOUSE",
+  "sig": "4 flats",
+  "last_chord": "F-9"
  },
  "full moon and empty arms": {
   "composer": "BUDDY KAYE / TED MOSSMAN (RACHMANINOFF)",
@@ -3698,12 +3626,11 @@
   "last_chord": "F-"
  },
  "games people play": {
-  "composer": "G. BURTON",
-  "key": "Fm",
-  "seen_title": "GENTLE WIND & FALLING TEAR",
-  "sig": "4 flats",
-  "last_chord": "EMaj7",
-  "page_mismatch": true
+  "composer": "Joe South",
+  "key": "F",
+  "seen_title": "Games People Play",
+  "sig": "1 flat",
+  "last_chord": "F"
  },
  "funky": {
   "composer": "Kenny Burrell",
@@ -3762,12 +3689,11 @@
   "last_chord": "EMaj7"
  },
  "georgia": {
-  "composer": "C. PORTER",
-  "key": "Cm",
-  "seen_title": "GET OUT OF TOWN",
-  "sig": "3 flats",
-  "last_chord": "Cmi",
-  "page_mismatch": true
+  "composer": "HOAGY CHARMICHAEL",
+  "key": "F",
+  "seen_title": "GEORGIA",
+  "sig": "1 flat",
+  "last_chord": "Dmi/C#"
  },
  "gettin it togetha": {
   "composer": "Joe South",
@@ -3799,12 +3725,11 @@
   "last_chord": "E7"
  },
  "ghost of a chance": {
-  "composer": "NEIL HEFTI",
-  "key": "Eb",
-  "seen_title": "GIRL TALK",
-  "sig": "3 flats",
-  "last_chord": "Am",
-  "page_mismatch": true
+  "composer": "V. YOUNG",
+  "key": "C",
+  "seen_title": "A GHOST OF A CHANCE",
+  "sig": "none",
+  "last_chord": "G+7"
  },
  "gift": {
   "composer": "Tom Douglas / Jim Brickman",
@@ -3842,12 +3767,11 @@
   "last_chord": "Fmaj7"
  },
  "girl talk": {
-  "composer": "Tadd Dameron",
-  "key": "Bb",
-  "seen_title": "GOOD BAIT",
-  "sig": "2 flats",
-  "last_chord": "unknown",
-  "page_mismatch": true
+  "composer": "NEIL HEFTI",
+  "key": "F",
+  "seen_title": "GIRL TALK",
+  "sig": "1 flat",
+  "last_chord": "F6"
  },
  "girl with his smile and my eyes": {
   "composer": "John Pizzarelli / Jessica Molaskey",
@@ -3871,12 +3795,11 @@
   "last_chord": "Fmaj7"
  },
  "gnu blu": {
-  "composer": "CLARE FISCHER",
-  "key": "Cm",
-  "seen_title": "GAVIOTA",
-  "sig": "3 flats",
-  "last_chord": "Em7",
-  "page_mismatch": true
+  "composer": "RON BUSCH",
+  "key": "C",
+  "seen_title": "GNU BLU",
+  "sig": "none",
+  "last_chord": "unknown"
  },
  "god rest ye merry gentlemen": {
   "composer": "19th Century English Carol",
@@ -3984,12 +3907,11 @@
   "last_chord": "Ab6"
  },
  "goodbye porkpie hat": {
-  "composer": "Stevie Wonder",
-  "key": "Ab",
-  "seen_title": "GOLDEN LADY",
-  "sig": "4 flats",
-  "last_chord": "Bbmaj7",
-  "page_mismatch": true
+  "composer": "Charles Mingus",
+  "key": "F",
+  "seen_title": "Goodbye Pork Pie Hat",
+  "sig": "none",
+  "last_chord": "C7"
  },
  "got a match": {
   "composer": "CHICK COREA",
@@ -4055,12 +3977,11 @@
   "last_chord": "G"
  },
  "greenwillow christmas": {
-  "composer": "Randy Brooks",
-  "key": "E",
-  "seen_title": "GRANDMA GOT RUN OVER BY A REINDEER",
-  "sig": "4 sharps",
-  "last_chord": "E6",
-  "page_mismatch": true
+  "composer": "Frank Loesser",
+  "key": "Am",
+  "seen_title": "GREENWILLOW CHRISTMAS",
+  "sig": "none",
+  "last_chord": "G6"
  },
  "gregory is here": {
   "composer": "HORACE SILVER",
@@ -4070,12 +3991,11 @@
   "last_chord": "C7"
  },
  "groove yard": {
-  "composer": "Sergio Mendes",
+  "composer": "Carl Perkins",
   "key": "Gm",
-  "seen_title": "Groovy Samba",
-  "sig": "2 flats",
-  "last_chord": "Gmi7",
-  "page_mismatch": true
+  "seen_title": "Groove Yard",
+  "sig": "1 flat",
+  "last_chord": "C13"
  },
  "groovin high": {
   "composer": "John \"Dizzy\" Gillespie",
@@ -4092,12 +4012,11 @@
   "last_chord": "Bb7"
  },
  "groovy samba": {
-  "composer": "T. MONK",
-  "key": "F",
-  "seen_title": "HACKENSACK",
-  "sig": "1 flat",
-  "last_chord": "F",
-  "page_mismatch": true
+  "composer": "Sergio Mendes",
+  "key": "Gm",
+  "seen_title": "Groovy Samba",
+  "sig": "2 flats",
+  "last_chord": "Gmi7"
  },
  "grow your own": {
   "composer": "KEITH JARRETT",
@@ -4121,12 +4040,11 @@
   "last_chord": "D-"
  },
  "guilty": {
-  "composer": "Clay Boland / Moe Jaffe / Clay Boland",
-  "key": "Eb",
-  "seen_title": "GYPSY IN MY SOUL",
-  "sig": "3 flats",
-  "last_chord": "Eb6",
-  "page_mismatch": true
+  "composer": "GUS KAHN / RICHARD WHITING / HARRY AKST",
+  "key": "Bb",
+  "seen_title": "GUILTY",
+  "sig": "2 flats",
+  "last_chord": "A7#5"
  },
  "guess who i saw today": {
   "composer": "Murray Grand / Elisse Boyd",
@@ -4194,7 +4112,7 @@
  },
  "hallucinations": {
   "composer": "McCoy Tyner",
-  "key": "Bb",
+  "key": "Eb",
   "seen_title": "BLUES ALAMODE",
   "sig": "3 flats",
   "last_chord": "Bb",
@@ -4258,12 +4176,11 @@
   "last_chord": "Gm6"
  },
  "hassan s dream": {
-  "composer": "Miles Davis",
-  "key": "C",
-  "seen_title": "HALF NELSON",
-  "sig": "none",
-  "last_chord": "Dbmaj7",
-  "page_mismatch": true
+  "composer": "Benny Golson",
+  "key": "Fm",
+  "seen_title": "Hassan's Dream",
+  "sig": "4 flats",
+  "last_chord": "Bbm7"
  },
  "harlequin": {
   "composer": "OSCAR PETTIFORD",
@@ -4302,12 +4219,11 @@
   "last_chord": "D7b9"
  },
  "head and shoulders": {
-  "composer": "B. Kessel",
-  "key": "E",
-  "seen_title": "Here's That Sunny Day",
-  "sig": "4 sharps",
-  "last_chord": "DMaj7/E",
-  "page_mismatch": true
+  "composer": "Cedar Walton",
+  "key": "Bb",
+  "seen_title": "HEAD AND SHOULDERS",
+  "sig": "2 flats",
+  "last_chord": "Eb7"
  },
  "heartaches": {
   "composer": "John Klenn / Al Hoffman",
@@ -4366,12 +4282,11 @@
   "last_chord": "unknown"
  },
  "hello": {
-  "composer": "Lee Konitz",
-  "key": "C",
-  "seen_title": "HI BECK",
-  "sig": "none",
-  "last_chord": "C",
-  "page_mismatch": true
+  "composer": "MILT JACKSON",
+  "key": "Bm",
+  "seen_title": "HELLO",
+  "sig": "2 sharps",
+  "last_chord": "unknown"
  },
  "here s that rainy day": {
   "composer": "Jimmy Van Heusen / Johnny Burke",
@@ -4388,12 +4303,11 @@
   "last_chord": "D6"
  },
  "here s that sunny day": {
-  "composer": "Barney Kessel",
-  "key": "A",
-  "seen_title": "Sunny Day Pt. 2",
-  "sig": "3 sharps",
-  "last_chord": "Bb7",
-  "page_mismatch": true
+  "composer": "B. Kessel",
+  "key": "E",
+  "seen_title": "Here's That Sunny Day",
+  "sig": "4 sharps",
+  "last_chord": "DMaj7/E"
  },
  "herzog": {
   "composer": "Bobby Hutcherson",
@@ -4487,12 +4401,11 @@
   "last_chord": "Amaj7"
  },
  "hoedown": {
-  "composer": "Johnny Mercer / Harold Arlen",
+  "composer": "OLIVER NELSON",
   "key": "Bb",
-  "seen_title": "HIT THE ROAD TO DREAMLAND",
+  "seen_title": "HOE-DOWN",
   "sig": "2 flats",
-  "last_chord": "Bb6",
-  "page_mismatch": true
+  "last_chord": "C"
  },
  "holly jolly christmas": {
   "composer": "Johnny Marks",
@@ -4719,12 +4632,11 @@
   "last_chord": "C6"
  },
  "i didn t know what time it was": {
-  "composer": "COLE PORTER",
-  "key": "Eb",
-  "seen_title": "I CONCENTRATE ON YOU",
-  "sig": "3 flats",
-  "last_chord": "Eb7",
-  "page_mismatch": true
+  "composer": "LORENZ HART / RICHARD RODGERS",
+  "key": "Em",
+  "seen_title": "I DIDN'T KNOW WHAT TIME IT WAS",
+  "sig": "1 sharp",
+  "last_chord": "G6/9"
  },
  "i fall in love too easily": {
   "composer": "SAMMY CAHN / JULE STYNE",
@@ -4790,12 +4702,11 @@
   "last_chord": "F6"
  },
  "i hear a rhapsody": {
-  "composer": "Wolf / Herron / Sinatra",
-  "key": "Fm",
-  "seen_title": "I'M A FOOL TO WANT YOU",
-  "sig": "4 flats",
-  "last_chord": "Fmi7",
-  "page_mismatch": true
+  "composer": "unknown",
+  "key": "Gm",
+  "seen_title": "I Hear a Rhapsody",
+  "sig": "2 flats",
+  "last_chord": "unknown"
  },
  "i heard the bells on christmas day": {
   "composer": "Johnny Marks / Henry Wadsworth Longfellow",
@@ -4897,12 +4808,11 @@
   "page_mismatch": true
  },
  "i m a pool to want you": {
-  "composer": "Burke / Van Husen",
-  "key": "G",
-  "seen_title": "Imagination",
-  "sig": "1 sharp",
-  "last_chord": "GMaj7",
-  "page_mismatch": true
+  "composer": "WOLF / HERRON / SINATRA",
+  "key": "Fm",
+  "seen_title": "I'M A FOOL TO WANT YOU",
+  "sig": "4 flats",
+  "last_chord": "Fmi7"
  },
  "i m all smiles": {
   "composer": "MICHAEL LEONARD / HERBERT MARTIN",
@@ -4912,12 +4822,11 @@
   "last_chord": "D6/F#"
  },
  "i m beginning to see the light": {
-  "composer": "STEVE SWALLOW",
-  "key": "C",
-  "seen_title": "I'M YOUR PAL",
-  "sig": "none",
-  "last_chord": "unknown",
-  "page_mismatch": true
+  "composer": "Don George / Johnny Hodges / Duke Ellington / Harry James",
+  "key": "G",
+  "seen_title": "I'M BEGINNING TO SEE THE LIGHT",
+  "sig": "1 sharp",
+  "last_chord": "G"
  },
  "i m gettin sentimental over you": {
   "composer": "G. Bassman",
@@ -4990,12 +4899,11 @@
   "last_chord": "Ebmaj7"
  },
  "i saw mommy kissing santa claus": {
-  "composer": "Johnny Marks / Henry Wadsworth Longfellow",
-  "key": "Bb",
-  "seen_title": "I Heard the Bells on Christmas Day",
-  "sig": "2 flats",
-  "last_chord": "F6",
-  "page_mismatch": true
+  "composer": "Tommie Connor",
+  "key": "F",
+  "seen_title": "I SAW MOMMY KISSING SANTA CLAUS",
+  "sig": "1 flat",
+  "last_chord": "C6"
  },
  "i say a little prayer": {
   "composer": "Hal David / Burt Bacharach",
@@ -5005,12 +4913,11 @@
   "last_chord": "G"
  },
  "i saw stars": {
-  "composer": "Hal David / Burt Bacharach",
-  "key": "G",
-  "seen_title": "I SAY A LITTLE PRAYER",
-  "sig": "1 sharp",
-  "last_chord": "G",
-  "page_mismatch": true
+  "composer": "Al Hoffman / Maurice Sigler / Al Goodharry",
+  "key": "Db",
+  "seen_title": "I SAW STARS",
+  "sig": "5 flats",
+  "last_chord": "Bb7"
  },
  "i shot the sheriff": {
   "composer": "Bob Marley",
@@ -5041,12 +4948,11 @@
   "last_chord": "Bb-7"
  },
  "i should care": {
-  "composer": "Billy Taylor",
+  "composer": "Sammy Cahn / Axel Stordahl / Paul Weston",
   "key": "F",
-  "seen_title": "I WISH I KNEW HOW IT WOULD FEEL TO BE FREE",
+  "seen_title": "I SHOULD CARE",
   "sig": "1 flat",
-  "last_chord": "unknown",
-  "page_mismatch": true
+  "last_chord": "C6"
  },
  "i ve got a crush on you": {
   "composer": "IRA GERSHWIN / GEORGE GERSHWIN",
@@ -5063,12 +4969,11 @@
   "last_chord": "F6/9"
  },
  "i ve got you under my skin": {
-  "composer": "unknown",
-  "key": "F",
-  "seen_title": "I'VE GOT ... STRING (P. 2)",
-  "sig": "1 flat",
-  "last_chord": "C7",
-  "page_mismatch": true
+  "composer": "COLE PORTER",
+  "key": "Eb",
+  "seen_title": "I'VE GOT YOU UNDER MY SKIN",
+  "sig": "3 flats",
+  "last_chord": "CMaj7"
  },
  "i ve got my love to keep me warm": {
   "composer": "Irving Berlin",
@@ -5184,20 +5089,18 @@
   "last_chord": "Bb"
  },
  "if i should lose you": {
-  "composer": "F. Loesser",
+  "composer": "unknown",
+  "key": "Bb",
+  "seen_title": "IF I SHOULD LOSE YOU",
+  "sig": "2 flats",
+  "last_chord": "Bb"
+ },
+ "if i were a bell": {
+  "composer": "F. LOESSER",
   "key": "Bb",
   "seen_title": "IF I WERE A BELL",
   "sig": "2 flats",
-  "last_chord": "F",
-  "page_mismatch": true
- },
- "if i were a bell": {
-  "composer": "Tadd Dameron",
-  "key": "Eb",
-  "seen_title": "IF YOU COULD SEE ME NOW",
-  "sig": "3 flats",
-  "last_chord": "Eb",
-  "page_mismatch": true
+  "last_chord": "F"
  },
  "if you could see me now": {
   "composer": "Carl Sigman / Tadd Dameron",
@@ -5246,7 +5149,7 @@
   "key": "Bb",
   "seen_title": "ILL WIND",
   "sig": "2 flats",
-  "last_chord": "Bb6/9",
+  "last_chord": "Bb△7",
   "page_mismatch": true
  },
  "in a capricornian way": {
@@ -5306,12 +5209,11 @@
   "last_chord": "F"
  },
  "in love in vain": {
-  "composer": "MARIAN McPARTLAND",
-  "key": "Am",
-  "seen_title": "IN THE DAYS OF OUR LOVE",
-  "sig": "none",
-  "last_chord": "unknown",
-  "page_mismatch": true
+  "composer": "LEO ROBIN / JEROME KERN",
+  "key": "Gm",
+  "seen_title": "IN LOVE IN VAIN",
+  "sig": "2 flats",
+  "last_chord": "Bb6/9"
  },
  "in pursuit of the 27th man": {
   "composer": "H. Silver",
@@ -5531,11 +5433,11 @@
   "last_chord": "Bb7"
  },
  "it could happen to you": {
-  "composer": "Charles Mingus",
-  "key": "Fm",
-  "seen_title": "Changes Two",
-  "sig": "5 flats",
-  "last_chord": "unknown",
+  "composer": "C. Mingus",
+  "key": "Eb",
+  "seen_title": "Free Cell Block \"F\", 'Tis Nazi U.S.A.",
+  "sig": "3 flats",
+  "last_chord": "DMaj7",
   "page_mismatch": true
  },
  "it came upon the midnight clear": {
@@ -5658,12 +5560,11 @@
   "last_chord": "F7(b9)"
  },
  "it s you or no one": {
-  "composer": "CHICK COREA",
+  "composer": "SAMMY CAHN / JULE STYNE",
   "key": "Gm",
-  "seen_title": "A JAPANESE WALTZ",
-  "sig": "none",
-  "last_chord": "Gm7",
-  "page_mismatch": true
+  "seen_title": "IT'S YOU OR NO ONE",
+  "sig": "2 flats",
+  "last_chord": "F6/9"
  },
  "it was a very good year": {
   "composer": "Ervin Drake",
@@ -5709,12 +5610,11 @@
   "last_chord": "G+7"
  },
  "jamento": {
-  "composer": "Ornette Coleman",
-  "key": "G",
-  "seen_title": "JAYNE",
-  "sig": "1 sharp",
-  "last_chord": "G6",
-  "page_mismatch": true
+  "composer": "Monty Alexander",
+  "key": "Dm",
+  "seen_title": "JAMENTO",
+  "sig": "1 flat",
+  "last_chord": "C6"
  },
  "jada": {
   "composer": "Bob Carleton",
@@ -5745,12 +5645,11 @@
   "last_chord": "G6"
  },
  "jeannine": {
-  "composer": "Hampton / Jones",
-  "key": "F",
-  "seen_title": "JE NE SAIS PAS",
-  "sig": "1 flat",
-  "last_chord": "F7",
-  "page_mismatch": true
+  "composer": "D. Pearson",
+  "key": "Fm",
+  "seen_title": "JEANNINE",
+  "sig": "4 flats",
+  "last_chord": "Ebmi7"
  },
  "jelly roll": {
   "composer": "C. Mingus",
@@ -5802,12 +5701,11 @@
   "last_chord": "C7alt"
  },
  "jody grind": {
-  "composer": "FATS WALLER",
-  "key": "Db",
-  "seen_title": "JITTERBUG WALTZ",
-  "sig": "5 flats",
-  "last_chord": "Fmi7",
-  "page_mismatch": true
+  "composer": "Horace Silver",
+  "key": "Fm",
+  "seen_title": "The Jody Grind",
+  "sig": "4 flats",
+  "last_chord": "unknown"
  },
  "jitterbug waltz": {
   "composer": "Fats Waller",
@@ -5908,12 +5806,11 @@
   "last_chord": "unknown"
  },
  "jump for joy": {
-  "composer": "Sam M. Lewis / John Klenner",
-  "key": "G",
-  "seen_title": "JUST FRIENDS",
-  "sig": "1 sharp",
-  "last_chord": "G6",
-  "page_mismatch": true
+  "composer": "Duke Ellington / Paul Webster / Sid Kuller",
+  "key": "Eb",
+  "seen_title": "JUMP FOR JOY",
+  "sig": "3 flats",
+  "last_chord": "Bb7"
  },
  "joyce s samba": {
   "composer": "D. Ferreira / M. Einhorn",
@@ -5934,7 +5831,7 @@
   "key": "F",
   "seen_title": "Joy To The World",
   "sig": "1 flat",
-  "last_chord": "Bb7",
+  "last_chord": "F7",
   "page_mismatch": true
  },
  "just a few": {
@@ -5945,12 +5842,11 @@
   "last_chord": "F"
  },
  "june 15th 1967": {
-  "composer": "Gary Burton",
-  "key": "C",
-  "seen_title": "Lofty Fake Anagram",
+  "composer": "Michael Gibbs",
+  "key": "Bb",
+  "seen_title": "June 15, 1967",
   "sig": "none",
-  "last_chord": "unknown",
-  "page_mismatch": true
+  "last_chord": "Bb"
  },
  "just a sittin and a rockin": {
   "composer": "Ellington / Strayhorn / Gaines",
@@ -5974,12 +5870,11 @@
   "last_chord": "C-7"
  },
  "just one more chance": {
-  "composer": "Tadd Dameron",
-  "key": "C",
-  "seen_title": "LADY BIRD",
-  "sig": "none",
-  "last_chord": "unknown",
-  "page_mismatch": true
+  "composer": "ARTHUR JOHNSTON / SAM COSLOW",
+  "key": "G",
+  "seen_title": "JUST ONE MORE CHANCE",
+  "sig": "1 sharp",
+  "last_chord": "A-7"
  },
  "just friends": {
   "composer": "Sam M. Lewis / John Klenner",
@@ -6038,12 +5933,11 @@
   "last_chord": "C"
  },
  "kelo": {
-  "composer": "TADD DAMERON",
-  "key": "C",
-  "seen_title": "LADY BIRD",
-  "sig": "none",
-  "last_chord": "unknown",
-  "page_mismatch": true
+  "composer": "J.J. Johnson",
+  "key": "Eb",
+  "seen_title": "KELO",
+  "sig": "3 flats",
+  "last_chord": "unknown"
  },
  "kentucky oysters": {
   "composer": "DAVID BAKER",
@@ -6082,23 +5976,21 @@
   "last_chord": "Dmi"
  },
  "killing me softly with his song": {
-  "composer": "Charlie Parker",
-  "key": "Bb",
-  "seen_title": "KIM",
-  "sig": "2 flats",
-  "last_chord": "F7",
-  "page_mismatch": true
+  "composer": "Norman Gimbel / Charles Fox",
+  "key": "Am",
+  "seen_title": "Killing Me Softly With His Song",
+  "sig": "none",
+  "last_chord": "A6"
  },
  "ko ko": {
-  "composer": "unknown",
+  "composer": "Charlie Parker",
   "key": "Bb",
-  "seen_title": "unknown",
-  "sig": "none",
-  "last_chord": "Bbmaj7",
-  "page_mismatch": true
+  "seen_title": "KO KO",
+  "sig": "2 flats",
+  "last_chord": "unknown"
  },
  "la nevada blues": {
-  "composer": "WAYNE SHORTER",
+  "composer": "Wayne Shorter",
   "key": "G",
   "seen_title": "LIMBO",
   "sig": "none",
@@ -6176,12 +6068,11 @@
   "last_chord": "F-6"
  },
  "lament for booker": {
-  "composer": "unknown",
-  "key": "Bb",
-  "seen_title": "unknown",
-  "sig": "2 flats",
-  "last_chord": "Bbmaj7",
-  "page_mismatch": true
+  "composer": "Freddie Hubbard",
+  "key": "Cm",
+  "seen_title": "LAMENT FOR BOOKER",
+  "sig": "3 flats",
+  "last_chord": "D7b9"
  },
  "las vegas tango": {
   "composer": "Gil Evans",
@@ -6191,20 +6082,18 @@
   "last_chord": "unknown"
  },
  "last christmas": {
-  "composer": "unknown",
+  "composer": "GEORGE MICHAEL",
   "key": "C",
-  "seen_title": "unknown",
-  "sig": "none",
-  "last_chord": "C6",
-  "page_mismatch": true
+  "seen_title": "LAST CHRISTMAS",
+  "sig": "1 flat",
+  "last_chord": "C6"
  },
  "last month of the year": {
-  "composer": "unknown",
-  "key": "C",
-  "seen_title": "unknown",
-  "sig": "none",
-  "last_chord": "C6",
-  "page_mismatch": true
+  "composer": "Vera Hall / Ruby Pickens Tartt / Alan Lomax",
+  "key": "Bb",
+  "seen_title": "THE LAST MONTH OF THE YEAR (WHAT MONTH WAS JESUS BORN IN?)",
+  "sig": "2 flats",
+  "last_chord": "Bb7"
  },
  "las guajiras": {
   "composer": "Mongo Santamaria",
@@ -6270,12 +6159,11 @@
   "last_chord": "unknown"
  },
  "leila": {
-  "composer": "LENNIE TRISTANO",
-  "key": "Cm",
-  "seen_title": "LENNIE'S PENNIES",
-  "sig": "3 flats",
-  "last_chord": "Cmi6",
-  "page_mismatch": true
+  "composer": "Wes Montgomery",
+  "key": "Gm",
+  "seen_title": "LEILA",
+  "sig": "none",
+  "last_chord": "unknown"
  },
  "lennie s pennies": {
   "composer": "Lennie Tristano",
@@ -6292,12 +6180,11 @@
   "last_chord": "C7"
  },
  "leroy the magician": {
-  "composer": "VAN HEUSEN / BURKE",
-  "key": "Eb",
-  "seen_title": "LIKE SOMEONE IN LOVE",
-  "sig": "3 flats",
-  "last_chord": "Eb6",
-  "page_mismatch": true
+  "composer": "Gary Burton",
+  "key": "Fm",
+  "seen_title": "Leroy, The Magician",
+  "sig": "4 flats",
+  "last_chord": "E7"
  },
  "lester leaps in": {
   "composer": "Lester Young",
@@ -6363,12 +6250,11 @@
   "last_chord": "D7(#9)"
  },
  "lie awake": {
-  "composer": "Gary Burton",
-  "key": "Fm",
-  "seen_title": "LEROY, THE MAGICIAN",
-  "sig": "4 flats",
-  "last_chord": "Fm7",
-  "page_mismatch": true
+  "composer": "Mitch Coodley",
+  "key": "unknown",
+  "seen_title": "LIE AWAKE",
+  "sig": "none",
+  "last_chord": "unknown"
  },
  "life is just a bowl of cherries": {
   "composer": "Lew Brown / Ray Henderson",
@@ -6399,12 +6285,11 @@
   "last_chord": "unknown"
  },
  "like sonny": {
-  "composer": "Frank Foster",
-  "key": "Bb",
-  "seen_title": "A LITTLE CHICAGO FIRE",
-  "sig": "2 flats",
-  "last_chord": "Bb6/9",
-  "page_mismatch": true
+  "composer": "John Coltrane",
+  "key": "F",
+  "seen_title": "Like Sonny",
+  "sig": "1 flat",
+  "last_chord": "FMaj7"
  },
  "lilac wine": {
   "composer": "JAMES H. SHELTON",
@@ -6435,12 +6320,11 @@
   "last_chord": "Ab6"
  },
  "lines and spaces": {
-  "composer": "Chick Corea",
-  "key": "D",
-  "seen_title": "LITHA",
-  "sig": "none",
-  "last_chord": "B7#9",
-  "page_mismatch": true
+  "composer": "Joe Lovano",
+  "key": "Fm",
+  "seen_title": "LINES AND SPACES",
+  "sig": "4 flats",
+  "last_chord": "Eb-7"
  },
  "linus and lucy": {
   "composer": "Vince Guaraldi",
@@ -6471,12 +6355,11 @@
   "last_chord": "B7#9"
  },
  "little girl blue": {
-  "composer": "PAUL FERGUSON",
-  "key": "C",
-  "seen_title": "THE LONG VIEW",
-  "sig": "none",
-  "last_chord": "F7",
-  "page_mismatch": true
+  "composer": "LORENZ HART / RICHARD RODGERS",
+  "key": "F",
+  "seen_title": "LITTLE GIRL BLUE",
+  "sig": "1 flat",
+  "last_chord": "F△7"
  },
  "little face": {
   "composer": "ERNIE KRIVDA",
@@ -6493,20 +6376,18 @@
   "last_chord": "Bb6/9"
  },
  "little boat": {
-  "composer": "Philip Braham / Douglas Furber",
-  "key": "Db",
-  "seen_title": "LIMEHOUSE BLUES",
-  "sig": "5 flats",
-  "last_chord": "Ab6",
-  "page_mismatch": true
+  "composer": "ROBERTO MENESCAL / RONALDO BOSCOLI / BUDDY KAYE",
+  "key": "Bb",
+  "seen_title": "LITTLE BOAT",
+  "sig": "2 flats",
+  "last_chord": "Bbmaj7"
  },
  "little rootie tootie": {
-  "composer": "Dizzy Gillespie / Gil Fuller",
-  "key": "Bb",
-  "seen_title": "MANTECA",
-  "sig": "2 flats",
-  "last_chord": "F7",
-  "page_mismatch": true
+  "composer": "Th. Monk",
+  "key": "Ab",
+  "seen_title": "Little Rootie Tootie",
+  "sig": "4 flats",
+  "last_chord": "Ab"
  },
  "little saint nick": {
   "composer": "Brian Wilson / Mike Love",
@@ -6565,12 +6446,11 @@
   "last_chord": "F6"
  },
  "lonely dreams": {
-  "composer": "ROGERS & HART",
-  "key": "Eb",
-  "seen_title": "LOVER",
-  "sig": "3 flats",
-  "last_chord": "Bb7",
-  "page_mismatch": true
+  "composer": "Terry Gibbs",
+  "key": "Bbm",
+  "seen_title": "Lonely Dreams",
+  "sig": "5 flats",
+  "last_chord": "F7"
  },
  "lone jack": {
   "composer": "PAT METHENY",
@@ -6673,12 +6553,11 @@
   "page_mismatch": true
  },
  "lost in the stars": {
-  "composer": "Victor Herbert",
-  "key": "Gm",
-  "seen_title": "March of the Toys",
-  "sig": "2 flats",
-  "last_chord": "Bb7",
-  "page_mismatch": true
+  "composer": "Kurt Weill / Maxwell Anderson",
+  "key": "G",
+  "seen_title": "LOST IN THE STARS",
+  "sig": "1 sharp",
+  "last_chord": "G-7"
  },
  "loud zee": {
   "composer": "JERRY BERGONZI",
@@ -6688,20 +6567,18 @@
   "last_chord": "GΔ7"
  },
  "love for sale": {
-  "composer": "Rogers & Hart",
-  "key": "Eb",
-  "seen_title": "LOVER",
-  "sig": "3 flats",
-  "last_chord": "Bb7",
-  "page_mismatch": true
+  "composer": "unknown",
+  "key": "Ebm",
+  "seen_title": "LOVE FOR SALE",
+  "sig": "none",
+  "last_chord": "BbMaj7"
  },
  "love is the sweetest thing": {
-  "composer": "KEITH JARRETT",
+  "composer": "RAY NOBLE",
   "key": "D",
-  "seen_title": "LUCKY SOUTHERN",
+  "seen_title": "LOVE IS THE SWEETEST THING",
   "sig": "2 sharps",
-  "last_chord": "Ebmaj7#11",
-  "page_mismatch": true
+  "last_chord": "A7"
  },
  "love my baby": {
   "composer": "Bud Green / Harry Warren",
@@ -6712,12 +6589,11 @@
   "page_mismatch": true
  },
  "love vibrations": {
-  "composer": "DAVID BAKER",
-  "key": "G",
-  "seen_title": "LYDIAN APRIL",
-  "sig": "1 sharp",
-  "last_chord": "GMaj7",
-  "page_mismatch": true
+  "composer": "H. Silver",
+  "key": "Cm",
+  "seen_title": "LOVE VIBRATIONS",
+  "sig": "3 flats",
+  "last_chord": "unknown"
  },
  "love wise": {
   "composer": "Marvin Fisher / Kenward Elmslie",
@@ -6840,20 +6716,18 @@
   "last_chord": "C-"
  },
  "magician in you": {
-  "composer": "Billy Strayhorn",
-  "key": "Db",
-  "seen_title": "LUSH LIFE",
-  "sig": "5 flats",
-  "last_chord": "D7",
-  "page_mismatch": true
+  "composer": "KEITH JARRETT",
+  "key": "D",
+  "seen_title": "THE MAGICIAN IN YOU",
+  "sig": "2 sharps",
+  "last_chord": "unknown"
  },
  "magician in you the": {
-  "composer": "Herbie Hancock",
+  "composer": "Keith Jarrett",
   "key": "D",
-  "seen_title": "MAIDEN VOYAGE",
-  "sig": "none",
-  "last_chord": "D7sus4",
-  "page_mismatch": true
+  "seen_title": "The Magician in You",
+  "sig": "2 sharps",
+  "last_chord": "unknown"
  },
  "mahjong": {
   "composer": "WAYNE SHORTER",
@@ -6877,12 +6751,11 @@
   "last_chord": "D7sus4"
  },
  "majoong": {
-  "composer": "Dave Holland",
-  "key": "Bb",
-  "seen_title": "MAY DANCE",
-  "sig": "2 flats",
-  "last_chord": "Bb",
-  "page_mismatch": true
+  "composer": "Wayne Shorter",
+  "key": "Fm",
+  "seen_title": "MAHJONG",
+  "sig": "4 flats",
+  "last_chord": "F-7"
  },
  "make believe": {
   "composer": "Jerome Kern / Oscar Hammerstein II",
@@ -7124,12 +6997,11 @@
   "last_chord": "Eb7/Bb"
  },
  "merry christmas darling": {
-  "composer": "Sonny Burke / Paul Francis Webster",
+  "composer": "Richard Carpenter / Frank Pooler",
   "key": "Eb",
-  "seen_title": "THE MERRY CHRISTMAS POLKA",
+  "seen_title": "MERRY CHRISTMAS, DARLING",
   "sig": "3 flats",
-  "last_chord": "Eb6",
-  "page_mismatch": true
+  "last_chord": "F/Eb"
  },
  "merry christmas polka": {
   "composer": "Sonny Burke / Paul Francis Webster",
@@ -7188,12 +7060,11 @@
   "last_chord": "unknown"
  },
  "milano": {
-  "composer": "Gigi Gryce",
-  "key": "Fm",
-  "seen_title": "MINORITY",
-  "sig": "4 flats",
-  "last_chord": "F-7",
-  "page_mismatch": true
+  "composer": "John Lewis",
+  "key": "Dm",
+  "seen_title": "MILANO",
+  "sig": "1 flat",
+  "last_chord": "A7b9"
  },
  "miles ahead": {
   "composer": "Miles Davis",
@@ -7203,20 +7074,18 @@
   "last_chord": "unknown"
  },
  "michelle": {
-  "composer": "Josef Zawinul",
-  "key": "Db",
-  "seen_title": "MIDNIGHT MOOD",
-  "sig": "5 flats",
-  "last_chord": "Dbmaj7",
-  "page_mismatch": true
+  "composer": "John Lennon / Paul McCartney",
+  "key": "F",
+  "seen_title": "MICHELLE",
+  "sig": "4 flats",
+  "last_chord": "F"
  },
  "minor mishap": {
-  "composer": "Clifford Brown",
-  "key": "Fm",
-  "seen_title": "MINOR MOOD",
-  "sig": "4 flats",
-  "last_chord": "Fmi",
-  "page_mismatch": true
+  "composer": "T. FLANAGAN",
+  "key": "Bbm",
+  "seen_title": "MINOR MISHAP",
+  "sig": "5 flats",
+  "last_chord": "Bbmi"
  },
  "milestones": {
   "composer": "MILES DAVIS",
@@ -7261,20 +7130,18 @@
   "last_chord": "G7#5"
  },
  "miss ann": {
-  "composer": "PAT METHENY",
-  "key": "A",
-  "seen_title": "MISSOURI UNCOMPROMISED",
-  "sig": "3 sharps",
-  "last_chord": "Apsus4",
-  "page_mismatch": true
+  "composer": "Eric Dolphy",
+  "key": "F",
+  "seen_title": "MISS ANN",
+  "sig": "1 flat",
+  "last_chord": "C7"
  },
  "miss fine": {
-  "composer": "Lalo Schifrin",
-  "key": "Gm",
-  "seen_title": "Mission: Impossible Theme",
+  "composer": "OLIVER NELSON",
+  "key": "Bb",
+  "seen_title": "MISS FINE",
   "sig": "2 flats",
-  "last_chord": "D",
-  "page_mismatch": true
+  "last_chord": "Bb7#9"
  },
  "mission impossible theme": {
   "composer": "Lalo Schifrin",
@@ -7376,20 +7243,18 @@
   "last_chord": "C6/9"
  },
  "monk s sphere": {
-  "composer": "TH. MONK",
-  "key": "C",
-  "seen_title": "MONK'S MOOD",
-  "sig": "none",
-  "last_chord": "DbMaj7",
-  "page_mismatch": true
+  "composer": "Gary McFarland",
+  "key": "F",
+  "seen_title": "MONK'S SPHERE",
+  "sig": "3 sharps",
+  "last_chord": "C7"
  },
  "montage": {
-  "composer": "Duke Ellington",
-  "key": "Ab",
-  "seen_title": "MOOD INDIGO",
-  "sig": "4 flats",
-  "last_chord": "Abmaj7",
-  "page_mismatch": true
+  "composer": "Stu Balcomb",
+  "key": "D",
+  "seen_title": "MONTAGE",
+  "sig": "2 sharps",
+  "last_chord": "A7(b5)"
  },
  "mooch": {
   "composer": "Duke Ellington / Irving Mills",
@@ -7462,12 +7327,11 @@
   "last_chord": "G6"
  },
  "moonchild": {
-  "composer": "Keith Jarrett",
-  "key": "Cm",
-  "seen_title": "CORAL",
-  "sig": "none",
-  "last_chord": "Em7",
-  "page_mismatch": true
+  "composer": "KEITH JARRETT",
+  "key": "C#m",
+  "seen_title": "MOONCHILD",
+  "sig": "4 sharps",
+  "last_chord": "C#-7"
  },
  "more i see you": {
   "composer": "Warren & Gordon",
@@ -7547,12 +7411,11 @@
   "last_chord": "C6/9"
  },
  "movin along": {
-  "composer": "BILL EVANS",
-  "key": "B",
-  "seen_title": "MY BELLS",
-  "sig": "5 sharps",
-  "last_chord": "Bmaj7",
-  "page_mismatch": true
+  "composer": "John L. \"Wes\" Montgomery",
+  "key": "Eb",
+  "seen_title": "MOVIN' ALONG (SID'S TWELVE)",
+  "sig": "3 flats",
+  "last_chord": "Eb9"
  },
  "moving out": {
   "composer": "Sonny Rollins",
@@ -7577,11 +7440,11 @@
   "last_chord": "E7(#9)"
  },
  "mr jin": {
-  "composer": "GERSHWIN",
-  "key": "F",
-  "seen_title": "A FOGGY DAY",
+  "composer": "Dizzy Gillespie",
+  "key": "Dm",
+  "seen_title": "A NIGHT IN TUNISIA",
   "sig": "1 flat",
-  "last_chord": "F6",
+  "last_chord": "D-",
   "page_mismatch": true
  },
  "mr clean": {
@@ -7607,12 +7470,11 @@
   "last_chord": "C-"
  },
  "mr sims": {
-  "composer": "G. WASHINGTON",
-  "key": "Cm",
-  "seen_title": "MR. MAGIC",
+  "composer": "John Coltrane",
+  "key": "Ebm",
+  "seen_title": "Mr. Sims",
   "sig": "3 flats",
-  "last_chord": "unknown",
-  "page_mismatch": true
+  "last_chord": "Db"
  },
  "muezzin": {
   "composer": "PEPPER ADAMS",
@@ -7622,12 +7484,11 @@
   "last_chord": "G△7"
  },
  "mrs miniver": {
-  "composer": "Pepper Adams",
+  "composer": "DEXTER GORDON",
   "key": "Fm",
-  "seen_title": "Muezzin'",
+  "seen_title": "MRS. MINIVER",
   "sig": "4 flats",
-  "last_chord": "GMaj7",
-  "page_mismatch": true
+  "last_chord": "F+7"
  },
  "my favorite things": {
   "composer": "RICHARD RODGERS / OSCAR HAMMERSTEIN II",
@@ -7658,20 +7519,18 @@
   "last_chord": "Eb6"
  },
  "my buddy": {
-  "composer": "RICHARD RODGERS / OSCAR HAMMERSTEIN II",
-  "key": "Em",
-  "seen_title": "MY FAVORITE THINGS",
+  "composer": "WALTER DONALDSON / GUS KAHN",
+  "key": "G",
+  "seen_title": "MY BUDDY",
   "sig": "1 sharp",
-  "last_chord": "E-7",
-  "page_mismatch": true
+  "last_chord": "D7"
  },
  "my little boat": {
-  "composer": "WASHINGTON / YOUNG",
-  "key": "Bb",
-  "seen_title": "MY FOOLISH HEART",
-  "sig": "3 flats",
-  "last_chord": "Bbmaj7",
-  "page_mismatch": true
+  "composer": "Roberto Menescal",
+  "key": "Bm",
+  "seen_title": "MY LITTLE BOAT",
+  "sig": "2 sharps",
+  "last_chord": "unknown"
  },
  "my heart stood still": {
   "composer": "LORENZ HART / RICHARD RODGERS",
@@ -7681,15 +7540,14 @@
   "last_chord": "F6/9"
  },
  "my little suede shoes": {
-  "composer": "JOHNSON / COSLOW",
-  "key": "G",
-  "seen_title": "MY OLD FLAME",
-  "sig": "1 sharp",
-  "last_chord": "GMaj7",
-  "page_mismatch": true
+  "composer": "C. PARKER",
+  "key": "Eb",
+  "seen_title": "MY LITTLE SUEDE SHOES",
+  "sig": "3 flats",
+  "last_chord": "Eb"
  },
  "my my romance ship 311": {
-  "composer": "WEILL / GERSHWIN",
+  "composer": "Weill / Gershwin",
   "key": "F",
   "seen_title": "MY SHIP",
   "sig": "2 sharps",
@@ -7704,12 +7562,11 @@
   "last_chord": "DbΔ 7"
  },
  "my one and only love": {
-  "composer": "Richard Rodgers / Lorenz Hart",
-  "key": "Bb",
-  "seen_title": "My Romance",
-  "sig": "2 flats",
-  "last_chord": "F7",
-  "page_mismatch": true
+  "composer": "Guy Wood / Robert Mellin",
+  "key": "C",
+  "seen_title": "My One and Only Love",
+  "sig": "none",
+  "last_chord": "E-"
  },
  "my old flame": {
   "composer": "JOHNSON / COSLOW",
@@ -7761,11 +7618,11 @@
   "last_chord": "unknown"
  },
  "mystic touch": {
-  "composer": "Th. Monk",
-  "key": "C",
-  "seen_title": "MONK'S MOOD",
-  "sig": "none",
-  "last_chord": "DbMaj7",
+  "composer": "Gary McFarland",
+  "key": "F",
+  "seen_title": "Monk's Sphere",
+  "sig": "1 flat",
+  "last_chord": "C7",
   "page_mismatch": true
  },
  "nagasaki": {
@@ -7783,12 +7640,11 @@
   "last_chord": "unknown"
  },
  "nancy joe": {
-  "composer": "G. Mulligan",
-  "key": "G",
-  "seen_title": "North Atlantic Run",
-  "sig": "1 sharp",
-  "last_chord": "GMaj7",
-  "page_mismatch": true
+  "composer": "Gerald Wilson",
+  "key": "F",
+  "seen_title": "Nancy Joe",
+  "sig": "1 flat",
+  "last_chord": "C7"
  },
  "naima": {
   "composer": "John Coltrane",
@@ -7819,12 +7675,11 @@
   "last_chord": "C7"
  },
  "nearness of you": {
-  "composer": "Slide Hampton",
-  "key": "Dm",
-  "seen_title": "A NEW THING",
+  "composer": "N. WASHINGTON / H. CARMICHAEL",
+  "key": "F",
+  "seen_title": "THE NEARNESS OF YOU",
   "sig": "1 flat",
-  "last_chord": "Dmi7",
-  "page_mismatch": true
+  "last_chord": "F"
  },
  "never let me go": {
   "composer": "Jay Livingston / Ray Evans",
@@ -7918,12 +7773,11 @@
   "last_chord": "Gmaj7/D"
  },
  "night on bop mountain": {
-  "composer": "Pat Martino",
-  "key": "Em",
-  "seen_title": "NIGHTWINGS",
-  "sig": "1 sharp",
-  "last_chord": "B9#5",
-  "page_mismatch": true
+  "composer": "Kai Winding",
+  "key": "Fm",
+  "seen_title": "A NIGHT ON BOP MOUNTAIN",
+  "sig": "4 flats",
+  "last_chord": "F-(maj13)"
  },
  "night in tunisia": {
   "composer": "John \"Dizzy\" Gillespie / Frank Paparelli",
@@ -7954,12 +7808,11 @@
   "last_chord": "Bb6"
  },
  "nightwings": {
-  "composer": "Julian Adderley",
-  "key": "F",
-  "seen_title": "Nippon Soul",
-  "sig": "1 flat",
-  "last_chord": "C7",
-  "page_mismatch": true
+  "composer": "Pat Martino",
+  "key": "Em",
+  "seen_title": "NIGHTWINGS",
+  "sig": "1 sharp",
+  "last_chord": "B9#5"
  },
  "nightingale sang in berkeley square": {
   "composer": "ERIC MASCHWITZ / MANNING SHERWIN",
@@ -8004,12 +7857,11 @@
   "last_chord": "Gmi"
  },
  "no me esqueca": {
-  "composer": "Sonny Rollins",
-  "key": "Bb",
-  "seen_title": "No Moe",
-  "sig": "2 flats",
-  "last_chord": "Bb",
-  "page_mismatch": true
+  "composer": "unknown",
+  "key": "Em",
+  "seen_title": "NO ME ESQUEÇA",
+  "sig": "1 sharp",
+  "last_chord": "unknown"
  },
  "nobody else but me": {
   "composer": "OSCAR HAMMERSTEIN / JEROME KERN",
@@ -8019,12 +7871,11 @@
   "last_chord": "Eb6/9"
  },
  "nobody knows you when you re down and out": {
-  "composer": "JIMMY FORREST / OSCAR WASHINGTON / LEWIS C. SIMPKINS",
-  "key": "Bb",
-  "seen_title": "NIGHT TRAIN",
-  "sig": "2 flats",
-  "last_chord": "Bb6",
-  "page_mismatch": true
+  "composer": "Jimmie Cox",
+  "key": "F",
+  "seen_title": "NOBODY KNOWS YOU WHEN YOU'RE DOWN AND OUT",
+  "sig": "1 flat",
+  "last_chord": "unknown"
  },
  "noel noel": {
   "composer": "unknown",
@@ -8048,12 +7899,11 @@
   "last_chord": "F"
  },
  "not really the blues": {
-  "composer": "GERRY MULLIGAN",
-  "key": "F",
-  "seen_title": "NOBLESSE",
-  "sig": "1 flat",
-  "last_chord": "Fmaj9",
-  "page_mismatch": true
+  "composer": "Johnny Mandel",
+  "key": "Eb",
+  "seen_title": "NOT REALLY THE BLUES",
+  "sig": "3 flats",
+  "last_chord": "G-7"
  },
  "nothing personal": {
   "composer": "DON GROLNICK",
@@ -8099,7 +7949,7 @@
  },
  "now s the time": {
   "composer": "Gerald Wilson",
-  "key": "Gm",
+  "key": "Dm",
   "seen_title": "Nancy Joe",
   "sig": "1 flat",
   "last_chord": "C7",
@@ -8134,12 +7984,11 @@
   "last_chord": "Gadd2"
  },
  "o holy night": {
-  "composer": "unknown",
+  "composer": "Adolphe Adam / French words by Placide Cappeau / English words by John S. Dwight",
   "key": "C",
-  "seen_title": "unknown",
+  "seen_title": "O HOLY NIGHT",
   "sig": "none",
-  "last_chord": "Cadd2",
-  "page_mismatch": true
+  "last_chord": "Cmaj7"
  },
  "o little town of bethlehem": {
   "composer": "Lewis H. Redner / Phillips Brooks",
@@ -8219,12 +8068,11 @@
   "last_chord": "Eb6"
  },
  "old folks": {
-  "composer": "ALAN J. LERNER / BURTON LANE",
-  "key": "G",
-  "seen_title": "ON A CLEAR DAY",
-  "sig": "1 sharp",
-  "last_chord": "G6/9",
-  "page_mismatch": true
+  "composer": "ERIC BLAU / MORT SHUMAN / JACQUE BREL",
+  "key": "F",
+  "seen_title": "OLD FOLKS",
+  "sig": "1 flat",
+  "last_chord": "F6/9"
  },
  "old country": {
   "composer": "Nat Adderley / Curtis R. Lewis",
@@ -8248,12 +8096,11 @@
   "last_chord": "A-"
  },
  "oliloqui valley": {
-  "composer": "Antonio Carlos Jobim / Vinicius de Moraes / Ray Gilbert",
-  "key": "Dm",
-  "seen_title": "ONCE I LOVED (AMOR EM PAZ) (LOVE IN PEACE)",
+  "composer": "HERBIE HANCOCK",
+  "key": "F",
+  "seen_title": "OLILOQUI VALLEY",
   "sig": "1 flat",
-  "last_chord": "D7",
-  "page_mismatch": true
+  "last_chord": "Amaj7"
  },
  "on broadway": {
   "composer": "Barry Mann / Cynthia Weil / Mike Stoller / Jerry Leiber",
@@ -8295,7 +8142,7 @@
   "key": "Gm",
   "seen_title": "OFF MINOR",
   "sig": "2 flats",
-  "last_chord": "C7",
+  "last_chord": "F",
   "page_mismatch": true
  },
  "once i loved": {
@@ -8327,12 +8174,11 @@
   "last_chord": "F"
  },
  "one by one": {
-  "composer": "Clark Terry",
-  "key": "F",
-  "seen_title": "ONE FOOT IN THE GUTTER",
-  "sig": "1 flat",
-  "last_chord": "C7",
-  "page_mismatch": true
+  "composer": "WAYNE SHORTER",
+  "key": "Gm",
+  "seen_title": "ONE BY ONE",
+  "sig": "2 flats",
+  "last_chord": "Gmi7"
  },
  "one finger snap": {
   "composer": "Herbie Hancock",
@@ -8349,11 +8195,11 @@
   "last_chord": "C7"
  },
  "one for daddy o": {
-  "composer": "G. Gershwin",
-  "key": "F",
-  "seen_title": "OUR LOVE IS HERE TO STAY",
-  "sig": "1 flat",
-  "last_chord": "unknown",
+  "composer": "HORACE SILVER",
+  "key": "Bbm",
+  "seen_title": "OPUS DE FUNK",
+  "sig": "2 flats",
+  "last_chord": "Bbmi",
   "page_mismatch": true
  },
  "one for helen": {
@@ -8519,19 +8365,18 @@
   "page_mismatch": true
  },
  "palladium": {
-  "composer": "unknown",
-  "key": "D",
-  "seen_title": "339",
-  "sig": "2 sharps",
-  "last_chord": "F#7",
-  "page_mismatch": true
+  "composer": "Wayne Shorter",
+  "key": "Fm",
+  "seen_title": "PALLADIUM",
+  "sig": "none",
+  "last_chord": "B6/D"
  },
  "palo alto": {
-  "composer": "O. Nelson",
-  "key": "C",
-  "seen_title": "THE DRIVE",
-  "sig": "none",
-  "last_chord": "G7",
+  "composer": "RALPH BURNS",
+  "key": "Ab",
+  "seen_title": "EARLY AUTUMN",
+  "sig": "4 flats",
+  "last_chord": "Bb",
   "page_mismatch": true
  },
  "p s i love you": {
@@ -8591,12 +8436,11 @@
   "last_chord": "unknown"
  },
  "passion flower": {
-  "composer": "Horace Silver",
-  "key": "Bb",
-  "seen_title": "PEACE",
-  "sig": "2 flats",
-  "last_chord": "Bbmaj7",
-  "page_mismatch": true
+  "composer": "Billy Strayhorn / Milton Raskin",
+  "key": "G",
+  "seen_title": "PASSION FLOWER",
+  "sig": "1 sharp",
+  "last_chord": "B9#11"
  },
  "passport": {
   "composer": "CHARLIE PARKER",
@@ -8606,11 +8450,11 @@
   "last_chord": "Bb∆7"
  },
  "patterns": {
-  "composer": "G. GERSHWIN",
-  "key": "G",
-  "seen_title": "EMBRACEABLE YOU",
-  "sig": "1 sharp",
-  "last_chord": "G6",
+  "composer": "J.J. Johnson",
+  "key": "Cm",
+  "seen_title": "ELDRA",
+  "sig": "3 flats",
+  "last_chord": "C7",
   "page_mismatch": true
  },
  "paul s pal": {
@@ -8656,11 +8500,11 @@
   "last_chord": "Dbmaj7"
  },
  "penny arcade": {
-  "composer": "J. BRACKEEN",
-  "key": "Em",
-  "seen_title": "EVENING IN CONCERT",
-  "sig": "none",
-  "last_chord": "unknown",
+  "composer": "B. Evans",
+  "key": "Eb",
+  "seen_title": "EPILOGUE",
+  "sig": "3 flats",
+  "last_chord": "Cmi7(11)",
   "page_mismatch": true
  },
  "pensativa": {
@@ -8695,7 +8539,7 @@
   "composer": "unknown",
   "key": "F",
   "seen_title": "OLD DEVIL MOON",
-  "sig": "2 flats",
+  "sig": "1 flat",
   "last_chord": "F6",
   "page_mismatch": true
  },
@@ -8710,17 +8554,17 @@
  "perdido": {
   "composer": "J. Brackeen",
   "key": "Em",
-  "seen_title": "Evening In Concert",
+  "seen_title": "EVENING IN CONCERT",
   "sig": "none",
   "last_chord": "unknown",
   "page_mismatch": true
  },
  "perdido line": {
-  "composer": "George Russell",
-  "key": "Cm",
-  "seen_title": "EZZ-THETIC",
-  "sig": "3 flats",
-  "last_chord": "Cm",
+  "composer": "H. Hancock",
+  "key": "Fm",
+  "seen_title": "EYE OF THE HURRICANE",
+  "sig": "none",
+  "last_chord": "unknown",
   "page_mismatch": true
  },
  "perfect love jamala": {
@@ -8769,7 +8613,7 @@
  "petite fleure": {
   "composer": "TH. MONK",
   "key": "C",
-  "seen_title": "52nd STREET THEME",
+  "seen_title": "52ND STREET THEME",
   "sig": "none",
   "last_chord": "C",
   "page_mismatch": true
@@ -8801,23 +8645,22 @@
   "key": "Dm",
   "seen_title": "FIRST MOVES",
   "sig": "none",
-  "last_chord": "G7",
+  "last_chord": "Dmi7",
   "page_mismatch": true
  },
  "picadilly lilly": {
-  "composer": "BUDDY BERNIER / NAT SIMON",
-  "key": "G",
-  "seen_title": "POINCIANA",
-  "sig": "1 sharp",
-  "last_chord": "G6/9",
-  "page_mismatch": true
+  "composer": "DAVE LIEBMAN",
+  "key": "E",
+  "seen_title": "PICADILLY LILLY",
+  "sig": "none",
+  "last_chord": "A7#11"
  },
  "pick yourself up": {
   "composer": "unknown",
   "key": "Gm",
-  "seen_title": "Feels So Good",
+  "seen_title": "FEELS SO GOOD",
   "sig": "2 flats",
-  "last_chord": "Gmin7/C",
+  "last_chord": "Gmi7/C",
   "page_mismatch": true
  },
  "pinocchio": {
@@ -8870,11 +8713,11 @@
   "last_chord": "G6/9"
  },
  "plain jane to reflections": {
-  "composer": "FAIN / HILLIARD",
-  "key": "Dm",
-  "seen_title": "ALICE IN WONDERLAND",
-  "sig": "none",
-  "last_chord": "D-7",
+  "composer": "unknown",
+  "key": "Fm",
+  "seen_title": "AIREGIN",
+  "sig": "4 flats",
+  "last_chord": "unknown",
   "page_mismatch": true
  },
  "point of return": {
@@ -8892,12 +8735,11 @@
   "last_chord": "AbΔ7"
  },
  "polka dots and moonbeams": {
-  "composer": "Burdge / Robinson",
-  "key": "Eb",
-  "seen_title": "PORTRAIT OF JENNIE",
-  "sig": "3 flats",
-  "last_chord": "Eb",
-  "page_mismatch": true
+  "composer": "Burke - Van Heusen",
+  "key": "G",
+  "seen_title": "Polka Dots And Moonbeams",
+  "sig": "1 sharp",
+  "last_chord": "F#7"
  },
  "portrait of jennie": {
   "composer": "Burdge-Robinson",
@@ -9020,12 +8862,11 @@
   "last_chord": "Cmaj9"
  },
  "quietnightsofquiet stars": {
-  "composer": "DANNY ZEITLIN",
-  "key": "Am",
-  "seen_title": "QUIET NOW",
+  "composer": "Antonio Carlos Jobim / Gene Lees",
+  "key": "C",
+  "seen_title": "QUIET NIGHTS OF QUIET STARS (CORCOVADO)",
   "sig": "none",
-  "last_chord": "Cmaj9",
-  "page_mismatch": true
+  "last_chord": "C6"
  },
  "rahsaan s run": {
   "composer": "WOODY SHAW",
@@ -9042,12 +8883,11 @@
   "last_chord": "D7"
  },
  "raven the": {
-  "composer": "STEVE KUHN",
-  "key": "Am",
-  "seen_title": "THE REAL GUITARIST (IN THE HOUSE)",
+  "composer": "K. Jarrett",
+  "key": "Dm",
+  "seen_title": "THE RAVEN",
   "sig": "2 sharps",
-  "last_chord": "A-",
-  "page_mismatch": true
+  "last_chord": "Dm"
  },
  "raven": {
   "composer": "Keith Jarrett",
@@ -9092,12 +8932,11 @@
   "last_chord": "Dmi"
  },
  "recorda me": {
-  "composer": "Freddie Hubbard",
-  "key": "Cm",
-  "seen_title": "RED CLAY",
-  "sig": "3 flats",
-  "last_chord": "G7sus4",
-  "page_mismatch": true
+  "composer": "Joe Henderson",
+  "key": "Am",
+  "seen_title": "RECORDA-ME",
+  "sig": "none",
+  "last_chord": "unknown"
  },
  "red clay": {
   "composer": "FREDDIE HUBBARD",
@@ -9107,12 +8946,11 @@
   "last_chord": "G7sus4"
  },
  "red cross": {
-  "composer": "DJALMA FERREIRA",
-  "key": "Dm",
-  "seen_title": "RECADO BOSSA NOVA",
+  "composer": "CHARLIE PARKER",
+  "key": "Bb",
+  "seen_title": "RED CROSS",
   "sig": "none",
-  "last_chord": "Dmi",
-  "page_mismatch": true
+  "last_chord": "unknown"
  },
  "red s good groove": {
   "composer": "Red Garland",
@@ -9207,7 +9045,7 @@
  },
  "ribbon in the sky": {
   "composer": "unknown",
-  "key": "Eb",
+  "key": "unknown",
   "seen_title": "unknown",
   "sig": "none",
   "last_chord": "Eb",
@@ -9249,12 +9087,11 @@
   "last_chord": "C6"
  },
  "river stay way from my door": {
-  "composer": "Russell Ferrante / Lorraine Perry",
-  "key": "G",
-  "seen_title": "REVELATION",
-  "sig": "1 sharp",
-  "last_chord": "D#o7",
-  "page_mismatch": true
+  "composer": "Mort Dixon / Harry Woods",
+  "key": "F",
+  "seen_title": "RIVER, STAY 'WAY FROM MY DOOR",
+  "sig": "1 flat",
+  "last_chord": "E-"
  },
  "rosewood": {
   "composer": "WOODY SHAW",
@@ -9272,10 +9109,10 @@
  },
  "round trip": {
   "composer": "Ornette Coleman",
-  "key": "D",
+  "key": "C",
   "seen_title": "Ramblin'",
   "sig": "none",
-  "last_chord": "unknown",
+  "last_chord": "D7",
   "page_mismatch": true
  },
  "round midnight": {
@@ -9321,12 +9158,11 @@
   "last_chord": "N.C."
  },
  "saga of harrison crabfeathers": {
-  "composer": "unknown",
-  "key": "Cm",
-  "seen_title": "unknown",
-  "sig": "none",
-  "last_chord": "A-7",
-  "page_mismatch": true
+  "composer": "Steve Kuhn",
+  "key": "Em",
+  "seen_title": "THE SAGA OF HARRISON CRABFEATHERS",
+  "sig": "1 sharp",
+  "last_chord": "C-7"
  },
  "saga of harrison crabpeathers": {
   "composer": "Steve Kuhn",
@@ -9371,12 +9207,11 @@
   "last_chord": "F-7"
  },
  "samba du bois": {
-  "composer": "CLIFFORD BROWN",
-  "key": "Eb",
-  "seen_title": "SANDU",
-  "sig": "3 flats",
-  "last_chord": "F7(#9)",
-  "page_mismatch": true
+  "composer": "Phil Woods",
+  "key": "Fm",
+  "seen_title": "Samba Du Bois",
+  "sig": "4 flats",
+  "last_chord": "GMaj7"
  },
  "sambacide": {
   "composer": "BILL DOBBINS",
@@ -9386,12 +9221,11 @@
   "last_chord": "FΔ 7#11"
  },
  "same shame": {
-  "composer": "Steve Kuhn",
-  "key": "Em",
-  "seen_title": "Saga of Harrison Crabfeathers",
-  "sig": "none",
-  "last_chord": "C-7",
-  "page_mismatch": true
+  "composer": "Bobby Hutcherson",
+  "key": "E",
+  "seen_title": "SAME SHAME",
+  "sig": "4 sharps",
+  "last_chord": "Bb+7"
  },
  "samba song": {
   "composer": "Chick Corea",
@@ -9457,12 +9291,11 @@
   "last_chord": "Eb"
  },
  "scene is clean": {
-  "composer": "Dizzy Gillespie / Gil Fuller",
-  "key": "Bb",
-  "seen_title": "MANTECA",
-  "sig": "2 flats",
-  "last_chord": "F7",
-  "page_mismatch": true
+  "composer": "Tadd Dameron",
+  "key": "Db",
+  "seen_title": "THE SCENE IS CLEAN",
+  "sig": "none",
+  "last_chord": "unknown"
  },
  "scotch n soda": {
   "composer": "GUARD",
@@ -9486,12 +9319,11 @@
   "last_chord": "C7sus"
  },
  "scotch and soda": {
-  "composer": "CHARLIE PARKER",
-  "key": "F",
-  "seen_title": "SCRAPPLE FROM THE APPLE",
-  "sig": "1 flat",
-  "last_chord": "unknown",
-  "page_mismatch": true
+  "composer": "DAVE GUARD",
+  "key": "Ab",
+  "seen_title": "SCOTCH AND SODA",
+  "sig": "4 flats",
+  "last_chord": "Eb7"
  },
  "sea journey": {
   "composer": "Chick Corea / Neville Potter",
@@ -9501,12 +9333,11 @@
   "last_chord": "Fmaj7"
  },
  "seabrook revisited": {
-  "composer": "MITCHELL PARISH / BOBBY SHERWOOD",
-  "key": "Eb",
-  "seen_title": "SECRET LOVE",
-  "sig": "3 flats",
-  "last_chord": "Ebmaj7",
-  "page_mismatch": true
+  "composer": "JACK ZUCKER",
+  "key": "A",
+  "seen_title": "SEABROOK REVISITED",
+  "sig": "3 sharps",
+  "last_chord": "BbΔ7#11"
  },
  "secret love": {
   "composer": "MITCHELL PARISH / BOBBY SHERWOOD",
@@ -9523,12 +9354,11 @@
   "last_chord": "Db6/9"
  },
  "self portrait in 3 colors": {
-  "composer": "P.S.",
-  "key": "C",
-  "seen_title": "Sea Journey",
-  "sig": "none",
-  "last_chord": "unknown",
-  "page_mismatch": true
+  "composer": "Charles Mingus",
+  "key": "Cm",
+  "seen_title": "SELF PORTRAIT IN 3 COLORS",
+  "sig": "3 flats",
+  "last_chord": "Bb-7"
  },
  "senor mouse": {
   "composer": "CHICK COREA",
@@ -9552,20 +9382,18 @@
   "last_chord": "Eb"
  },
  "september song": {
-  "composer": "Sonny Rollins",
+  "composer": "K. Weill",
   "key": "C",
-  "seen_title": "ST. THOMAS",
+  "seen_title": "SEPTEMBER SONG",
   "sig": "none",
-  "last_chord": "Ab7(#11)",
-  "page_mismatch": true
+  "last_chord": "unknown"
  },
  "semblence": {
-  "composer": "unknown",
-  "key": "Fm",
-  "seen_title": "SEÑOR MOUSE",
-  "sig": "4 flats",
-  "last_chord": "C-",
-  "page_mismatch": true
+  "composer": "Keith Jarrett",
+  "key": "Am",
+  "seen_title": "Semblence",
+  "sig": "none",
+  "last_chord": "Eb7"
  },
  "serenade to a bus beat": {
   "composer": "CLARK TERRY",
@@ -9582,12 +9410,11 @@
   "last_chord": "Fm"
  },
  "serenade to a soul sister": {
-  "composer": "ERIC DOLPHY",
-  "key": "C",
-  "seen_title": "SEVENTEEN WEST",
-  "sig": "none",
-  "last_chord": "A7",
-  "page_mismatch": true
+  "composer": "H. Silver",
+  "key": "Fm",
+  "seen_title": "SERENADE TO A SOUL SISTER",
+  "sig": "4 flats",
+  "last_chord": "E7(#9)"
  },
  "serengeti walk": {
   "composer": "David Grusin / Louis Johnson / Harvey Mason",
@@ -9691,12 +9518,11 @@
   "last_chord": "unknown"
  },
  "shiny stockings": {
-  "composer": "John Coltrane",
-  "key": "F",
-  "seen_title": "SOME OTHER BLUES",
-  "sig": "1 flat",
-  "last_chord": "G+7",
-  "page_mismatch": true
+  "composer": "F. Foster",
+  "key": "Ab",
+  "seen_title": "SHINY STOCKINGS",
+  "sig": "4 flats",
+  "last_chord": "unknown"
  },
  "shivers": {
   "composer": "Lionel Hampton / Charlie Christian",

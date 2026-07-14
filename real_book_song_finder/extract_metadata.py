@@ -138,7 +138,7 @@ def ask_page(client: anthropic.Anthropic, books: dict,
     top, bottom = render_crops(books, book_id, pdf_page)
     resp = client.messages.create(
         model=MODEL,
-        max_tokens=300,
+        max_tokens=2000,  # Sonnet thinks before answering; 300 truncated replies to nothing
         messages=[{
             "role": "user",
             "content": [_img_block(top), _img_block(bottom),
@@ -180,6 +180,8 @@ def main() -> None:
     ap.add_argument("--redo", action="store_true", help="reprocess everything, ignoring metadata.json")
     ap.add_argument("--upgrade", action="store_true",
                     help="reprocess only songs still carrying old-method data (no 'sig' field)")
+    ap.add_argument("--mismatch", action="store_true",
+                    help="reprocess only songs currently flagged page_mismatch")
     args = ap.parse_args()
 
     load_dotenv(APP_DIR.parent / ".env")
@@ -194,6 +196,8 @@ def main() -> None:
         todo = [s for s in db["songs"] if args.only.lower() in s["id"]]
     elif args.upgrade:
         todo = [s for s in db["songs"] if "sig" not in meta.get(s["id"], {})]
+    elif args.mismatch:
+        todo = [s for s in db["songs"] if meta.get(s["id"], {}).get("page_mismatch")]
     elif args.redo:
         todo = db["songs"]
     else:
