@@ -117,6 +117,20 @@
     padding: 1px 6px; font-size: 12px;
   }
   #spinner { display: none; color: var(--accent); margin-top: 10vh; font-size: 15px; }
+
+  @media print {
+    body * { visibility: hidden; }
+    #viewer, #viewer * { visibility: visible; }
+    #viewer {
+      position: absolute; top: 0; left: 0; width: 100%; height: auto;
+      background: #fff; padding: 0; overflow: visible; display: block;
+    }
+    #welcome, #spinner { display: none !important; }
+    #pageImg {
+      display: block !important; box-shadow: none; border-radius: 0;
+      width: 100% !important; max-width: 100%; margin: 0;
+    }
+  }
 </style>
 </head>
 <body>
@@ -158,6 +172,7 @@
         <button id="prevPg" title="Previous page (&larr;)">&#9664;</button>
         <span id="pageLabel"></span>
         <button id="nextPg" title="Next page (&rarr;)">&#9654;</button>
+        <button id="printBtn" title="Print this page (Ctrl+P)">&#128438; Print</button>
       </span>
     </div>
     <div id="viewer">
@@ -389,6 +404,7 @@ function zoomFit() { if (!cur) return; cur.zoom = 0; applyZoom(); }
 $("zoomIn").onclick = zoomIn;
 $("zoomOut").onclick = zoomOut;
 $("zoomFit").onclick = zoomFit;
+$("printBtn").onclick = () => { if (cur) window.print(); };
 $("randomBtn").onclick = () => {
   // respect active filters: pick a random song from the current list
   const pool = filtered.length ? filtered : songs;
