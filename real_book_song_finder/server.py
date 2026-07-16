@@ -9,8 +9,10 @@ Multi-device use:  python server.py --lan   (reachable from other devices
                     access token printed on first run)
 """
 import argparse
+import datetime
 import json
 import logging
+import os
 import secrets
 import threading
 import webbrowser
@@ -21,7 +23,8 @@ import pymupdf
 from flask import (Flask, abort, jsonify, redirect, request,
                     send_from_directory, session, Response)
 
-BOOKS_DIR = Path(r"C:\Users\stats\OneDrive\Desktop\Jazz Night School\Real_Books")
+BOOKS_DIR = Path(os.environ.get(
+    "BOOKS_DIR", r"C:\Users\stats\OneDrive\Desktop\Jazz Night School\Real_Books"))
 APP_DIR = Path(__file__).parent
 PORT = 8765
 RENDER_DPI = 170
@@ -61,9 +64,46 @@ def _load_or_create(path: Path) -> str:
 
 SECRET_PATH = APP_DIR / "data" / ".session_secret"
 TOKEN_PATH = APP_DIR / "data" / ".access_token"
-app.secret_key = _load_or_create(SECRET_PATH)
-ACCESS_TOKEN = _load_or_create(TOKEN_PATH)
-REQUIRE_AUTH = False  # flipped on by --lan
+# In the cloud these come from env vars (Modal secret); locally from files.
+app.secret_key = os.environ.get("SESSION_SECRET") or _load_or_create(SECRET_PATH)
+ACCESS_TOKEN = os.environ.get("ACCESS_TOKEN") or _load_or_create(TOKEN_PATH)
+# Flipped on by --lan locally, or REQUIRE_AUTH=1 env var in the cloud
+# (the __main__ block never runs under a WSGI host).
+REQUIRE_AUTH = os.environ.get("REQUIRE_AUTH") == "1"
+app.permanent_session_lifetime = datetime.timedelta(days=90)
+
+_LOGIN_PAGE = """<!doctype html><html><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Real Book Song Finder</title>
+<style>
+  body {{ background:#14161c; color:#e8e6e3; font-family:system-ui,sans-serif;
+         display:flex; align-items:center; justify-content:center;
+         min-height:100vh; margin:0; }}
+  form {{ background:#1d2027; padding:2.2rem 2.6rem; border-radius:12px;
+         text-align:center; box-shadow:0 8px 30px rgba(0,0,0,.45); }}
+  h1 {{ font-size:1.25rem; margin:0 0 1.2rem; }}
+  h1 span {{ color:#e8b849; }}
+  input {{ font-size:1.05rem; padding:.55rem .8rem; border-radius:8px;
+          border:1px solid #3a3f4b; background:#14161c; color:#e8e6e3;
+          width:14rem; }}
+  button {{ font-size:1.05rem; padding:.55rem 1.3rem; margin-left:.4rem;
+           border-radius:8px; border:0; background:#e8b849; color:#14161c;
+           font-weight:600; cursor:pointer; }}
+  .err {{ color:#e46f6f; margin-top:.9rem; font-size:.95rem; }}
+</style></head><body>
+<form method="post" action="/login">
+  <h1>&#119070; Real Book <span>Song Finder</span></h1>
+  <input type="password" name="password" placeholder="Password"
+         autofocus autocomplete="current-password">
+  <button type="submit">Enter</button>
+  {error}
+</form></body></html>"""
+
+
+def _login_page(error: str = "") -> Response:
+    err = f'<div class="err">{error}</div>' if error else ""
+    return Response(_LOGIN_PAGE.format(error=err), mimetype="text/html")
 
 
 def auth_required(view):
@@ -79,8 +119,28 @@ def auth_required(view):
             if request.path == "/":
                 return redirect("/")
             return view(*args, **kwargs)
+        # Browsers hitting the app root get a login form; API calls get 403.
+        if request.path == "/":
+            return _login_page()
         abort(403, "missing or invalid access key")
     return wrapped
+
+
+@app.route("/login", methods=["POST"])
+def login() -> Response:
+    password = request.form.get("password", "")
+    if password and secrets.compare_digest(password, ACCESS_TOKEN):
+        session["authed"] = True
+        session.permanent = True
+        return redirect("/")
+    return _login_page("Wrong password — try again.")
+
+
+@app.after_request
+def _noindex(resp: Response) -> Response:
+    if REQUIRE_AUTH:
+        resp.headers["X-Robots-Tag"] = "noindex, nofollow"
+    return resp
 
 
 def get_doc(book_id: str) -> pymupdf.Document:
@@ -143,7 +203,7 @@ def parse_args() -> argparse.Namespace:
 
 if __name__ == "__main__":
     args = parse_args()
-    REQUIRE_AUTH = args.lan
+    REQUIRE_AUTH = args.lan or REQUIRE_AUTH
     host = "0.0.0.0" if args.lan else "127.0.0.1"
 
     logger.info("Real Book Song Finder: %d songs, %d books",
