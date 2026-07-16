@@ -2,6 +2,9 @@
 data/.access_token
 data/.session_secret
 
+# Word docs (the user guide contains the app password)
+*.docx
+
 # Python
 __pycache__/
 *.pyc

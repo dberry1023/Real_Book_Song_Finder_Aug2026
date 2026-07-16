@@ -10,7 +10,23 @@ displays the sheet music instantly in your browser.
 > Start link below embeds an access token, so treat repo access the same
 > as you'd treat a password.
 
-## 🚀 Quick start — open the app right now
+## ☁️ Hosted version (Modal) — use it from anywhere
+
+Since July 2026 the app is also deployed privately on
+[Modal](https://modal.com):
+
+- **URL**: `https://statsias--real-book-finder-web.modal.run`
+- Every route is password-protected (login page; sessions last 90 days);
+  the password lives in the Modal secret `realbook-auth`, never in this repo.
+- The 7 PDFs live in the private Modal volume `real-books` — not in this
+  repo, not in the container image.
+- Redeploy after code changes: `python -m modal deploy modal_app.py`
+
+See **[TECHNICAL.md](TECHNICAL.md)** for the full architecture writeup
+(what changed in `server.py`, how the Modal image/volume/secret fit
+together, operations, and cost).
+
+## 🚀 Quick start — open the app right now (Tailscale, optional)
 
 Once Tailscale is set up on this PC and your device (one-time, see
 [below](#using-it-from-other-devices-tailscale)), your personal link is:
