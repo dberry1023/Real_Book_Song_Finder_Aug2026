@@ -135,7 +135,8 @@
   }
   .libRow .lbl { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
   .libStatus { font-size: 11px; color: var(--dim); flex: 0 0 auto; }
-  .libStatus.pending { color: var(--accent); }
+  .libStatus.pending, .libStatus.indexing { color: var(--accent); }
+  .libStatus.failed { color: #e46f6f; }
   #libMsg { font-size: 13px; color: var(--accent); margin: 10px 0 4px; min-height: 18px; }
   #libActions { display: flex; gap: 8px; margin-top: 12px; align-items: center; }
   #libEmpty { color: var(--dim); font-size: 14px; padding: 12px 0; }
@@ -500,12 +501,28 @@ fetch("/api/songs").then(r => r.json()).then(db => {
 // ---------- My Books panel (multi-user mode) ----------
 function libStatusText(b) {
   if (b.status === "indexed") return `${b.songs} songs`;
+  if (b.status === "indexing") return "indexing…";
+  if (b.status === "failed") return "failed: " + (b.error || "unknown reason");
   return "awaiting indexing";
+}
+
+let libPoll = null;
+function pollLibraryIfBusy(books) {
+  const busy = books.some(b => b.status === "indexing");
+  if (busy && !libPoll) {
+    libPoll = setInterval(() => {
+      if ($("libOverlay").classList.contains("open")) loadLibrary();
+      else { clearInterval(libPoll); libPoll = null; }
+    }, 4000);
+  } else if (!busy && libPoll) {
+    clearInterval(libPoll); libPoll = null;
+  }
 }
 
 async function loadLibrary() {
   const r = await fetch("/api/books");
   const d = await r.json();
+  pollLibraryIfBusy(d.books);
   const list = $("libList");
   list.innerHTML = "";
   if (!d.books.length) {

@@ -38,10 +38,19 @@ USER_DATA_ROOT = Path(os.environ.get("USER_DATA_ROOT", str(APP_DIR / "data" / "u
 SIGNUP_CODE = os.environ.get("SIGNUP_CODE")  # optional invite code for beta
 
 if MULTI_USER:
+    import index_book
     import library
     import multiuser
 
     multiuser.init_db(USERS_DB)
+    try:  # local dev convenience; deployments set real env vars
+        from dotenv import load_dotenv
+        load_dotenv(APP_DIR.parent / ".env")
+    except ImportError:
+        pass
+
+# Automatic indexing of unknown books needs a Claude API key.
+INDEXING_ENABLED = MULTI_USER and bool(os.environ.get("ANTHROPIC_API_KEY"))
 
 logging.basicConfig(level=logging.INFO,
                     format="%(asctime)s - %(levelname)s - %(message)s")
@@ -259,20 +268,63 @@ def logout() -> Response:
 # --------------------------------------------------------------------------
 # "Load My Books" library management (multi-user mode only)
 # --------------------------------------------------------------------------
+_lib_lock = threading.Lock()  # serializes manifest/index writes per process
+
+
+def _update_manifest_entry(d: Path, digest: str, **fields) -> None:
+    with _lib_lock:
+        manifest = library.load_manifest(d)
+        for e in manifest:
+            if e["sha256"] == digest:
+                e.update(fields)
+        library.save_manifest(d, manifest)
+
+
+def _index_worker(uid: int, digest: str, pdf_name: str, label: str) -> None:
+    """Background indexing of an unknown book (runs in a daemon thread).
+
+    Note for the Modal deployment: threads don't survive scale-to-zero, so
+    there this should become a spawned Modal function (deploy-time change).
+    """
+    d = user_dir(uid)
+    try:
+        result = index_book.build_index(
+            d / "books" / pdf_name, library.custom_book_key(digest), label)
+        idx_path = library.custom_index_path(d, digest)
+        idx_path.parent.mkdir(parents=True, exist_ok=True)
+        idx_path.write_text(json.dumps(result), encoding="utf-8")
+        _update_manifest_entry(d, digest, status="indexed",
+                               book_id=library.custom_book_key(digest))
+        logger.info("indexed custom book %s for user %d: %d songs",
+                    label, uid, len(result["songs"]))
+    except index_book.IndexingError as e:
+        _update_manifest_entry(d, digest, status="failed", error=str(e))
+        logger.warning("indexing failed for user %d book %s: %s", uid, label, e)
+    except Exception:
+        logger.exception("unexpected indexing failure (user %d, %s)", uid, label)
+        _update_manifest_entry(d, digest, status="failed",
+                               error="Unexpected error during indexing.")
+    with _lib_lock:
+        library.rebuild_index(d, DB)
+    _user_dbs.pop(uid, None)
+
+
 @app.route("/api/books")
 @auth_required
 def list_books() -> Response:
     if not MULTI_USER:
         abort(404)
     d = user_dir(session["user_id"])
-    manifest = library.load_manifest(d)
+    with _lib_lock:
+        manifest = library.load_manifest(d)
     counts: dict[str, int] = {}
     for s in get_db()["songs"]:
         for book in {src["book"] for src in s["sources"]}:
             counts[book] = counts.get(book, 0) + 1
     return jsonify({"books": [
         {"sha256": e["sha256"], "label": e["label"], "status": e["status"],
-         "songs": counts.get(e.get("book_id"), 0)}
+         "songs": counts.get(e.get("book_id"), 0),
+         "error": e.get("error", "")}
         for e in manifest
     ]})
 
@@ -302,7 +354,8 @@ def upload_book() -> Response:
             abort(400, "That PDF could not be opened.")
         if pages < 1:
             abort(400, "That PDF has no pages.")
-        entry, err = library.add_upload(d, tmp, f.filename, DB)
+        with _lib_lock:
+            entry, err = library.add_upload(d, tmp, f.filename, DB)
         if err:
             abort(409, err)
     finally:
@@ -310,6 +363,16 @@ def upload_book() -> Response:
     _user_dbs.pop(uid, None)
     if entry["status"] == "indexed":
         msg = f"Recognized “{entry['label']}” — indexed instantly."
+    elif INDEXING_ENABLED:
+        _update_manifest_entry(d, entry["sha256"], status="indexing")
+        entry["status"] = "indexing"
+        threading.Thread(
+            target=_index_worker,
+            args=(uid, entry["sha256"], entry["pdf"], entry["label"]),
+            daemon=True,
+        ).start()
+        msg = ("Saved — building this book's index now. This usually takes "
+               "a minute or two; the list below will update when it's done.")
     else:
         msg = ("Saved. Automatic indexing for new books is coming soon — "
                "this book will appear in search once it's indexed.")
@@ -334,7 +397,8 @@ def remove_book(digest: str) -> Response:
     if doc is not None:
         doc.close()
     render_png.cache_clear()
-    library.delete_book(d, digest, DB)
+    with _lib_lock:
+        library.delete_book(d, digest, DB)
     _user_dbs.pop(uid, None)
     return jsonify({"deleted": True})
 

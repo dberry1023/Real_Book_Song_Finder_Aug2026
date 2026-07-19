@@ -55,23 +55,54 @@ def save_manifest(user_dir: Path, manifest: list[dict]) -> None:
         json.dumps(manifest, indent=1), encoding="utf-8")
 
 
+def custom_book_key(digest: str) -> str:
+    """Book id for a user-indexed (non-standard) book."""
+    return "u_" + digest[:8]
+
+
+def custom_index_path(user_dir: Path, digest: str) -> Path:
+    return user_dir / "indexes" / f"{digest}.json"
+
+
 def rebuild_index(user_dir: Path, master_db: dict) -> None:
     """Write the user's songs.json from their manifest's indexed books.
 
-    Songs come from the master index restricted to books the user owns
-    (master DB songs already carry merged composer/key metadata).
+    Known books come from the master index (whose songs already carry
+    merged composer/key metadata); custom books come from their own
+    per-book index files written by the indexing pipeline.
     """
-    owned = {e["book_id"] for e in load_manifest(user_dir)
+    manifest = load_manifest(user_dir)
+    owned = {e["book_id"] for e in manifest
              if e.get("book_id") and e.get("status") == "indexed"}
     books = {bid: master_db["books"][bid] for bid in owned
              if bid in master_db["books"]}
-    songs = []
+    merged: dict[str, dict] = {}
     for s in master_db["songs"]:
         sources = [src for src in s["sources"] if src["book"] in owned]
         if sources:
             entry = {k: v for k, v in s.items() if k != "sources"}
             entry["sources"] = sources
-            songs.append(entry)
+            merged[s["id"]] = entry
+
+    # merge in the user's custom-indexed books
+    for e in manifest:
+        bid = e.get("book_id") or ""
+        if e.get("status") != "indexed" or not bid.startswith("u_"):
+            continue
+        idx_path = custom_index_path(user_dir, e["sha256"])
+        if not idx_path.exists():
+            continue
+        idx = json.loads(idx_path.read_text(encoding="utf-8"))
+        books[bid] = idx["book"]
+        for s in idx["songs"]:
+            if s["id"] in merged:
+                existing = merged[s["id"]]["sources"]
+                existing.extend(src for src in s["sources"]
+                                if src not in existing)
+            else:
+                merged[s["id"]] = {k: v for k, v in s.items()}
+
+    songs = sorted(merged.values(), key=lambda s: s["id"])
     user_dir.mkdir(parents=True, exist_ok=True)
     (user_dir / "songs.json").write_text(
         json.dumps({"books": books, "songs": songs}), encoding="utf-8")
@@ -133,6 +164,7 @@ def delete_book(user_dir: Path, digest: str, master_db: dict) -> bool:
     pdf_path = user_dir / "books" / entry["pdf"]
     if pdf_path.exists():
         pdf_path.unlink()
+    custom_index_path(user_dir, digest).unlink(missing_ok=True)
     manifest.remove(entry)
     save_manifest(user_dir, manifest)
     rebuild_index(user_dir, master_db)
