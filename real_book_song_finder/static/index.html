@@ -118,6 +118,28 @@
   }
   #spinner { display: none; color: var(--accent); margin-top: 10vh; font-size: 15px; }
 
+  /* ---------- My Books panel ---------- */
+  #libOverlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,.65);
+    display: none; align-items: center; justify-content: center; z-index: 50;
+  }
+  #libOverlay.open { display: flex; }
+  #libPanel {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 12px;
+    width: min(560px, 92vw); max-height: 80vh; overflow: auto; padding: 18px 22px;
+  }
+  #libPanel h2 { font-size: 17px; margin-bottom: 10px; }
+  .libRow {
+    display: flex; align-items: center; gap: 10px; padding: 9px 0;
+    border-bottom: 1px solid var(--border); font-size: 14px;
+  }
+  .libRow .lbl { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+  .libStatus { font-size: 11px; color: var(--dim); flex: 0 0 auto; }
+  .libStatus.pending { color: var(--accent); }
+  #libMsg { font-size: 13px; color: var(--accent); margin: 10px 0 4px; min-height: 18px; }
+  #libActions { display: flex; gap: 8px; margin-top: 12px; align-items: center; }
+  #libEmpty { color: var(--dim); font-size: 14px; padding: 12px 0; }
+
   @media print {
     @page { margin: 0.25in; }
     header, #sidebar, #toolbar, #welcome, #spinner { display: none !important; }
@@ -141,10 +163,25 @@
   <span class="stats" id="stats"></span>
   <span class="spacer"></span>
   <button id="randomBtn" title="Open a random song">&#127922; Random song</button>
+  <button id="libBtn" style="display:none" title="Manage your book library">&#128218; My Books</button>
   <form id="logoutForm" method="post" action="/logout" style="display:none;margin:0">
     <button id="logoutBtn" title="Sign out of your account">Sign out</button>
   </form>
 </header>
+
+<div id="libOverlay">
+  <div id="libPanel">
+    <h2>&#128218; My Books</h2>
+    <div id="libList"></div>
+    <div id="libMsg"></div>
+    <div id="libActions">
+      <input type="file" id="libFile" accept=".pdf,application/pdf" style="display:none">
+      <button id="libUpload">&#8679; Load a book (PDF)</button>
+      <span class="spacer" style="flex:1"></span>
+      <button id="libClose">Close</button>
+    </div>
+  </div>
+</div>
 
 <div id="layout">
   <div id="sidebar">
@@ -443,21 +480,87 @@ fetch("/api/songs").then(r => r.json()).then(db => {
   $("stats").textContent =
     `${songs.length} songs · ${nSrc} charts · ${nBooks} book${nBooks === 1 ? "" : "s"}`;
   if (db.user) {
-    // Multi-user mode: show who is signed in and a sign-out button.
+    // Multi-user mode: show who is signed in, sign-out and library buttons.
     $("logoutForm").style.display = "inline";
     $("logoutBtn").title = `Sign out (${db.user.email})`;
+    $("libBtn").style.display = "inline-block";
   }
-  if (songs.length === 0) {
+  if (songs.length === 0 && db.user) {
     $("welcome").innerHTML =
       `<div class="big">&#127927;</div>
        Your library is empty.<br>
-       The <b>Load My Books</b> feature is coming soon &mdash; it will let you
-       upload your own Real Book PDFs<br>and build your personal searchable index.`;
+       Click <b>&#128218; My Books</b> in the top-right corner to upload
+       your own Real Book PDFs<br>and build your personal searchable index.`;
     $("stats").textContent = "No books loaded yet";
   }
   buildFilterControls();
   applyFilter();
 });
+
+// ---------- My Books panel (multi-user mode) ----------
+function libStatusText(b) {
+  if (b.status === "indexed") return `${b.songs} songs`;
+  return "awaiting indexing";
+}
+
+async function loadLibrary() {
+  const r = await fetch("/api/books");
+  const d = await r.json();
+  const list = $("libList");
+  list.innerHTML = "";
+  if (!d.books.length) {
+    list.innerHTML = `<div id="libEmpty">No books yet — upload your first
+      Real Book PDF below. Standard Real Books are recognized and indexed
+      instantly.</div>`;
+    return;
+  }
+  for (const b of d.books) {
+    const row = document.createElement("div");
+    row.className = "libRow";
+    row.innerHTML =
+      `<span class="lbl"></span>
+       <span class="libStatus ${b.status}"></span>
+       <button class="libDel" title="Remove this book">&times;</button>`;
+    row.querySelector(".lbl").textContent = b.label;
+    row.querySelector(".libStatus").textContent = libStatusText(b);
+    row.querySelector(".libDel").onclick = async () => {
+      if (!confirm(`Remove “${b.label}” from your library?`)) return;
+      await fetch(`/api/books/${b.sha256}`, { method: "DELETE" });
+      location.reload();
+    };
+    list.appendChild(row);
+  }
+}
+
+$("libBtn").onclick = () => { $("libOverlay").classList.add("open"); $("libMsg").textContent = ""; loadLibrary(); };
+$("libClose").onclick = () => { $("libOverlay").classList.remove("open"); location.reload(); };
+$("libOverlay").onclick = e => { if (e.target === $("libOverlay")) $("libClose").onclick(); };
+$("libUpload").onclick = () => $("libFile").click();
+$("libFile").onchange = async () => {
+  const file = $("libFile").files[0];
+  if (!file) return;
+  $("libMsg").textContent = `Uploading “${file.name}”… (large books can take a minute)`;
+  $("libUpload").disabled = true;
+  try {
+    const fd = new FormData();
+    fd.append("file", file);
+    const r = await fetch("/api/books/upload", { method: "POST", body: fd });
+    if (r.ok) {
+      const d = await r.json();
+      $("libMsg").textContent = d.message;
+      loadLibrary();
+    } else {
+      const text = await r.text();
+      const m = text.match(/<p>([^<]+)<\/p>/);
+      $("libMsg").textContent = "Upload failed: " + (m ? m[1] : r.statusText);
+    }
+  } catch (err) {
+    $("libMsg").textContent = "Upload failed: " + err;
+  } finally {
+    $("libUpload").disabled = false;
+    $("libFile").value = "";
+  }
+};
 </script>
 </body>
 </html>

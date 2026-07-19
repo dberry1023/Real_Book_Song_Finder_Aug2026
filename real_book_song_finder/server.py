@@ -38,6 +38,7 @@ USER_DATA_ROOT = Path(os.environ.get("USER_DATA_ROOT", str(APP_DIR / "data" / "u
 SIGNUP_CODE = os.environ.get("SIGNUP_CODE")  # optional invite code for beta
 
 if MULTI_USER:
+    import library
     import multiuser
 
     multiuser.init_db(USERS_DB)
@@ -47,6 +48,8 @@ logging.basicConfig(level=logging.INFO,
 logger = logging.getLogger("song_finder")
 
 app = Flask(__name__, static_folder=str(APP_DIR / "static"))
+if MULTI_USER:
+    app.config["MAX_CONTENT_LENGTH"] = library.MAX_UPLOAD_BYTES
 
 def _load_db(songs_path: Path, meta_path: Path) -> dict:
     """Load a song index and merge composer/key metadata if present."""
@@ -251,6 +254,89 @@ def signup() -> Response:
 def logout() -> Response:
     session.clear()
     return redirect("/")
+
+
+# --------------------------------------------------------------------------
+# "Load My Books" library management (multi-user mode only)
+# --------------------------------------------------------------------------
+@app.route("/api/books")
+@auth_required
+def list_books() -> Response:
+    if not MULTI_USER:
+        abort(404)
+    d = user_dir(session["user_id"])
+    manifest = library.load_manifest(d)
+    counts: dict[str, int] = {}
+    for s in get_db()["songs"]:
+        for book in {src["book"] for src in s["sources"]}:
+            counts[book] = counts.get(book, 0) + 1
+    return jsonify({"books": [
+        {"sha256": e["sha256"], "label": e["label"], "status": e["status"],
+         "songs": counts.get(e.get("book_id"), 0)}
+        for e in manifest
+    ]})
+
+
+@app.route("/api/books/upload", methods=["POST"])
+@auth_required
+def upload_book() -> Response:
+    if not MULTI_USER:
+        abort(404)
+    f = request.files.get("file")
+    if f is None or not f.filename:
+        abort(400, "no file uploaded")
+    uid = session["user_id"]
+    d = user_dir(uid)
+    tmp = d / "books" / ".upload.tmp"
+    tmp.parent.mkdir(parents=True, exist_ok=True)
+    f.save(tmp)
+    try:
+        with open(tmp, "rb") as fh:
+            if fh.read(5) != b"%PDF-":
+                abort(400, "That file is not a PDF.")
+        try:
+            doc = pymupdf.open(str(tmp))
+            pages = doc.page_count
+            doc.close()
+        except Exception:
+            abort(400, "That PDF could not be opened.")
+        if pages < 1:
+            abort(400, "That PDF has no pages.")
+        entry, err = library.add_upload(d, tmp, f.filename, DB)
+        if err:
+            abort(409, err)
+    finally:
+        tmp.unlink(missing_ok=True)
+    _user_dbs.pop(uid, None)
+    if entry["status"] == "indexed":
+        msg = f"Recognized “{entry['label']}” — indexed instantly."
+    else:
+        msg = ("Saved. Automatic indexing for new books is coming soon — "
+               "this book will appear in search once it's indexed.")
+    return jsonify({**entry, "message": msg})
+
+
+@app.route("/api/books/<digest>", methods=["DELETE"])
+@auth_required
+def remove_book(digest: str) -> Response:
+    if not MULTI_USER:
+        abort(404)
+    uid = session["user_id"]
+    d = user_dir(uid)
+    entry = next((e for e in library.load_manifest(d)
+                  if e["sha256"] == digest), None)
+    if entry is None:
+        abort(404, "book not found")
+    # Close any open PyMuPDF handle so Windows lets us delete the file,
+    # and drop rendered pages so a future same-named upload can't serve
+    # stale images.
+    doc = _docs.pop(str(d / "books" / entry["pdf"]), None)
+    if doc is not None:
+        doc.close()
+    render_png.cache_clear()
+    library.delete_book(d, digest, DB)
+    _user_dbs.pop(uid, None)
+    return jsonify({"deleted": True})
 
 
 @app.after_request
