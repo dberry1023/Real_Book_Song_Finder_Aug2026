@@ -5,6 +5,10 @@ data/.session_secret
 # Word docs (the user guide contains the app password)
 *.docx
 
+# Multi-user mode data - accounts and per-user book libraries
+data/users.db
+data/users/
+
 # Python
 __pycache__/
 *.pyc

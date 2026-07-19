@@ -141,6 +141,9 @@
   <span class="stats" id="stats"></span>
   <span class="spacer"></span>
   <button id="randomBtn" title="Open a random song">&#127922; Random song</button>
+  <form id="logoutForm" method="post" action="/logout" style="display:none;margin:0">
+    <button id="logoutBtn" title="Sign out of your account">Sign out</button>
+  </form>
 </header>
 
 <div id="layout">
@@ -301,7 +304,7 @@ function renderList() {
     div.className = "item" + (s.id === selId ? " sel" : "");
     div.dataset.id = s.id;
     const badges = s.sources.map(x =>
-      `<span class="badge b-${x.book}">${BOOK_SHORT[x.book]}</span>`).join("");
+      `<span class="badge b-${x.book}">${BOOK_SHORT[x.book] || x.book.toUpperCase()}</span>`).join("");
     div.innerHTML = `<span class="tw"><span class="t"></span><span class="sub"></span></span>${badges}`;
     div.querySelector(".t").textContent = s.title;
     const bits = [];
@@ -358,7 +361,7 @@ function loadPage() {
   img.src = `/api/page/${src.book}/${pdfPage}`;
   const printedNow = src.printed + (pdfPage - src.pdf_page);
   $("pageLabel").textContent =
-    `${BOOK_SHORT[src.book]} — page ${printedNow}`;
+    `${BOOK_SHORT[src.book] || src.book.toUpperCase()} — page ${printedNow}`;
   $("prevPg").disabled = pdfPage <= 1;
   $("nextPg").disabled = pdfPage >= DB.books[src.book].pages;
 }
@@ -436,7 +439,22 @@ fetch("/api/songs").then(r => r.json()).then(db => {
     s._c = norm(s.composer || "");
   });
   const nSrc = songs.reduce((a, s) => a + s.sources.length, 0);
-  $("stats").textContent = `${songs.length} songs · ${nSrc} charts · 7 books`;
+  const nBooks = Object.keys(db.books).length;
+  $("stats").textContent =
+    `${songs.length} songs · ${nSrc} charts · ${nBooks} book${nBooks === 1 ? "" : "s"}`;
+  if (db.user) {
+    // Multi-user mode: show who is signed in and a sign-out button.
+    $("logoutForm").style.display = "inline";
+    $("logoutBtn").title = `Sign out (${db.user.email})`;
+  }
+  if (songs.length === 0) {
+    $("welcome").innerHTML =
+      `<div class="big">&#127927;</div>
+       Your library is empty.<br>
+       The <b>Load My Books</b> feature is coming soon &mdash; it will let you
+       upload your own Real Book PDFs<br>and build your personal searchable index.`;
+    $("stats").textContent = "No books loaded yet";
+  }
   buildFilterControls();
   applyFilter();
 });

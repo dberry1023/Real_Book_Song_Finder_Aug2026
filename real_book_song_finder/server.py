@@ -29,23 +29,65 @@ APP_DIR = Path(__file__).parent
 PORT = 8765
 RENDER_DPI = 170
 
+# Multi-user cloud mode (MULTI_USER=1): individual email+password accounts
+# instead of the single shared password, and a private book library per user.
+# Off by default, so local mode and the single-password deployment are untouched.
+MULTI_USER = os.environ.get("MULTI_USER") == "1"
+USERS_DB = Path(os.environ.get("USERS_DB", str(APP_DIR / "data" / "users.db")))
+USER_DATA_ROOT = Path(os.environ.get("USER_DATA_ROOT", str(APP_DIR / "data" / "users")))
+SIGNUP_CODE = os.environ.get("SIGNUP_CODE")  # optional invite code for beta
+
+if MULTI_USER:
+    import multiuser
+
+    multiuser.init_db(USERS_DB)
+
 logging.basicConfig(level=logging.INFO,
                     format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger("song_finder")
 
 app = Flask(__name__, static_folder=str(APP_DIR / "static"))
 
-DB = json.loads((APP_DIR / "data" / "songs.json").read_text(encoding="utf-8"))
+def _load_db(songs_path: Path, meta_path: Path) -> dict:
+    """Load a song index and merge composer/key metadata if present."""
+    if not songs_path.exists():
+        return {"books": {}, "songs": []}
+    db = json.loads(songs_path.read_text(encoding="utf-8"))
+    if meta_path.exists():
+        meta = json.loads(meta_path.read_text(encoding="utf-8"))
+        for s in db["songs"]:
+            m = meta.get(s["id"])
+            if m and not m.get("page_mismatch"):
+                s["composer"] = m.get("composer", "unknown")
+                s["key"] = m.get("key", "unknown")
+    return db
 
-# Merge composer/key metadata (built by extract_metadata.py) if present.
-_META_PATH = APP_DIR / "data" / "metadata.json"
-if _META_PATH.exists():
-    _meta = json.loads(_META_PATH.read_text(encoding="utf-8"))
-    for _s in DB["songs"]:
-        _m = _meta.get(_s["id"])
-        if _m and not _m.get("page_mismatch"):
-            _s["composer"] = _m.get("composer", "unknown")
-            _s["key"] = _m.get("key", "unknown")
+
+DB = _load_db(APP_DIR / "data" / "songs.json", APP_DIR / "data" / "metadata.json")
+
+# Per-user indexes, loaded lazily in multi-user mode (keyed by user id).
+_user_dbs: dict[int, dict] = {}
+
+
+def user_dir(uid: int) -> Path:
+    return USER_DATA_ROOT / str(uid)
+
+
+def get_db() -> dict:
+    """The song index for the current request (shared, or the user's own)."""
+    if not MULTI_USER:
+        return DB
+    uid = session["user_id"]
+    if uid not in _user_dbs:
+        d = user_dir(uid)
+        _user_dbs[uid] = _load_db(d / "songs.json", d / "metadata.json")
+    return _user_dbs[uid]
+
+
+def get_books_dir() -> Path:
+    if not MULTI_USER:
+        return BOOKS_DIR
+    return user_dir(session["user_id"]) / "books"
 
 _docs: dict[str, pymupdf.Document] = {}
 _render_lock = threading.Lock()  # PyMuPDF rendering is not thread-safe
@@ -72,7 +114,7 @@ ACCESS_TOKEN = os.environ.get("ACCESS_TOKEN") or _load_or_create(TOKEN_PATH)
 REQUIRE_AUTH = os.environ.get("REQUIRE_AUTH") == "1"
 app.permanent_session_lifetime = datetime.timedelta(days=90)
 
-_LOGIN_PAGE = """<!doctype html><html><head><meta charset="utf-8">
+_AUTH_PAGE = """<!doctype html><html><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
 <title>Real Book Song Finder</title>
@@ -86,29 +128,67 @@ _LOGIN_PAGE = """<!doctype html><html><head><meta charset="utf-8">
   h1 span {{ color:#e8b849; }}
   input {{ font-size:1.05rem; padding:.55rem .8rem; border-radius:8px;
           border:1px solid #3a3f4b; background:#14161c; color:#e8e6e3;
-          width:14rem; }}
-  button {{ font-size:1.05rem; padding:.55rem 1.3rem; margin-left:.4rem;
+          width:16rem; display:block; margin:0 auto .6rem; }}
+  button {{ font-size:1.05rem; padding:.55rem 1.3rem; margin-top:.3rem;
            border-radius:8px; border:0; background:#e8b849; color:#14161c;
            font-weight:600; cursor:pointer; }}
   .err {{ color:#e46f6f; margin-top:.9rem; font-size:.95rem; }}
+  .alt {{ margin-top:1.1rem; font-size:.9rem; color:#9a97a8; }}
+  .alt a {{ color:#e8b849; }}
 </style></head><body>
-<form method="post" action="/login">
+<form method="post" action="{action}">
   <h1>&#119070; Real Book <span>Song Finder</span></h1>
-  <input type="password" name="password" placeholder="Password"
-         autofocus autocomplete="current-password">
-  <button type="submit">Enter</button>
+  {fields}
+  <button type="submit">{button}</button>
   {error}
+  {footer}
 </form></body></html>"""
+
+_PW_FIELD = ('<input type="password" name="password" placeholder="Password" '
+             'autocomplete="{ac}">')
+_EMAIL_FIELD = ('<input type="email" name="email" placeholder="Email" '
+                'autofocus autocomplete="email">')
+
+
+def _auth_page(action: str, fields: str, button: str,
+               error: str = "", footer: str = "") -> Response:
+    err = f'<div class="err">{error}</div>' if error else ""
+    return Response(
+        _AUTH_PAGE.format(action=action, fields=fields, button=button,
+                          error=err, footer=footer),
+        mimetype="text/html")
 
 
 def _login_page(error: str = "") -> Response:
-    err = f'<div class="err">{error}</div>' if error else ""
-    return Response(_LOGIN_PAGE.format(error=err), mimetype="text/html")
+    if MULTI_USER:
+        fields = _EMAIL_FIELD + _PW_FIELD.format(ac="current-password")
+        footer = ('<div class="alt">New here? '
+                  '<a href="/signup">Create an account</a></div>')
+        return _auth_page("/login", fields, "Sign in", error, footer)
+    fields = _PW_FIELD.format(ac="current-password").replace(
+        'type="password"', 'type="password" autofocus', 1)
+    return _auth_page("/login", fields, "Enter", error)
+
+
+def _signup_page(error: str = "") -> Response:
+    fields = _EMAIL_FIELD + _PW_FIELD.format(ac="new-password")
+    if SIGNUP_CODE:
+        fields += ('<input type="text" name="code" placeholder="Invite code" '
+                   'autocomplete="off">')
+    footer = ('<div class="alt">Already have an account? '
+              '<a href="/">Sign in</a></div>')
+    return _auth_page("/signup", fields, "Create account", error, footer)
 
 
 def auth_required(view):
     @wraps(view)
     def wrapped(*args, **kwargs):
+        if MULTI_USER:
+            if session.get("user_id"):
+                return view(*args, **kwargs)
+            if request.path == "/":
+                return _login_page()
+            abort(403, "sign in required")
         if not REQUIRE_AUTH or session.get("authed"):
             return view(*args, **kwargs)
         key = request.args.get("key")
@@ -128,12 +208,49 @@ def auth_required(view):
 
 @app.route("/login", methods=["POST"])
 def login() -> Response:
+    if MULTI_USER:
+        uid, email = multiuser.verify_user(
+            USERS_DB, request.form.get("email", ""), request.form.get("password", ""))
+        if uid is None:
+            return _login_page("Wrong email or password.")
+        session.clear()
+        session["user_id"] = uid
+        session["email"] = email
+        session.permanent = True
+        return redirect("/")
     password = request.form.get("password", "")
     if password and secrets.compare_digest(password, ACCESS_TOKEN):
         session["authed"] = True
         session.permanent = True
         return redirect("/")
     return _login_page("Wrong password — try again.")
+
+
+@app.route("/signup", methods=["GET", "POST"])
+def signup() -> Response:
+    if not MULTI_USER:
+        abort(404)
+    if request.method == "GET":
+        return _signup_page()
+    if SIGNUP_CODE and not secrets.compare_digest(
+            request.form.get("code", ""), SIGNUP_CODE):
+        return _signup_page("Invalid invite code.")
+    uid, err = multiuser.create_user(
+        USERS_DB, request.form.get("email", ""), request.form.get("password", ""))
+    if err:
+        return _signup_page(err)
+    (user_dir(uid) / "books").mkdir(parents=True, exist_ok=True)
+    session.clear()
+    session["user_id"] = uid
+    session["email"] = request.form.get("email", "").strip().lower()
+    session.permanent = True
+    return redirect("/")
+
+
+@app.route("/logout", methods=["POST"])
+def logout() -> Response:
+    session.clear()
+    return redirect("/")
 
 
 @app.after_request
@@ -143,17 +260,18 @@ def _noindex(resp: Response) -> Response:
     return resp
 
 
-def get_doc(book_id: str) -> pymupdf.Document:
-    if book_id not in _docs:
-        pdf_name = DB["books"][book_id]["pdf"]
-        _docs[book_id] = pymupdf.open(str(BOOKS_DIR / pdf_name))
-    return _docs[book_id]
+def get_doc(pdf_path: Path) -> pymupdf.Document:
+    key = str(pdf_path)
+    if key not in _docs:
+        _docs[key] = pymupdf.open(key)
+    return _docs[key]
 
 
 @lru_cache(maxsize=300)
-def render_png(book_id: str, pdf_page: int) -> bytes:
+def render_png(pdf_path: Path, pdf_page: int) -> bytes:
+    # Keyed by full path, so users' identically-named books never collide.
     with _render_lock:
-        doc = get_doc(book_id)
+        doc = get_doc(pdf_path)
         pix = doc[pdf_page - 1].get_pixmap(dpi=RENDER_DPI)
         return pix.tobytes("png")
 
@@ -167,19 +285,29 @@ def home() -> Response:
 @app.route("/api/songs")
 @auth_required
 def songs() -> Response:
-    return jsonify(DB)
+    db = get_db()
+    if MULTI_USER:
+        return jsonify({**db, "user": {"email": session.get("email")}})
+    return jsonify(db)
 
 
 @app.route("/api/page/<book_id>/<int:pdf_page>")
 @auth_required
 def page_image(book_id: str, pdf_page: int) -> Response:
-    if book_id not in DB["books"]:
+    db = get_db()
+    if book_id not in db["books"]:
         abort(404, "unknown book")
-    if not (1 <= pdf_page <= DB["books"][book_id]["pages"]):
+    if not (1 <= pdf_page <= db["books"][book_id]["pages"]):
         abort(404, "page out of range")
-    png = render_png(book_id, pdf_page)
+    pdf_path = get_books_dir() / db["books"][book_id]["pdf"]
+    if not pdf_path.exists():
+        abort(404, "book file missing")
+    png = render_png(pdf_path, pdf_page)
     resp = Response(png, mimetype="image/png")
     resp.headers["Cache-Control"] = "public, max-age=86400"
+    # Per-user pages must never be served from a shared cache.
+    if MULTI_USER:
+        resp.headers["Cache-Control"] = "private, max-age=86400"
     return resp
 
 
