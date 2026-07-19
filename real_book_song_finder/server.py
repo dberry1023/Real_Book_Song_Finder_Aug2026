@@ -51,6 +51,10 @@ if MULTI_USER:
 
 # Automatic indexing of unknown books needs a Claude API key.
 INDEXING_ENABLED = MULTI_USER and bool(os.environ.get("ANTHROPIC_API_KEY"))
+# INDEX_SYNC=1: index within the upload request instead of a background
+# thread. Used on serverless hosts (Modal) where threads don't survive
+# container scale-down. Uploads of unknown books then take 1-3 minutes.
+INDEX_SYNC = os.environ.get("INDEX_SYNC") == "1"
 
 # Stripe billing (item 4). Without keys the app runs in "beta mode":
 # every account is unlimited and no payment UI is shown.
@@ -381,6 +385,16 @@ def upload_book() -> Response:
     _user_dbs.pop(uid, None)
     if entry["status"] == "indexed":
         msg = f"Recognized “{entry['label']}” — indexed instantly."
+    elif INDEXING_ENABLED and INDEX_SYNC:
+        _update_manifest_entry(d, entry["sha256"], status="indexing")
+        _index_worker(uid, entry["sha256"], entry["pdf"], entry["label"])
+        done = next((e for e in library.load_manifest(d)
+                     if e["sha256"] == entry["sha256"]), entry)
+        entry.update(done)
+        if entry["status"] == "indexed":
+            msg = f"“{entry['label']}” indexed successfully."
+        else:
+            msg = "Indexing failed: " + entry.get("error", "unknown reason")
     elif INDEXING_ENABLED:
         _update_manifest_entry(d, entry["sha256"], status="indexing")
         entry["status"] = "indexing"
