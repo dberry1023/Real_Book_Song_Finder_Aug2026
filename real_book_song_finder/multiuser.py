@@ -32,6 +32,13 @@ def init_db(db_path: Path) -> None:
                    created_at TEXT NOT NULL
                )"""
         )
+        # additive migrations for databases created by earlier versions
+        cols = {r["name"] for r in con.execute("PRAGMA table_info(users)")}
+        for col, ddl in [("plan", "TEXT NOT NULL DEFAULT 'free'"),
+                         ("stripe_customer_id", "TEXT"),
+                         ("stripe_subscription_id", "TEXT")]:
+            if col not in cols:
+                con.execute(f"ALTER TABLE users ADD COLUMN {col} {ddl}")
 
 
 def create_user(db_path: Path, email: str, password: str) -> tuple[int | None, str | None]:
@@ -72,3 +79,41 @@ def get_email(db_path: Path, user_id: int) -> str | None:
     with _connect(db_path) as con:
         row = con.execute("SELECT email FROM users WHERE id = ?", (user_id,)).fetchone()
     return row["email"] if row else None
+
+
+# ---------------------------------------------------------------- billing --
+def get_plan(db_path: Path, user_id: int) -> str:
+    with _connect(db_path) as con:
+        row = con.execute("SELECT plan FROM users WHERE id = ?",
+                          (user_id,)).fetchone()
+    return row["plan"] if row else "free"
+
+
+def set_plan(db_path: Path, user_id: int, plan: str) -> None:
+    with _connect(db_path) as con:
+        con.execute("UPDATE users SET plan = ? WHERE id = ?", (plan, user_id))
+
+
+def set_stripe_ids(db_path: Path, user_id: int,
+                   customer_id: str | None, subscription_id: str | None) -> None:
+    with _connect(db_path) as con:
+        con.execute(
+            "UPDATE users SET stripe_customer_id = ?, "
+            "stripe_subscription_id = ? WHERE id = ?",
+            (customer_id, subscription_id, user_id))
+
+
+def get_stripe_customer(db_path: Path, user_id: int) -> str | None:
+    with _connect(db_path) as con:
+        row = con.execute("SELECT stripe_customer_id FROM users WHERE id = ?",
+                          (user_id,)).fetchone()
+    return row["stripe_customer_id"] if row else None
+
+
+def find_by_stripe_customer(db_path: Path, customer_id: str) -> int | None:
+    if not customer_id:
+        return None
+    with _connect(db_path) as con:
+        row = con.execute("SELECT id FROM users WHERE stripe_customer_id = ?",
+                          (customer_id,)).fetchone()
+    return row["id"] if row else None

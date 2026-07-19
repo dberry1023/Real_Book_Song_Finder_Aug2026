@@ -164,6 +164,7 @@
   <span class="stats" id="stats"></span>
   <span class="spacer"></span>
   <button id="randomBtn" title="Open a random song">&#127922; Random song</button>
+  <button id="upgBtn" style="display:none" title="Unlimited books with Pro">&#11088; Upgrade</button>
   <button id="libBtn" style="display:none" title="Manage your book library">&#128218; My Books</button>
   <form id="logoutForm" method="post" action="/logout" style="display:none;margin:0">
     <button id="logoutBtn" title="Sign out of your account">Sign out</button>
@@ -178,9 +179,26 @@
     <div id="libActions">
       <input type="file" id="libFile" accept=".pdf,application/pdf" style="display:none">
       <button id="libUpload">&#8679; Load a book (PDF)</button>
+      <button id="portalBtn" style="display:none" title="Change or cancel your subscription">Manage subscription</button>
       <span class="spacer" style="flex:1"></span>
       <button id="libClose">Close</button>
     </div>
+  </div>
+</div>
+
+<div id="upgOverlay" style="position:fixed;inset:0;background:rgba(0,0,0,.65);display:none;align-items:center;justify-content:center;z-index:60">
+  <div id="libPanelUpg" style="background:var(--panel);border:1px solid var(--border);border-radius:12px;width:min(420px,92vw);padding:20px 24px;text-align:center">
+    <h2 style="font-size:17px;margin-bottom:6px">&#11088; Song Finder Pro</h2>
+    <p style="color:var(--dim);font-size:13px;margin-bottom:14px">
+      Unlimited books, automatic indexing, and every future Pro feature.</p>
+    <div style="display:flex;gap:10px;justify-content:center">
+      <button id="planAnnual" class="active" style="padding:10px 16px">$39 / year<br>
+        <span style="font-size:11px;font-weight:400">2 months free</span></button>
+      <button id="planMonthly" style="padding:10px 16px">$4.99 / month<br>
+        <span style="font-size:11px;font-weight:400">cancel anytime</span></button>
+    </div>
+    <div id="upgMsg" style="color:var(--dim);font-size:12px;margin-top:12px;min-height:16px"></div>
+    <button id="upgClose" style="margin-top:6px">Not now</button>
   </div>
 </div>
 
@@ -485,6 +503,13 @@ fetch("/api/songs").then(r => r.json()).then(db => {
     $("logoutForm").style.display = "inline";
     $("logoutBtn").title = `Sign out (${db.user.email})`;
     $("libBtn").style.display = "inline-block";
+    if (db.user.billing && db.user.plan !== "pro") {
+      $("upgBtn").style.display = "inline-block";
+    }
+    if (db.user.plan === "pro") {
+      $("logoutBtn").textContent = "Sign out ⭐";
+      $("portalBtn").style.display = "inline-block";
+    }
   }
   if (songs.length === 0 && db.user) {
     $("welcome").innerHTML =
@@ -550,6 +575,32 @@ async function loadLibrary() {
 }
 
 $("libBtn").onclick = () => { $("libOverlay").classList.add("open"); $("libMsg").textContent = ""; loadLibrary(); };
+
+// ---------- Upgrade / billing ----------
+async function startCheckout(plan) {
+  $("upgMsg").textContent = "Opening secure checkout…";
+  try {
+    const r = await fetch("/api/billing/checkout", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ plan }),
+    });
+    const d = await r.json();
+    if (d.url) window.location = d.url;
+    else $("upgMsg").textContent = "Could not start checkout.";
+  } catch (e) {
+    $("upgMsg").textContent = "Could not start checkout: " + e;
+  }
+}
+$("upgBtn").onclick = () => { $("upgOverlay").style.display = "flex"; $("upgMsg").textContent = ""; };
+$("upgClose").onclick = () => { $("upgOverlay").style.display = "none"; };
+$("upgOverlay").onclick = e => { if (e.target === $("upgOverlay")) $("upgClose").onclick(); };
+$("planAnnual").onclick = () => startCheckout("annual");
+$("planMonthly").onclick = () => startCheckout("monthly");
+$("portalBtn").onclick = async () => {
+  const r = await fetch("/api/billing/portal", { method: "POST" });
+  const d = await r.json();
+  if (d.url) window.location = d.url;
+};
 $("libClose").onclick = () => { $("libOverlay").classList.remove("open"); location.reload(); };
 $("libOverlay").onclick = e => { if (e.target === $("libOverlay")) $("libClose").onclick(); };
 $("libUpload").onclick = () => $("libFile").click();
@@ -566,6 +617,10 @@ $("libFile").onchange = async () => {
       const d = await r.json();
       $("libMsg").textContent = d.message;
       loadLibrary();
+    } else if (r.status === 402) {
+      const d = await r.json();
+      $("libMsg").textContent = d.message;
+      $("upgOverlay").style.display = "flex";
     } else {
       const text = await r.text();
       const m = text.match(/<p>([^<]+)<\/p>/);

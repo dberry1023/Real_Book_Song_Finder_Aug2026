@@ -52,6 +52,15 @@ if MULTI_USER:
 # Automatic indexing of unknown books needs a Claude API key.
 INDEXING_ENABLED = MULTI_USER and bool(os.environ.get("ANTHROPIC_API_KEY"))
 
+# Stripe billing (item 4). Without keys the app runs in "beta mode":
+# every account is unlimited and no payment UI is shown.
+STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY", "")
+STRIPE_WEBHOOK_SECRET = os.environ.get("STRIPE_WEBHOOK_SECRET", "")
+STRIPE_PRICE_MONTHLY = os.environ.get("STRIPE_PRICE_MONTHLY", "")
+STRIPE_PRICE_ANNUAL = os.environ.get("STRIPE_PRICE_ANNUAL", "")
+PAYMENTS_ENABLED = MULTI_USER and bool(STRIPE_SECRET_KEY)
+FREE_BOOK_LIMIT = int(os.environ.get("FREE_BOOK_LIMIT", "1"))
+
 logging.basicConfig(level=logging.INFO,
                     format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger("song_finder")
@@ -339,6 +348,15 @@ def upload_book() -> Response:
         abort(400, "no file uploaded")
     uid = session["user_id"]
     d = user_dir(uid)
+    if (PAYMENTS_ENABLED
+            and multiuser.get_plan(USERS_DB, uid) != "pro"
+            and len(library.load_manifest(d)) >= FREE_BOOK_LIMIT):
+        # werkzeug has no exception class for 402, so build it directly
+        return app.response_class(
+            json.dumps({"error": "upgrade_required",
+                        "message": f"The free plan includes {FREE_BOOK_LIMIT} "
+                                   "book — upgrade to Pro for unlimited books."}),
+            status=402, mimetype="application/json")
     tmp = d / "books" / ".upload.tmp"
     tmp.parent.mkdir(parents=True, exist_ok=True)
     f.save(tmp)
@@ -437,7 +455,10 @@ def home() -> Response:
 def songs() -> Response:
     db = get_db()
     if MULTI_USER:
-        return jsonify({**db, "user": {"email": session.get("email")}})
+        plan = multiuser.get_plan(USERS_DB, session["user_id"])
+        return jsonify({**db, "user": {"email": session.get("email"),
+                                       "plan": plan,
+                                       "billing": PAYMENTS_ENABLED}})
     return jsonify(db)
 
 
@@ -459,6 +480,79 @@ def page_image(book_id: str, pdf_page: int) -> Response:
     if MULTI_USER:
         resp.headers["Cache-Control"] = "private, max-age=86400"
     return resp
+
+
+# --------------------------------------------------------------------------
+# Stripe billing (multi-user mode with STRIPE_SECRET_KEY configured)
+# --------------------------------------------------------------------------
+@app.route("/api/billing/checkout", methods=["POST"])
+@auth_required
+def billing_checkout() -> Response:
+    if not PAYMENTS_ENABLED:
+        abort(404)
+    import stripe
+    stripe.api_key = STRIPE_SECRET_KEY
+    plan = (request.get_json(silent=True) or {}).get("plan", "annual")
+    price = STRIPE_PRICE_MONTHLY if plan == "monthly" else STRIPE_PRICE_ANNUAL
+    if not price:
+        abort(500, "price not configured")
+    checkout = stripe.checkout.Session.create(
+        mode="subscription",
+        line_items=[{"price": price, "quantity": 1}],
+        client_reference_id=str(session["user_id"]),
+        customer_email=session.get("email"),
+        success_url=request.host_url.rstrip("/") + "/?upgraded=1",
+        cancel_url=request.host_url,
+        allow_promotion_codes=True,
+    )
+    return jsonify({"url": checkout.url})
+
+
+@app.route("/api/billing/portal", methods=["POST"])
+@auth_required
+def billing_portal() -> Response:
+    if not PAYMENTS_ENABLED:
+        abort(404)
+    import stripe
+    stripe.api_key = STRIPE_SECRET_KEY
+    customer = multiuser.get_stripe_customer(USERS_DB, session["user_id"])
+    if not customer:
+        abort(400, "no billing account yet")
+    portal = stripe.billing_portal.Session.create(
+        customer=customer, return_url=request.host_url)
+    return jsonify({"url": portal.url})
+
+
+@app.route("/stripe/webhook", methods=["POST"])
+def stripe_webhook() -> Response:
+    if not PAYMENTS_ENABLED:
+        abort(404)
+    import stripe
+    try:
+        event = stripe.Webhook.construct_event(
+            request.data, request.headers.get("Stripe-Signature", ""),
+            STRIPE_WEBHOOK_SECRET)
+    except Exception:
+        abort(400, "invalid signature")
+    etype = event["type"]
+    obj = event["data"]["object"]
+    if etype == "checkout.session.completed":
+        uid = int(obj.get("client_reference_id") or 0)
+        if uid:
+            multiuser.set_stripe_ids(USERS_DB, uid, obj.get("customer"),
+                                     obj.get("subscription"))
+            multiuser.set_plan(USERS_DB, uid, "pro")
+            logger.info("user %d upgraded to pro", uid)
+    elif etype in ("customer.subscription.deleted",
+                   "customer.subscription.updated"):
+        uid = multiuser.find_by_stripe_customer(USERS_DB, obj.get("customer"))
+        if uid:
+            active = (etype == "customer.subscription.updated"
+                      and obj.get("status") in ("active", "trialing"))
+            multiuser.set_plan(USERS_DB, uid, "pro" if active else "free")
+            logger.info("user %d plan -> %s (stripe %s)", uid,
+                        "pro" if active else "free", etype)
+    return jsonify({"received": True})
 
 
 def open_browser(url: str) -> None:
