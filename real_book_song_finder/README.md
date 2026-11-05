@@ -125,13 +125,15 @@ pick an **instrument**.
 - Accounts in the multi-user app get 200 lookups a day (`CHORD_DAILY_LIMIT`).
   This protects the saved charts from being copied wholesale.
 
-**Current state: only 5 songs have charts.** A 20-tune test found that Claude
-working from memory isn't reliable enough to generate the rest yet. See
+**Current state:** 1,616 of the 1,780 songs have saved charts, generated on
+Claude Opus 5.5 at high effort. Only the 25 rated high confidence show until you
+approve more. See
 [TECHNICAL.md](TECHNICAL.md#8-chord-accuracy-test-november-2026).
 
 ```bash
-python generate_chords.py --test                            # 20 test tunes
-python generate_chords.py --all --model claude-sonnet-5-5   # every song, about $9
+python generate_chords.py --test                                  # test tunes
+python generate_chords.py --batch-submit --model claude-opus-5-5  # half price
+python generate_chords.py --batch-collect --wait                  # save results
 python generate_chords.py --export-review                   # data/chord_review.csv
 python generate_chords.py --import-review                   # apply approved/rejected
 ```

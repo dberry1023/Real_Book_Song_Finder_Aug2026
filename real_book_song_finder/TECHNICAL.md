@@ -222,18 +222,32 @@ of these tunes, not a bar-by-bar comparison with the printed pages.
 | Haiku 5.5, from memory | 8 of 20 | Not usable. Giant Steps and All The Things You Are were wrong. | $0.0005 |
 | Sonnet 5.5, from memory | 13 of 20 | 8 rated high confidence: 5 looked right, 3 had errors. Declined 7 of the 8 less common tunes. | $0.0049 |
 | Sonnet 5.5, reading the printed page | 15 of 20 | 7 looked right, 1 misread (Blue Bossa), 7 need checking. Worked on the less common tunes. | $0.0142 |
+| Opus 5.5, high effort, from memory (21 tunes) | 21 of 21 | All 7 high-confidence charts looked right. About 5 of 7 medium looked right or close. Low were mostly guesses. | $0.027 |
+| Fable 5.1, high effort, from memory (21 tunes) | 21 of 21 | 9 of 11 high-confidence charts looked right. | $0.094 |
+
+The Sonnet and Haiku rows used low effort and told the model to decline songs it
+wasn't sure of. The Opus and Fable rows used high effort and asked for the version
+most commonly played, which is closer to how a person asks Claude directly.
+
+### Full run
+
+Opus 5.5 at high effort, through the Batches API at half price, cost **$18.42**.
+All 1,775 requests succeeded.
+
+| Result | Songs |
+|---|---|
+| High confidence | 25 |
+| Medium confidence | 205 |
+| Low confidence | 1,386 |
+| Declined | 164 |
 
 Findings:
 
-- The one medium-confidence chart was wrong, so only high confidence shows without
-  review.
-- Generating everything from memory would cost about $9, but with this coverage
-  many songs would stay empty and about 3 in 8 "high confidence" charts could
-  contain errors.
-- Reading the page gave the best coverage, at about $25 for one chart per song.
-  Five pages failed the chart format check because the model added markers such
-  as `(1st` or `1.`. It is **not built into the app**, because saving chords taken
-  from the books needs a copyright decision first.
-- `data/chords.json` holds only the 5 from-memory charts that looked right, marked
-  unreviewed. It is gitignored because `Real_Book_Song_Finder_Aug2026` is public,
-  and is force-added only to the private `real-book-song-finder` repo.
+- Far fewer songs rated high than in the test, because the test tunes were
+  unusually famous. Whether the model's "low" is too cautious has not been measured.
+- `is_servable()` shows high confidence only, so 25 charts appear until more are
+  approved. The multi-user app shows none until they are approved.
+- The owner's view is that the Real Book itself has known errors and that Claude's
+  chords are right more often, so reading the printed pages is not planned.
+- `data/chords.json` is gitignored because `Real_Book_Song_Finder_Aug2026` is
+  public, and is force-added only to the private `real-book-song-finder` repo.

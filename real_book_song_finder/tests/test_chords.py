@@ -1,5 +1,6 @@
 """Tests for chord transposition, chart checks and the review rules."""
 import json
+from types import SimpleNamespace
 
 import pytest
 
@@ -191,7 +192,7 @@ def test_run_all_saves_charts_and_never_repays_for_a_declined_song(
     monkeypatch.setattr(generate_chords, "CHORDS_PATH", tmp_path / "chords.json")
     monkeypatch.setattr(generate_chords, "DECLINED_PATH", tmp_path / "declined.json")
     calls = []
-    def fake_ask(client, model, song):
+    def fake_ask(client, model, song, effort):
         calls.append(song["id"])
         if song["id"] == "rare":
             return None, generate_chords.DECLINED, {"input": 600, "output": 20}
@@ -209,6 +210,96 @@ def test_run_all_saves_charts_and_never_repays_for_a_declined_song(
     saved = chords.load_store(tmp_path / "chords.json")
     assert list(saved) == ["famous"]
     assert saved["famous"]["review"] == "unreviewed"
+
+
+class _FakeBatches:
+    """Stands in for the Batches API."""
+
+    def __init__(self) -> None:
+        self.sent: list[dict] = []
+        self.status = "ended"
+
+    def create(self, requests):
+        self.sent = requests
+        return SimpleNamespace(id="batch_1")
+
+    def retrieve(self, batch_id):
+        return SimpleNamespace(
+            processing_status=self.status,
+            request_counts=SimpleNamespace(processing=0, succeeded=2, errored=1))
+
+    def results(self, batch_id):
+        def message(reply: dict) -> SimpleNamespace:
+            return SimpleNamespace(
+                stop_reason="end_turn",
+                content=[SimpleNamespace(type="text", text=json.dumps(reply))],
+                usage=SimpleNamespace(input_tokens=600, output_tokens=300))
+
+        good = {"form": "A", "confidence": "high",
+                "sections": [{"name": "A", "bars": ["C7"]}]}
+        no = {"form": "", "confidence": "low", "sections": []}
+        return [
+            SimpleNamespace(custom_id="song-0000", result=SimpleNamespace(
+                type="succeeded", message=message(good))),
+            SimpleNamespace(custom_id="song-0001", result=SimpleNamespace(
+                type="succeeded", message=message(no))),
+            SimpleNamespace(custom_id="song-0002", result=SimpleNamespace(
+                type="errored")),
+        ]
+
+
+@pytest.fixture
+def batch_setup(tmp_path, monkeypatch):
+    """Point the batch files at a temporary folder and return a fake client."""
+    monkeypatch.setattr(generate_chords, "CHORDS_PATH", tmp_path / "chords.json")
+    monkeypatch.setattr(generate_chords, "DECLINED_PATH", tmp_path / "declined.json")
+    monkeypatch.setattr(generate_chords, "BATCH_PATH", tmp_path / "batch.json")
+    client = SimpleNamespace(messages=SimpleNamespace(batches=_FakeBatches()))
+    songs = {name: {"id": name, "title": name.title()}
+             for name in ("take the a train", "rare tune", "third song")}
+    return client, songs
+
+
+def test_batch_submit_uses_ids_without_spaces(batch_setup) -> None:
+    """Test that song ids with spaces are mapped to ids the API accepts."""
+    client, songs = batch_setup
+    generate_chords.batch_submit(client, songs, "m", "high", None)
+    sent = client.messages.batches.sent
+    assert [r["custom_id"] for r in sent] == ["song-0000", "song-0001", "song-0002"]
+    assert sent[0]["params"]["output_config"]["effort"] == "high"
+    assert generate_chords.BATCH_PATH.exists()
+
+
+def test_batch_submit_refuses_a_second_batch_before_collecting(batch_setup) -> None:
+    """Test that an uncollected batch can't be lost or paid for twice."""
+    client, songs = batch_setup
+    generate_chords.batch_submit(client, songs, "m", "high", None)
+    with pytest.raises(SystemExit):
+        generate_chords.batch_submit(client, songs, "m", "high", None)
+
+
+def test_batch_collect_saves_charts_and_records_declines(batch_setup) -> None:
+    """Test each outcome, and that a failed song is left to retry."""
+    client, songs = batch_setup
+    generate_chords.batch_submit(client, songs, "m", "high", None)
+
+    assert generate_chords.batch_collect(client, songs) is True
+
+    saved = chords.load_store(generate_chords.CHORDS_PATH)
+    assert list(saved) == ["take the a train"]
+    assert generate_chords.load_declined() == {"rare tune"}
+    assert not generate_chords.BATCH_PATH.exists()
+    generate_chords.batch_submit(client, songs, "m", "high", None)
+    assert [r["custom_id"] for r in client.messages.batches.sent] == ["song-0000"]
+
+
+def test_batch_collect_keeps_waiting_state_while_running(batch_setup) -> None:
+    """Test that checking early changes nothing."""
+    client, songs = batch_setup
+    generate_chords.batch_submit(client, songs, "m", "high", None)
+    client.messages.batches.status = "in_progress"
+    assert generate_chords.batch_collect(client, songs) is False
+    assert generate_chords.BATCH_PATH.exists()
 
 
 def test_review_round_trip_marks_songs(tmp_path, monkeypatch) -> None:

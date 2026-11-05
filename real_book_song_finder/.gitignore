@@ -18,6 +18,7 @@ data/chords.json
 data/chord_test/
 data/chord_review.csv
 data/chord_declined.json
+data/chord_batch.json
 
 # Python
 __pycache__/
