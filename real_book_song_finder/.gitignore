@@ -9,6 +9,16 @@ data/.session_secret
 data/users.db
 data/users/
 
+# Local mode uploads (copies of your own books)
+data/local_library/
+
+# Chord data stays out of the public repo. chords.json is force-added only to
+# the private repo, real-book-song-finder.
+data/chords.json
+data/chord_test/
+data/chord_review.csv
+data/chord_declined.json
+
 # Python
 __pycache__/
 *.pyc

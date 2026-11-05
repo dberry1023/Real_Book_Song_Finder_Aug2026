@@ -16,6 +16,8 @@ One-time setup:
 Deploy:
     modal deploy modal_saas.py
 """
+from pathlib import Path
+
 import modal
 
 app = modal.App("song-finder-saas")
@@ -30,12 +32,17 @@ image = (
         "INDEX_SYNC": "1",          # threads don't survive scale-down
         "USERS_DB": "/userdata/users.db",
         "USER_DATA_ROOT": "/userdata/users",
+        "CHORDS_REVIEWED_ONLY": "1",  # customers see approved charts only
     })
-    .add_local_python_source("server", "multiuser", "library", "index_book")
+    .add_local_python_source("server", "multiuser", "library", "index_book",
+                             "chords")
     .add_local_dir("static", remote_path="/root/static")
     .add_local_file("data/songs.json", remote_path="/root/data/songs.json")
     .add_local_file("data/metadata.json", remote_path="/root/data/metadata.json")
 )
+if Path("data/chords.json").exists():
+    image = image.add_local_file("data/chords.json",
+                                 remote_path="/root/data/chords.json")
 
 
 @app.function(

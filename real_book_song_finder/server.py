@@ -23,6 +23,10 @@ import pymupdf
 from flask import (Flask, abort, jsonify, redirect, request,
                     send_from_directory, session, Response)
 
+import chords as chord_store
+import index_book
+import library
+
 BOOKS_DIR = Path(os.environ.get(
     "BOOKS_DIR", r"C:\Users\stats\OneDrive\Desktop\Jazz Night School\Real_Books"))
 APP_DIR = Path(__file__).parent
@@ -37,20 +41,33 @@ USERS_DB = Path(os.environ.get("USERS_DB", str(APP_DIR / "data" / "users.db")))
 USER_DATA_ROOT = Path(os.environ.get("USER_DATA_ROOT", str(APP_DIR / "data" / "users")))
 SIGNUP_CODE = os.environ.get("SIGNUP_CODE")  # optional invite code for beta
 
+# LOAD and DELETE. Multi-user mode keeps a library per account. Local mode keeps
+# uploads in their own folder, separate from the master PDFs in BOOKS_DIR, so
+# DELETE can never reach those. The private single-password cloud app turns this
+# off (LOCAL_LIBRARY=0) because its container disk does not persist.
+LOCAL_LIBRARY_DIR = Path(os.environ.get(
+    "LOCAL_LIBRARY_DIR", str(APP_DIR / "data" / "local_library")))
+LIBRARY_ENABLED = MULTI_USER or os.environ.get("LOCAL_LIBRARY", "1") == "1"
+LOCAL_LIBRARY_KEY = 0  # users.db ids start at 1
+
+# Saved chord charts. CHORDS_REVIEWED_ONLY=1 shows only charts you have approved.
+CHORDS_PATH = Path(os.environ.get(
+    "CHORDS_PATH", str(APP_DIR / "data" / "chords.json")))
+CHORDS_REVIEWED_ONLY = os.environ.get("CHORDS_REVIEWED_ONLY") == "1"
+CHORD_DAILY_LIMIT = int(os.environ.get("CHORD_DAILY_LIMIT", "200"))
+
 if MULTI_USER:
-    import index_book
-    import library
     import multiuser
 
     multiuser.init_db(USERS_DB)
-    try:  # local dev convenience; deployments set real env vars
-        from dotenv import load_dotenv
-        load_dotenv(APP_DIR.parent / ".env")
-    except ImportError:
-        pass
+try:  # local dev convenience; deployments set real env vars
+    from dotenv import load_dotenv
+    load_dotenv(APP_DIR.parent / ".env")
+except ImportError:
+    pass
 
 # Automatic indexing of unknown books needs a Claude API key.
-INDEXING_ENABLED = MULTI_USER and bool(os.environ.get("ANTHROPIC_API_KEY"))
+INDEXING_ENABLED = LIBRARY_ENABLED and bool(os.environ.get("ANTHROPIC_API_KEY"))
 # INDEX_SYNC=1: index within the upload request instead of a background
 # thread. Used on serverless hosts (Modal) where threads don't survive
 # container scale-down. Uploads of unknown books then take 1-3 minutes.
@@ -70,7 +87,7 @@ logging.basicConfig(level=logging.INFO,
 logger = logging.getLogger("song_finder")
 
 app = Flask(__name__, static_folder=str(APP_DIR / "static"))
-if MULTI_USER:
+if LIBRARY_ENABLED:
     app.config["MAX_CONTENT_LENGTH"] = library.MAX_UPLOAD_BYTES
 
 def _load_db(songs_path: Path, meta_path: Path) -> dict:
@@ -89,8 +106,9 @@ def _load_db(songs_path: Path, meta_path: Path) -> dict:
 
 
 DB = _load_db(APP_DIR / "data" / "songs.json", APP_DIR / "data" / "metadata.json")
+CHORDS = chord_store.load_store(CHORDS_PATH)
 
-# Per-user indexes, loaded lazily in multi-user mode (keyed by user id).
+# Library indexes, loaded lazily (keyed by user id, or LOCAL_LIBRARY_KEY).
 _user_dbs: dict[int, dict] = {}
 
 
@@ -98,21 +116,41 @@ def user_dir(uid: int) -> Path:
     return USER_DATA_ROOT / str(uid)
 
 
+def library_key() -> int:
+    """Which library this request belongs to."""
+    return session["user_id"] if MULTI_USER else LOCAL_LIBRARY_KEY
+
+
+def library_dir(key: int | None = None) -> Path:
+    """The folder holding a library's uploaded books and indexes."""
+    if MULTI_USER:
+        return user_dir(library_key() if key is None else key)
+    return LOCAL_LIBRARY_DIR
+
+
 def get_db() -> dict:
     """The song index for the current request (shared, or the user's own)."""
-    if not MULTI_USER:
+    if not LIBRARY_ENABLED:
         return DB
-    uid = session["user_id"]
-    if uid not in _user_dbs:
-        d = user_dir(uid)
-        _user_dbs[uid] = _load_db(d / "songs.json", d / "metadata.json")
-    return _user_dbs[uid]
+    key = library_key()
+    if key not in _user_dbs:
+        d = library_dir()
+        if MULTI_USER:
+            _user_dbs[key] = _load_db(d / "songs.json", d / "metadata.json")
+        elif library.load_manifest(d):
+            _user_dbs[key] = library.merged_index(d, DB, all_master=True)
+        else:
+            _user_dbs[key] = DB
+    return _user_dbs[key]
 
 
-def get_books_dir() -> Path:
-    if not MULTI_USER:
-        return BOOKS_DIR
-    return user_dir(session["user_id"]) / "books"
+def book_pdf_path(book_id: str, db: dict) -> Path:
+    """Where a book's PDF lives: uploads in the library, the rest in BOOKS_DIR."""
+    pdf = db["books"][book_id]["pdf"]
+    if MULTI_USER or book_id.startswith("u_"):
+        return library_dir() / "books" / pdf
+    return BOOKS_DIR / pdf
+
 
 _docs: dict[str, pymupdf.Document] = {}
 _render_lock = threading.Lock()  # PyMuPDF rendering is not thread-safe
@@ -279,9 +317,25 @@ def logout() -> Response:
 
 
 # --------------------------------------------------------------------------
-# "Load My Books" library management (multi-user mode only)
+# LOAD and DELETE: book library management
 # --------------------------------------------------------------------------
 _lib_lock = threading.Lock()  # serializes manifest/index writes per process
+_loading: set[int] = set()    # libraries with a book loading right now
+
+
+def app_request_only(view):
+    """Refuse changes that did not come from this app's own page.
+
+    Local mode has no login, so without this any website open in the same
+    browser could post to 127.0.0.1. A browser will not send this custom header
+    from another site without a permission check this server never grants.
+    """
+    @wraps(view)
+    def wrapped(*args, **kwargs):
+        if request.headers.get("X-Song-Finder") != "1":
+            abort(403, "request did not come from the app")
+        return view(*args, **kwargs)
+    return wrapped
 
 
 def _update_manifest_entry(d: Path, digest: str, **fields) -> None:
@@ -293,13 +347,13 @@ def _update_manifest_entry(d: Path, digest: str, **fields) -> None:
         library.save_manifest(d, manifest)
 
 
-def _index_worker(uid: int, digest: str, pdf_name: str, label: str) -> None:
+def _index_worker(key: int, d: Path, digest: str, pdf_name: str,
+                  label: str) -> None:
     """Background indexing of an unknown book (runs in a daemon thread).
 
     Note for the Modal deployment: threads don't survive scale-to-zero, so
     there this should become a spawned Modal function (deploy-time change).
     """
-    d = user_dir(uid)
     try:
         result = index_book.build_index(
             d / "books" / pdf_name, library.custom_book_key(digest), label)
@@ -308,59 +362,51 @@ def _index_worker(uid: int, digest: str, pdf_name: str, label: str) -> None:
         idx_path.write_text(json.dumps(result), encoding="utf-8")
         _update_manifest_entry(d, digest, status="indexed",
                                book_id=library.custom_book_key(digest))
-        logger.info("indexed custom book %s for user %d: %d songs",
-                    label, uid, len(result["songs"]))
+        logger.info("indexed custom book %s for library %d: %d songs",
+                    label, key, len(result["songs"]))
     except index_book.IndexingError as e:
         _update_manifest_entry(d, digest, status="failed", error=str(e))
-        logger.warning("indexing failed for user %d book %s: %s", uid, label, e)
+        logger.warning("indexing failed for library %d book %s: %s", key, label, e)
     except Exception:
-        logger.exception("unexpected indexing failure (user %d, %s)", uid, label)
+        logger.exception("unexpected indexing failure (library %d, %s)", key, label)
         _update_manifest_entry(d, digest, status="failed",
                                error="Unexpected error during indexing.")
-    with _lib_lock:
-        library.rebuild_index(d, DB)
-    _user_dbs.pop(uid, None)
+    finally:
+        with _lib_lock:
+            library.rebuild_index(d, DB, all_master=not MULTI_USER)
+            _loading.discard(key)
+        _user_dbs.pop(key, None)
 
 
 @app.route("/api/books")
 @auth_required
 def list_books() -> Response:
-    if not MULTI_USER:
+    if not LIBRARY_ENABLED:
         abort(404)
-    d = user_dir(session["user_id"])
+    d = library_dir()
+    key = library_key()
     with _lib_lock:
         manifest = library.load_manifest(d)
+        busy = key in _loading
     counts: dict[str, int] = {}
     for s in get_db()["songs"]:
         for book in {src["book"] for src in s["sources"]}:
             counts[book] = counts.get(book, 0) + 1
-    return jsonify({"books": [
-        {"sha256": e["sha256"], "label": e["label"], "status": e["status"],
-         "songs": counts.get(e.get("book_id"), 0),
-         "error": e.get("error", "")}
-        for e in manifest
-    ]})
+    books = []
+    for e in manifest:
+        status, error = e["status"], e.get("error", "")
+        if status == "indexing" and not busy:
+            # The server stopped partway through, so nothing is working on it.
+            status = "failed"
+            error = "Indexing was interrupted. Delete this book and load it again."
+        books.append({"sha256": e["sha256"], "label": e["label"],
+                      "status": status, "error": error,
+                      "songs": counts.get(e.get("book_id"), 0)})
+    return jsonify({"books": books})
 
 
-@app.route("/api/books/upload", methods=["POST"])
-@auth_required
-def upload_book() -> Response:
-    if not MULTI_USER:
-        abort(404)
-    f = request.files.get("file")
-    if f is None or not f.filename:
-        abort(400, "no file uploaded")
-    uid = session["user_id"]
-    d = user_dir(uid)
-    if (PAYMENTS_ENABLED
-            and multiuser.get_plan(USERS_DB, uid) != "pro"
-            and len(library.load_manifest(d)) >= FREE_BOOK_LIMIT):
-        # werkzeug has no exception class for 402, so build it directly
-        return app.response_class(
-            json.dumps({"error": "upgrade_required",
-                        "message": f"The free plan includes {FREE_BOOK_LIMIT} "
-                                   "book — upgrade to Pro for unlimited books."}),
-            status=402, mimetype="application/json")
+def _save_upload(f, d: Path) -> dict:
+    """Check an uploaded PDF and add it to the library."""
     tmp = d / "books" / ".upload.tmp"
     tmp.parent.mkdir(parents=True, exist_ok=True)
     f.save(tmp)
@@ -377,62 +423,180 @@ def upload_book() -> Response:
         if pages < 1:
             abort(400, "That PDF has no pages.")
         with _lib_lock:
-            entry, err = library.add_upload(d, tmp, f.filename, DB)
+            entry, err = library.add_upload(d, tmp, f.filename, DB,
+                                            all_master=not MULTI_USER)
         if err:
             abort(409, err)
+        return entry
     finally:
         tmp.unlink(missing_ok=True)
-    _user_dbs.pop(uid, None)
-    if entry["status"] == "indexed":
-        msg = f"Recognized “{entry['label']}” — indexed instantly."
-    elif INDEXING_ENABLED and INDEX_SYNC:
-        _update_manifest_entry(d, entry["sha256"], status="indexing")
-        _index_worker(uid, entry["sha256"], entry["pdf"], entry["label"])
-        done = next((e for e in library.load_manifest(d)
-                     if e["sha256"] == entry["sha256"]), entry)
-        entry.update(done)
+
+
+@app.route("/api/books/upload", methods=["POST"])
+@auth_required
+@app_request_only
+def upload_book() -> Response:
+    """Load one book. A second load is refused until the first has finished."""
+    if not LIBRARY_ENABLED:
+        abort(404)
+    f = request.files.get("file")
+    if f is None or not f.filename:
+        abort(400, "no file uploaded")
+    key = library_key()
+    d = library_dir()
+    if (PAYMENTS_ENABLED
+            and multiuser.get_plan(USERS_DB, key) != "pro"
+            and len(library.load_manifest(d)) >= FREE_BOOK_LIMIT):
+        # werkzeug has no exception class for 402, so build it directly
+        return app.response_class(
+            json.dumps({"error": "upgrade_required",
+                        "message": f"The free plan includes {FREE_BOOK_LIMIT} "
+                                   "book — upgrade to Pro for unlimited books."}),
+            status=402, mimetype="application/json")
+    with _lib_lock:
+        if key in _loading:
+            abort(409, "Another book is still loading. Please wait for it "
+                       "to finish, then load the next one.")
+        _loading.add(key)
+    handed_to_worker = False
+    try:
+        entry = _save_upload(f, d)
+        _user_dbs.pop(key, None)
         if entry["status"] == "indexed":
-            msg = f"“{entry['label']}” indexed successfully."
+            msg = f"Recognized “{entry['label']}” — indexed instantly."
+        elif INDEXING_ENABLED and INDEX_SYNC:
+            _update_manifest_entry(d, entry["sha256"], status="indexing")
+            handed_to_worker = True
+            _index_worker(key, d, entry["sha256"], entry["pdf"], entry["label"])
+            done = next((e for e in library.load_manifest(d)
+                         if e["sha256"] == entry["sha256"]), entry)
+            entry.update(done)
+            if entry["status"] == "indexed":
+                msg = f"“{entry['label']}” indexed successfully."
+            else:
+                msg = "Indexing failed: " + entry.get("error", "unknown reason")
+        elif INDEXING_ENABLED:
+            _update_manifest_entry(d, entry["sha256"], status="indexing")
+            entry["status"] = "indexing"
+            handed_to_worker = True
+            threading.Thread(
+                target=_index_worker,
+                args=(key, d, entry["sha256"], entry["pdf"], entry["label"]),
+                daemon=True,
+            ).start()
+            msg = (f"“{entry['label']}” saved. Building its song list now, "
+                   "which usually takes a minute or two.")
         else:
-            msg = "Indexing failed: " + entry.get("error", "unknown reason")
-    elif INDEXING_ENABLED:
-        _update_manifest_entry(d, entry["sha256"], status="indexing")
-        entry["status"] = "indexing"
-        threading.Thread(
-            target=_index_worker,
-            args=(uid, entry["sha256"], entry["pdf"], entry["label"]),
-            daemon=True,
-        ).start()
-        msg = ("Saved — building this book's index now. This usually takes "
-               "a minute or two; the list below will update when it's done.")
-    else:
-        msg = ("Saved. Automatic indexing for new books is coming soon — "
-               "this book will appear in search once it's indexed.")
+            msg = (f"“{entry['label']}” saved, but it can't be searched yet "
+                   "because automatic indexing needs a Claude API key.")
+    finally:
+        if not handed_to_worker:
+            with _lib_lock:
+                _loading.discard(key)
     return jsonify({**entry, "message": msg})
 
 
 @app.route("/api/books/<digest>", methods=["DELETE"])
 @auth_required
+@app_request_only
 def remove_book(digest: str) -> Response:
-    if not MULTI_USER:
+    """Delete an uploaded book. The page asks the user to confirm first."""
+    if not LIBRARY_ENABLED:
         abort(404)
-    uid = session["user_id"]
-    d = user_dir(uid)
+    key = library_key()
+    d = library_dir()
     entry = next((e for e in library.load_manifest(d)
                   if e["sha256"] == digest), None)
     if entry is None:
         abort(404, "book not found")
+    with _lib_lock:
+        if key in _loading:
+            abort(409, "A book is still loading. Please try again when it "
+                       "has finished.")
     # Close any open PyMuPDF handle so Windows lets us delete the file,
     # and drop rendered pages so a future same-named upload can't serve
     # stale images.
-    doc = _docs.pop(str(d / "books" / entry["pdf"]), None)
-    if doc is not None:
-        doc.close()
+    with _render_lock:
+        doc = _docs.pop(str(d / "books" / entry["pdf"]), None)
+        if doc is not None:
+            doc.close()
     render_png.cache_clear()
     with _lib_lock:
-        library.delete_book(d, digest, DB)
-    _user_dbs.pop(uid, None)
-    return jsonify({"deleted": True})
+        library.delete_book(d, digest, DB, all_master=not MULTI_USER)
+    _user_dbs.pop(key, None)
+    return jsonify({"deleted": True, "label": entry["label"]})
+
+
+# --------------------------------------------------------------------------
+# Chords: saved charts only. No AI model is called from this server.
+# --------------------------------------------------------------------------
+_chord_lookups: dict[str, dict[int, int]] = {}
+_chord_lock = threading.Lock()
+
+
+def _over_chord_limit() -> bool:
+    """Count one lookup and report whether this account is over today's limit.
+
+    Lookups cost nothing, so this only stops the saved charts being scraped. The
+    count is kept in memory and restarts if the server restarts.
+    """
+    if not MULTI_USER:
+        return False
+    today = datetime.date.today().isoformat()
+    uid = session["user_id"]
+    with _chord_lock:
+        counts = _chord_lookups.setdefault(today, {})
+        for day in [d for d in _chord_lookups if d != today]:
+            del _chord_lookups[day]
+        counts[uid] = counts.get(uid, 0) + 1
+        return counts[uid] > CHORD_DAILY_LIMIT
+
+
+@app.route("/api/chords/songs")
+@auth_required
+def chord_songs() -> Response:
+    """The song choices: every song in the Real Book index, and nothing else."""
+    return jsonify({
+        "instruments": [{"id": k, "label": v[0]}
+                        for k, v in chord_store.INSTRUMENTS.items()],
+        "songs": [
+            {"id": s["id"], "title": s["title"],
+             "composer": s.get("composer", "unknown"),
+             "ready": chord_store.is_servable(CHORDS.get(s["id"]),
+                                              CHORDS_REVIEWED_ONLY)}
+            for s in sorted(DB["songs"], key=lambda s: s["id"])
+        ],
+    })
+
+
+@app.route("/api/chords/lookup")
+@auth_required
+def chord_lookup() -> Response:
+    """Saved chords for one Real Book song, written for one instrument."""
+    song_id = request.args.get("song", "")
+    instrument = request.args.get("instrument", "concert")
+    song = next((s for s in DB["songs"] if s["id"] == song_id), None)
+    if song is None:
+        abort(404, "That song is not in the Real Book index.")
+    if instrument not in chord_store.INSTRUMENTS:
+        abort(400, "unknown instrument")
+    if _over_chord_limit():
+        return app.response_class(
+            json.dumps({"message": "You've reached today's chord lookup limit. "
+                                   "Please try again tomorrow."}),
+            status=429, mimetype="application/json")
+    entry = CHORDS.get(song_id)
+    if not chord_store.is_servable(entry, CHORDS_REVIEWED_ONLY):
+        return jsonify({"id": song_id, "title": song["title"],
+                        "composer": song.get("composer", "unknown"),
+                        "available": False})
+    return jsonify({
+        **chord_store.transpose_chart(entry, instrument),
+        "id": song_id, "title": song["title"],
+        "composer": song.get("composer", "unknown"),
+        "available": True,
+        "reviewed": entry.get("review") == "approved",
+    })
 
 
 @app.after_request
@@ -470,10 +634,11 @@ def songs() -> Response:
     db = get_db()
     if MULTI_USER:
         plan = multiuser.get_plan(USERS_DB, session["user_id"])
-        return jsonify({**db, "user": {"email": session.get("email"),
-                                       "plan": plan,
-                                       "billing": PAYMENTS_ENABLED}})
-    return jsonify(db)
+        return jsonify({**db, "library": True,
+                        "user": {"email": session.get("email"),
+                                 "plan": plan,
+                                 "billing": PAYMENTS_ENABLED}})
+    return jsonify({**db, "library": LIBRARY_ENABLED})
 
 
 @app.route("/api/page/<book_id>/<int:pdf_page>")
@@ -484,7 +649,7 @@ def page_image(book_id: str, pdf_page: int) -> Response:
         abort(404, "unknown book")
     if not (1 <= pdf_page <= db["books"][book_id]["pages"]):
         abort(404, "page out of range")
-    pdf_path = get_books_dir() / db["books"][book_id]["pdf"]
+    pdf_path = book_pdf_path(book_id, db)
     if not pdf_path.exists():
         abort(404, "book file missing")
     png = render_png(pdf_path, pdf_page)

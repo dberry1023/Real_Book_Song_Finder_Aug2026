@@ -1,6 +1,13 @@
 flask>=3.0.0
 pymupdf>=1.24.0
 
+# Reads ANTHROPIC_API_KEY from the .env file in the folder above this one.
+python-dotenv>=1.0.0
+
+# Claude API. Used to index uploaded books that have no bookmarks, and by
+# generate_chords.py. The app still runs without it for everything else.
+anthropic>=0.69.0
+
 # Only needed if re-running ocr_tocs.py to rebuild the OCR'd table-of-contents
 # files in data/ (the results are already saved, so most users never need this):
 # rapidocr-onnxruntime

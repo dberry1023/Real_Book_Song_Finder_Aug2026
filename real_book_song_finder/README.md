@@ -5,10 +5,11 @@ displays the sheet music instantly in your browser.
 
 **1,780 songs · 2,491 charts · 7 books**
 
-> **This repo is private.** It contains code and an index (song titles +
-> page numbers) only — no sheet music PDFs. Keep it private: the Quick
-> Start link below embeds an access token, so treat repo access the same
-> as you'd treat a password.
+> **Two GitHub repos hold this code.** `real-book-song-finder` is private.
+> `Real_Book_Song_Finder_Aug2026` is **public**. Both hold code and an index
+> (song titles and page numbers) only, with no sheet music PDFs. Saved chord
+> charts (`data/chords.json`) go in the private repo only. Never put a real
+> access token or password in a tracked file.
 
 ## ☁️ Hosted version (Modal) — use it from anywhere
 
@@ -56,7 +57,7 @@ that's intentional, see [Using it from other devices](#using-it-from-other-devic
 ```bash
 git clone https://github.com/dberry1023/real-book-song-finder.git
 cd real-book-song-finder
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 ```
 
 Then edit the `BOOKS_DIR` path near the top of `server.py` and
@@ -85,6 +86,66 @@ into this PC, so you usually don't need to launch anything manually.
 - Use **◀ ▶** or the **arrow keys** to flip pages for multi-page tunes.
 - **− / Fit / +** control zoom · **/** jumps to the search box ·
   **🎲 Random song** picks one for practice.
+
+## Load and delete your own books
+
+The **⇧ LOAD** and **🗑 DELETE** buttons sit side by side at the top right.
+They work in local mode and in the multi-user app. They are off in the private
+single-password cloud app, because its disk does not persist.
+
+- **LOAD** opens your computer's file picker and takes one PDF at a time. A
+  second book can't start until the first has finished.
+- **DELETE** lists the books you uploaded. Pick one, then answer *"Are you sure
+  you want to delete…?"* with **Yes, delete it** or **No, keep it**.
+- **🛈 Your 7 master Real Books can't be deleted from the app.** Local uploads
+  are copied to `data/local_library/`, and DELETE only ever touches that folder.
+- In local mode, loading a copy of one of the 7 standard books is refused,
+  because it is already there. In the multi-user app those 7 are recognized by
+  fingerprint and indexed instantly.
+- Other books use their PDF bookmarks if they have them (free). Otherwise Claude
+  reads the table of contents, which needs `ANTHROPIC_API_KEY` in the `.env`
+  file in the folder above this one.
+
+## Chords for your instrument
+
+**🎵 Chords** opens a short form: pick a **song**, the **composer** fills in, and
+pick an **instrument**.
+
+- Song choices are limited to the 1,780 songs in the Real Book index. Anything
+  else is refused, so the form can't be used to ask free-form questions.
+- Charts are generated once with `generate_chords.py` and saved in
+  `data/chords.json` in concert pitch. **The app never calls an AI model when
+  someone looks up chords**, so a lookup costs nothing.
+- Instruments are handled in code: Bb up a whole step, Eb up a major sixth,
+  F up a fifth, and bass at concert pitch.
+- Every chart is labelled AI-generated, with an **Open the chart** button when
+  the song is in your books.
+- Unreviewed charts appear only if the model rated them high confidence. The
+  multi-user app shows approved charts only (`CHORDS_REVIEWED_ONLY=1`).
+- Accounts in the multi-user app get 200 lookups a day (`CHORD_DAILY_LIMIT`).
+  This protects the saved charts from being copied wholesale.
+
+**Current state: only 5 songs have charts.** A 20-tune test found that Claude
+working from memory isn't reliable enough to generate the rest yet. See
+[TECHNICAL.md](TECHNICAL.md#8-chord-accuracy-test-november-2026).
+
+```bash
+python generate_chords.py --test                            # 20 test tunes
+python generate_chords.py --all --model claude-sonnet-5-5   # every song, about $9
+python generate_chords.py --export-review                   # data/chord_review.csv
+python generate_chords.py --import-review                   # apply approved/rejected
+```
+
+Restart the app after changing `data/chords.json`.
+
+## Tests
+
+```bash
+python -m pytest tests -q
+```
+
+The tests use temporary folders and a placeholder API key, so they can't touch
+your books or spend money.
 
 ## The books
 

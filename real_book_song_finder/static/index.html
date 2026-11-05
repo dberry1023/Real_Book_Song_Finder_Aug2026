@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Real Book Song Finder</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎼</text></svg>">
 <style>
   :root {
     --bg: #14161d; --panel: #1c1f29; --panel2: #232736;
@@ -50,7 +51,7 @@
     cursor: pointer; user-select: none;
   }
   .chip:hover { border-color: var(--accent); }
-  .chip.on { color: #14161d; border-color: transparent; }
+  .chip.on { color: #14161d; border-color: transparent; background: #c7cfdc; }
   .chip.on.c-bk1 { background: #e8b44a; } .chip.on.c-bk2 { background: #f2a25c; }
   .chip.on.c-bk3 { background: #a8c7fa; } .chip.on.c-bk4 { background: #7ee0b8; }
   .chip.on.c-bk5 { background: #d4c063; } .chip.on.c-bk6 { background: #f28ca8; }
@@ -85,7 +86,7 @@
   .item .sub { display: block; font-size: 11px; color: var(--dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .badge {
     font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 5px;
-    color: #14161d; flex: 0 0 auto;
+    color: #14161d; flex: 0 0 auto; background: #c7cfdc;
   }
   .b-bk1 { background: #e8b44a; } .b-bk2 { background: #f2a25c; }
   .b-bk3 { background: #a8c7fa; } .b-bk4 { background: #7ee0b8; }
@@ -141,9 +142,64 @@
   #libActions { display: flex; gap: 8px; margin-top: 12px; align-items: center; }
   #libEmpty { color: var(--dim); font-size: 14px; padding: 12px 0; }
 
+  /* ---------- status line and dialogs ---------- */
+  button:disabled { opacity: .5; cursor: default; }
+  button.danger { color: #ffb4b4; }
+  button.danger:hover:not(:disabled) { border-color: #e46f6f; }
+  button.danger.solid { background: #b23a3a; color: #fff; border-color: #b23a3a; font-weight: 600; }
+  #appMsg {
+    display: none; padding: 7px 18px; font-size: 13px; flex: 0 0 auto;
+    background: var(--panel2); color: var(--accent); border-bottom: 1px solid var(--border);
+  }
+  #appMsg.show { display: block; }
+  .overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,.65);
+    display: none; align-items: center; justify-content: center; z-index: 55;
+  }
+  .overlay.open { display: flex; }
+  .dialog {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 12px;
+    width: min(520px, 92vw); max-height: 86vh; overflow: auto; padding: 18px 22px;
+  }
+  .dialog.wide { width: min(760px, 94vw); }
+  .dialog h2 { font-size: 17px; margin-bottom: 10px; }
+  .dialog p { font-size: 14px; line-height: 1.5; margin-bottom: 10px; }
+  .dialog .dim { color: var(--dim); font-size: 13px; }
+  .dlgBtns { display: flex; gap: 8px; margin-top: 14px; align-items: center; }
+  .dlgMsg { font-size: 13px; color: #e46f6f; margin-top: 10px; min-height: 18px; }
+  .delRow {
+    display: flex; align-items: center; gap: 9px; padding: 8px 0;
+    border-bottom: 1px solid var(--border); font-size: 14px; cursor: pointer;
+  }
+  .delRow.off { color: var(--dim); cursor: default; }
+
+  /* ---------- chords ---------- */
+  .field { display: block; margin-bottom: 10px; font-size: 12px; color: var(--dim); }
+  .field input, .field select {
+    display: block; width: 100%; margin-top: 4px; padding: 8px 10px; font-size: 14px;
+    background: var(--panel2); color: var(--text); border: 1px solid var(--border);
+    border-radius: 7px; outline: none;
+  }
+  .field input:focus, .field select:focus { border-color: var(--accent); }
+  .field input[readonly] { color: var(--dim); }
+  #chordHead { font-size: 15px; font-weight: 600; margin-top: 12px; }
+  #chordSub { font-size: 12px; color: var(--dim); margin: 2px 0 8px; }
+  .chordSection { margin-top: 10px; }
+  .chordName { font-size: 12px; font-weight: 700; color: var(--accent); margin-bottom: 4px; }
+  .chordBars { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; }
+  .chordBar {
+    background: var(--panel2); border: 1px solid var(--border); border-radius: 5px;
+    padding: 6px 7px; font-size: 13px; font-weight: 600; min-height: 32px;
+    overflow-wrap: anywhere;
+  }
+  #chordLabel {
+    margin-top: 12px; padding: 8px 10px; border-left: 3px solid var(--accent);
+    background: var(--panel2); font-size: 12px; color: var(--dim);
+  }
+
   @media print {
     @page { margin: 0.25in; }
-    header, #sidebar, #toolbar, #welcome, #spinner { display: none !important; }
+    header, #sidebar, #toolbar, #welcome, #spinner, #appMsg { display: none !important; }
     body, #layout, #main, #viewer {
       display: block; height: auto; min-height: 0; overflow: visible;
       background: #fff; margin: 0; padding: 0;
@@ -164,12 +220,17 @@
   <span class="stats" id="stats"></span>
   <span class="spacer"></span>
   <button id="randomBtn" title="Open a random song">&#127922; Random song</button>
+  <button id="chordsBtn" title="Chords for a Real Book song, for your instrument">&#127925; Chords</button>
+  <button id="loadBtn" style="display:none" title="Load one book (PDF) from your computer">&#8679; LOAD</button>
+  <button id="deleteBtn" class="danger" style="display:none" title="Delete a book you uploaded">&#128465; DELETE</button>
   <button id="upgBtn" style="display:none" title="Unlimited books with Pro">&#11088; Upgrade</button>
-  <button id="libBtn" style="display:none" title="Manage your book library">&#128218; My Books</button>
+  <button id="libBtn" style="display:none" title="See your uploaded books">&#128218; My Books</button>
   <form id="logoutForm" method="post" action="/logout" style="display:none;margin:0">
     <button id="logoutBtn" title="Sign out of your account">Sign out</button>
   </form>
 </header>
+<div id="appMsg" role="status"></div>
+<input type="file" id="loadFile" accept=".pdf,application/pdf" style="display:none">
 
 <div id="libOverlay">
   <div id="libPanel">
@@ -177,11 +238,63 @@
     <div id="libList"></div>
     <div id="libMsg"></div>
     <div id="libActions">
-      <input type="file" id="libFile" accept=".pdf,application/pdf" style="display:none">
-      <button id="libUpload">&#8679; Load a book (PDF)</button>
+      <button id="libUpload">&#8679; LOAD</button>
       <button id="portalBtn" style="display:none" title="Change or cancel your subscription">Manage subscription</button>
       <span class="spacer" style="flex:1"></span>
       <button id="libClose">Close</button>
+    </div>
+  </div>
+</div>
+
+<div id="delOverlay" class="overlay" role="dialog" aria-modal="true" aria-labelledby="delTitle">
+  <div class="dialog">
+    <h2 id="delTitle">&#128465; Delete a book</h2>
+    <div id="delChoose">
+      <p class="dim">Choose the uploaded book you want to delete.</p>
+      <div id="delList"></div>
+      <div class="dlgBtns">
+        <button id="delNext" class="danger" disabled>Delete</button>
+        <button id="delCancel">Cancel</button>
+      </div>
+    </div>
+    <div id="delConfirm" style="display:none">
+      <p id="delQuestion"></p>
+      <p class="dim">This removes your uploaded copy and its songs from your
+        search. You can't undo this, but you can load the book again later.</p>
+      <div class="dlgBtns">
+        <button id="delYes" class="danger solid">Yes, delete it</button>
+        <button id="delNo">No, keep it</button>
+      </div>
+    </div>
+    <div id="delMsg" class="dlgMsg"></div>
+  </div>
+</div>
+
+<div id="chordOverlay" class="overlay" role="dialog" aria-modal="true" aria-labelledby="chordTitle">
+  <div class="dialog wide">
+    <h2 id="chordTitle">&#127925; Chords</h2>
+    <label class="field">Song (from the Real Book index)
+      <input id="chordSong" list="chordSongList" autocomplete="off"
+             placeholder="Start typing a song title&hellip;">
+    </label>
+    <datalist id="chordSongList"></datalist>
+    <label class="field">Composer
+      <input id="chordComposer" readonly tabindex="-1" placeholder="Fills in when you pick a song">
+    </label>
+    <label class="field">Instrument
+      <select id="chordInstrument"></select>
+    </label>
+    <div class="dlgBtns">
+      <button id="chordShow" class="active">Show chords</button>
+      <button id="chordClose">Close</button>
+    </div>
+    <div id="chordMsg" class="dlgMsg"></div>
+    <div id="chordResult" style="display:none">
+      <div id="chordHead"></div>
+      <div id="chordSub"></div>
+      <div id="chordSections"></div>
+      <div id="chordLabel"></div>
+      <div class="dlgBtns"><button id="chordOpen" style="display:none">Open the chart</button></div>
     </div>
   </div>
 </div>
@@ -261,6 +374,27 @@ let bookFilter = new Set();  // empty = all books
 // cur = {song, srcIdx, pdfPage, zoom}   zoom: 0 = fit width, else px width
 
 const $ = id => document.getElementById(id);
+const WELCOME_HTML = $("welcome").innerHTML;
+// Sent on every change to the library; see app_request_only in server.py.
+const APP_HEADERS = { "X-Song-Finder": "1" };
+
+function esc(s) {
+  const d = document.createElement("div");
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+function shortName(bid) {
+  if (BOOK_SHORT[bid]) return BOOK_SHORT[bid];
+  const label = (DB.books[bid] && DB.books[bid].label) || bid;
+  return label.length > 14 ? label.slice(0, 13) + "…" : label;
+}
+
+function showMsg(text) {
+  $("appMsg").textContent = text;
+  $("appMsg").classList.toggle("show", !!text);
+  $("libMsg").textContent = text;
+}
 
 function norm(s) {
   return s.toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g, "")
@@ -320,10 +454,14 @@ function applyFilter() {
 
 function buildFilterControls() {
   const chips = $("bookChips");
+  chips.innerHTML = "";
+  bookFilter.clear();
+  $("keySel").length = 1;  // keep "Any key"
+  $("composerList").innerHTML = "";
   for (const bid of Object.keys(DB.books)) {
     const c = document.createElement("span");
     c.className = `chip c-${bid}`;
-    c.textContent = BOOK_SHORT[bid];
+    c.textContent = shortName(bid);
     c.title = DB.books[bid].label;
     c.onclick = () => {
       bookFilter.has(bid) ? bookFilter.delete(bid) : bookFilter.add(bid);
@@ -360,7 +498,7 @@ function renderList() {
     div.className = "item" + (s.id === selId ? " sel" : "");
     div.dataset.id = s.id;
     const badges = s.sources.map(x =>
-      `<span class="badge b-${x.book}">${BOOK_SHORT[x.book] || x.book.toUpperCase()}</span>`).join("");
+      `<span class="badge b-${x.book}">${esc(shortName(x.book))}</span>`).join("");
     div.innerHTML = `<span class="tw"><span class="t"></span><span class="sub"></span></span>${badges}`;
     div.querySelector(".t").textContent = s.title;
     const bits = [];
@@ -395,7 +533,7 @@ function renderViewer() {
   $("pageCtl").style.display = "flex";
   const tabs = song.sources.map((x, i) => {
     const lbl = `${DB.books[x.book].label.replace("Real Book ", "")} · p.${x.printed}`;
-    return `<button class="${i === srcIdx ? "active" : ""}" data-i="${i}">${lbl}</button>`;
+    return `<button class="${i === srcIdx ? "active" : ""}" data-i="${i}">${esc(lbl)}</button>`;
   }).join("");
   $("srcTabs").innerHTML = tabs;
   $("srcTabs").querySelectorAll("button").forEach(b =>
@@ -416,8 +554,7 @@ function loadPage() {
   };
   img.src = `/api/page/${src.book}/${pdfPage}`;
   const printedNow = src.printed + (pdfPage - src.pdf_page);
-  $("pageLabel").textContent =
-    `${BOOK_SHORT[src.book] || src.book.toUpperCase()} — page ${printedNow}`;
+  $("pageLabel").textContent = `${shortName(src.book)} — page ${printedNow}`;
   $("prevPg").disabled = pdfPage <= 1;
   $("nextPg").disabled = pdfPage >= DB.books[src.book].pages;
 }
@@ -473,6 +610,11 @@ $("randomBtn").onclick = () => {
   openSong(s, 0);
 };
 document.addEventListener("keydown", e => {
+  const openDialog = document.querySelector(".overlay.open");
+  if (openDialog) {
+    if (e.key === "Escape") openDialog.classList.remove("open");
+    return;
+  }
   if (e.target.tagName === "INPUT" || e.target.tagName === "SELECT") {
     if (e.key === "Escape") e.target.blur();
     return;
@@ -487,7 +629,9 @@ document.addEventListener("keydown", e => {
 window.addEventListener("resize", () => { if (cur && cur.zoom === 0) applyZoom(); });
 
 // ---------- init ----------
-fetch("/api/songs").then(r => r.json()).then(db => {
+async function loadSongs() {
+  const r = await fetch("/api/songs");
+  const db = await r.json();
   DB = db;
   songs = db.songs;
   songs.forEach(s => {
@@ -498,11 +642,14 @@ fetch("/api/songs").then(r => r.json()).then(db => {
   const nBooks = Object.keys(db.books).length;
   $("stats").textContent =
     `${songs.length} songs · ${nSrc} charts · ${nBooks} book${nBooks === 1 ? "" : "s"}`;
+  if (db.library) {
+    for (const id of ["loadBtn", "deleteBtn", "libBtn"])
+      $(id).style.display = "inline-block";
+  }
   if (db.user) {
-    // Multi-user mode: show who is signed in, sign-out and library buttons.
+    // Multi-user mode: show who is signed in and the sign-out button.
     $("logoutForm").style.display = "inline";
     $("logoutBtn").title = `Sign out (${db.user.email})`;
-    $("libBtn").style.display = "inline-block";
     if (db.user.billing && db.user.plan !== "pro") {
       $("upgBtn").style.display = "inline-block";
     }
@@ -511,19 +658,171 @@ fetch("/api/songs").then(r => r.json()).then(db => {
       $("portalBtn").style.display = "inline-block";
     }
   }
+  $("welcome").innerHTML = WELCOME_HTML;
   if (songs.length === 0 && db.user) {
     $("welcome").innerHTML =
       `<div class="big">&#127927;</div>
        Your library is empty.<br>
-       Click <b>&#128218; My Books</b> in the top-right corner to upload
-       your own Real Book PDFs<br>and build your personal searchable index.`;
+       Click <b>&#8679; LOAD</b> in the top-right corner to add your own
+       Real Book PDFs,<br>one at a time, and build your searchable index.`;
     $("stats").textContent = "No books loaded yet";
   }
   buildFilterControls();
   applyFilter();
-});
+}
 
-// ---------- My Books panel (multi-user mode) ----------
+function closeViewer() {
+  cur = null; selId = null;
+  $("pageImg").style.display = "none";
+  $("pageCtl").style.display = "none";
+  $("songTitle").textContent = "";
+  $("srcTabs").innerHTML = "";
+  $("welcome").style.display = "block";
+}
+
+loadSongs();
+
+// ---------- LOAD: one book at a time ----------
+let libraryBusy = false;
+function setLibraryBusy(busy) {
+  libraryBusy = busy;
+  for (const id of ["loadBtn", "deleteBtn", "libUpload"]) $(id).disabled = busy;
+}
+
+function serverError(text, fallback) {
+  const m = text.match(/<p>([^<]+)<\/p>/);
+  return m ? m[1] : fallback;
+}
+
+// The book's song list is built in the background, so keep checking until done.
+function watchIndexing() {
+  setLibraryBusy(true);
+  const timer = setInterval(async () => {
+    const r = await fetch("/api/books");
+    const d = await r.json();
+    if (d.books.some(b => b.status === "indexing")) return;
+    clearInterval(timer);
+    setLibraryBusy(false);
+    const failed = d.books.find(b => b.status === "failed");
+    showMsg(failed ? `“${failed.label}” could not be indexed: ${failed.error}`
+                   : "Your book is ready. Its songs are now in your search.");
+    await loadSongs();
+    if ($("libOverlay").classList.contains("open")) loadLibrary();
+  }, 4000);
+}
+
+$("loadBtn").onclick = () => $("loadFile").click();
+$("libUpload").onclick = () => $("loadFile").click();
+$("loadFile").onchange = async () => {
+  const file = $("loadFile").files[0];
+  if (!file || libraryBusy) return;
+  showMsg(`Loading “${file.name}”… Large books can take a minute.`);
+  setLibraryBusy(true);
+  let indexing = false;
+  try {
+    const fd = new FormData();
+    fd.append("file", file);
+    const r = await fetch("/api/books/upload",
+                          { method: "POST", headers: APP_HEADERS, body: fd });
+    if (r.ok) {
+      const d = await r.json();
+      showMsg(d.message);
+      indexing = d.status === "indexing";
+      await loadSongs();
+      if ($("libOverlay").classList.contains("open")) loadLibrary();
+    } else if (r.status === 402) {
+      const d = await r.json();
+      showMsg(d.message);
+      $("upgOverlay").style.display = "flex";
+    } else if (r.status === 413) {
+      showMsg("That file is too large to load (the limit is 200 MB).");
+    } else {
+      showMsg("Could not load the book: " +
+              serverError(await r.text(), r.statusText));
+    }
+  } catch (err) {
+    showMsg("Could not load the book: " + err);
+  } finally {
+    setLibraryBusy(false);
+    $("loadFile").value = "";
+    if (indexing) watchIndexing();
+  }
+};
+
+// ---------- DELETE: choose a book, then confirm ----------
+let delBook = null;
+
+function showDeleteStep(confirming) {
+  $("delChoose").style.display = confirming ? "none" : "block";
+  $("delConfirm").style.display = confirming ? "block" : "none";
+  $("delMsg").textContent = "";
+}
+
+function askToConfirm(book) {
+  delBook = book;
+  $("delQuestion").textContent = `Are you sure you want to delete “${book.label}”?`;
+  showDeleteStep(true);
+  $("delOverlay").classList.add("open");
+  $("delNo").focus();
+}
+
+async function openDeleteDialog() {
+  const r = await fetch("/api/books");
+  const { books } = await r.json();
+  const list = $("delList");
+  list.innerHTML = "";
+  delBook = null;
+  $("delNext").disabled = true;
+  if (!books.length) {
+    list.innerHTML = `<p>You haven't uploaded any books yet. Only books you
+      load yourself can be deleted here.</p>`;
+  }
+  for (const b of books) {
+    const row = document.createElement("label");
+    row.className = "delRow" + (b.status === "indexing" ? " off" : "");
+    row.innerHTML = `<input type="radio" name="delPick"><span></span>`;
+    row.querySelector("span").textContent = b.label;
+    const radio = row.querySelector("input");
+    radio.disabled = b.status === "indexing";
+    radio.onchange = () => { delBook = b; $("delNext").disabled = false; };
+    list.appendChild(row);
+  }
+  showDeleteStep(false);
+  $("delOverlay").classList.add("open");
+}
+
+$("deleteBtn").onclick = openDeleteDialog;
+$("delNext").onclick = () => { if (delBook) askToConfirm(delBook); };
+$("delCancel").onclick = () => $("delOverlay").classList.remove("open");
+$("delNo").onclick = () => $("delOverlay").classList.remove("open");
+$("delOverlay").onclick = e => {
+  if (e.target === $("delOverlay")) $("delOverlay").classList.remove("open");
+};
+$("delYes").onclick = async () => {
+  const book = delBook;
+  if (!book) return;
+  $("delYes").disabled = true;
+  try {
+    const r = await fetch(`/api/books/${book.sha256}`,
+                          { method: "DELETE", headers: APP_HEADERS });
+    if (!r.ok) {
+      $("delMsg").textContent = serverError(await r.text(),
+                                            "The book could not be deleted.");
+      return;
+    }
+    $("delOverlay").classList.remove("open");
+    closeViewer();
+    await loadSongs();
+    if ($("libOverlay").classList.contains("open")) loadLibrary();
+    showMsg(`Deleted “${book.label}”.`);
+  } catch (err) {
+    $("delMsg").textContent = "The book could not be deleted: " + err;
+  } finally {
+    $("delYes").disabled = false;
+  }
+};
+
+// ---------- My Books panel ----------
 function libStatusText(b) {
   if (b.status === "indexed") return `${b.songs} songs`;
   if (b.status === "indexing") return "indexing…";
@@ -531,29 +830,14 @@ function libStatusText(b) {
   return "awaiting indexing";
 }
 
-let libPoll = null;
-function pollLibraryIfBusy(books) {
-  const busy = books.some(b => b.status === "indexing");
-  if (busy && !libPoll) {
-    libPoll = setInterval(() => {
-      if ($("libOverlay").classList.contains("open")) loadLibrary();
-      else { clearInterval(libPoll); libPoll = null; }
-    }, 4000);
-  } else if (!busy && libPoll) {
-    clearInterval(libPoll); libPoll = null;
-  }
-}
-
 async function loadLibrary() {
   const r = await fetch("/api/books");
   const d = await r.json();
-  pollLibraryIfBusy(d.books);
   const list = $("libList");
   list.innerHTML = "";
   if (!d.books.length) {
-    list.innerHTML = `<div id="libEmpty">No books yet — upload your first
-      Real Book PDF below. Standard Real Books are recognized and indexed
-      instantly.</div>`;
+    list.innerHTML = `<div id="libEmpty">No uploaded books yet. Click LOAD to
+      add one PDF from your computer.</div>`;
     return;
   }
   for (const b of d.books) {
@@ -561,20 +845,129 @@ async function loadLibrary() {
     row.className = "libRow";
     row.innerHTML =
       `<span class="lbl"></span>
-       <span class="libStatus ${b.status}"></span>
-       <button class="libDel" title="Remove this book">&times;</button>`;
+       <span class="libStatus ${esc(b.status)}"></span>
+       <button class="libDel danger" title="Delete this book">&times;</button>`;
     row.querySelector(".lbl").textContent = b.label;
     row.querySelector(".libStatus").textContent = libStatusText(b);
-    row.querySelector(".libDel").onclick = async () => {
-      if (!confirm(`Remove “${b.label}” from your library?`)) return;
-      await fetch(`/api/books/${b.sha256}`, { method: "DELETE" });
-      location.reload();
-    };
+    row.querySelector(".libDel").disabled = b.status === "indexing";
+    row.querySelector(".libDel").onclick = () => askToConfirm(b);
     list.appendChild(row);
   }
 }
 
 $("libBtn").onclick = () => { $("libOverlay").classList.add("open"); $("libMsg").textContent = ""; loadLibrary(); };
+
+// ---------- Chords: songs from the Real Book index only ----------
+let chordSongs = null;     // title (normalized) -> song
+let chordCurrent = null;   // song whose chart is showing
+
+function chordPick() {
+  return (chordSongs && chordSongs.get(norm($("chordSong").value))) || null;
+}
+
+function fillComposer() {
+  const song = chordPick();
+  const composer = song ? song.composer : "";
+  $("chordComposer").value = composer === "unknown" ? "Not listed" : composer;
+  return song;
+}
+
+async function openChords() {
+  $("chordOverlay").classList.add("open");
+  $("chordMsg").textContent = "";
+  if (!chordSongs) {
+    const r = await fetch("/api/chords/songs");
+    const d = await r.json();
+    chordSongs = new Map();
+    const options = document.createDocumentFragment();
+    for (const s of d.songs) {
+      const key = norm(s.title);
+      if (chordSongs.has(key)) continue;
+      chordSongs.set(key, s);
+      const o = document.createElement("option");
+      o.value = s.title;
+      options.appendChild(o);
+    }
+    $("chordSongList").appendChild(options);
+    for (const i of d.instruments) {
+      const o = document.createElement("option");
+      o.value = i.id; o.textContent = i.label;
+      $("chordInstrument").appendChild(o);
+    }
+  }
+  if (cur && !chordPick()) $("chordSong").value = cur.song.title;
+  fillComposer();
+  $("chordSong").focus();
+}
+
+async function showChords() {
+  const song = chordPick();
+  $("chordResult").style.display = "none";
+  chordCurrent = null;
+  if (!song) {
+    $("chordMsg").textContent =
+      "Please pick a song from the list. Only songs in the Real Book index can be used.";
+    return;
+  }
+  $("chordMsg").textContent = "";
+  const q = new URLSearchParams({ song: song.id, instrument: $("chordInstrument").value });
+  const r = await fetch(`/api/chords/lookup?${q}`);
+  if (r.status === 429) { $("chordMsg").textContent = (await r.json()).message; return; }
+  if (!r.ok) { $("chordMsg").textContent = "Those chords could not be loaded."; return; }
+  const c = await r.json();
+  if (!c.available) {
+    $("chordMsg").textContent = `Chords for “${c.title}” aren't ready yet.`;
+    return;
+  }
+  chordCurrent = c;
+  $("chordHead").textContent = `${c.title} · ${c.key === "unknown" ? "key not listed" : "Key of " + c.key}`;
+  const written = c.key === c.concert_key ? "" : ` · Concert key ${c.concert_key}`;
+  $("chordSub").textContent = `${c.instrument}${written}${c.form ? " · Form " + c.form : ""}`;
+  const box = $("chordSections");
+  box.innerHTML = "";
+  for (const section of c.sections) {
+    const wrap = document.createElement("div");
+    wrap.className = "chordSection";
+    const name = document.createElement("div");
+    name.className = "chordName";
+    name.textContent = section.name;
+    const bars = document.createElement("div");
+    bars.className = "chordBars";
+    for (const bar of section.bars) {
+      const cell = document.createElement("div");
+      cell.className = "chordBar";
+      cell.textContent = bar;
+      bars.appendChild(cell);
+    }
+    wrap.append(name, bars);
+    box.appendChild(wrap);
+  }
+  const inBooks = songs.some(s => s.id === c.id);
+  let label = c.reviewed
+    ? "AI-generated chords, checked by Song Finder."
+    : "AI-generated chords. They can contain mistakes and have not been checked yet.";
+  label += inBooks ? " Check them against the chart in your book."
+                   : " This song isn't in the books you have loaded.";
+  $("chordLabel").textContent = label;
+  $("chordOpen").style.display = inBooks ? "inline-block" : "none";
+  $("chordResult").style.display = "block";
+}
+
+$("chordsBtn").onclick = openChords;
+$("chordSong").addEventListener("input", fillComposer);
+$("chordSong").addEventListener("keydown", e => { if (e.key === "Enter") showChords(); });
+$("chordShow").onclick = showChords;
+$("chordInstrument").onchange = () => { if (chordCurrent) showChords(); };
+$("chordClose").onclick = () => $("chordOverlay").classList.remove("open");
+$("chordOverlay").onclick = e => {
+  if (e.target === $("chordOverlay")) $("chordOverlay").classList.remove("open");
+};
+$("chordOpen").onclick = () => {
+  const song = chordCurrent && songs.find(s => s.id === chordCurrent.id);
+  if (!song) return;
+  $("chordOverlay").classList.remove("open");
+  openSong(song, 0);
+};
 
 // ---------- Upgrade / billing ----------
 async function startCheckout(plan) {
@@ -601,38 +994,8 @@ $("portalBtn").onclick = async () => {
   const d = await r.json();
   if (d.url) window.location = d.url;
 };
-$("libClose").onclick = () => { $("libOverlay").classList.remove("open"); location.reload(); };
+$("libClose").onclick = () => $("libOverlay").classList.remove("open");
 $("libOverlay").onclick = e => { if (e.target === $("libOverlay")) $("libClose").onclick(); };
-$("libUpload").onclick = () => $("libFile").click();
-$("libFile").onchange = async () => {
-  const file = $("libFile").files[0];
-  if (!file) return;
-  $("libMsg").textContent = `Uploading “${file.name}”… (large books can take a minute)`;
-  $("libUpload").disabled = true;
-  try {
-    const fd = new FormData();
-    fd.append("file", file);
-    const r = await fetch("/api/books/upload", { method: "POST", body: fd });
-    if (r.ok) {
-      const d = await r.json();
-      $("libMsg").textContent = d.message;
-      loadLibrary();
-    } else if (r.status === 402) {
-      const d = await r.json();
-      $("libMsg").textContent = d.message;
-      $("upgOverlay").style.display = "flex";
-    } else {
-      const text = await r.text();
-      const m = text.match(/<p>([^<]+)<\/p>/);
-      $("libMsg").textContent = "Upload failed: " + (m ? m[1] : r.statusText);
-    }
-  } catch (err) {
-    $("libMsg").textContent = "Upload failed: " + err;
-  } finally {
-    $("libUpload").disabled = false;
-    $("libFile").value = "";
-  }
-};
 </script>
 </body>
 </html>

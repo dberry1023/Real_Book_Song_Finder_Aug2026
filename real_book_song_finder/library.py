@@ -64,18 +64,31 @@ def custom_index_path(user_dir: Path, digest: str) -> Path:
     return user_dir / "indexes" / f"{digest}.json"
 
 
-def rebuild_index(user_dir: Path, master_db: dict) -> None:
-    """Write the user's songs.json from their manifest's indexed books.
+def merged_index(user_dir: Path, master_db: dict,
+                 all_master: bool = False) -> dict:
+    """Combine the master index with a user's indexed books.
 
     Known books come from the master index (whose songs already carry
     merged composer/key metadata); custom books come from their own
     per-book index files written by the indexing pipeline.
+
+    Args:
+        user_dir: The folder holding this library.
+        master_db: The master song index.
+        all_master: Include every master book, whether or not it is in the
+            manifest. Local mode uses this because the seven Real Books are
+            already on the PC and uploads only add to them.
+
+    Returns:
+        A song index with "books" and "songs".
     """
     manifest = load_manifest(user_dir)
     owned = {e["book_id"] for e in manifest
              if e.get("book_id") and e.get("status") == "indexed"}
-    books = {bid: master_db["books"][bid] for bid in owned
-             if bid in master_db["books"]}
+    if all_master:
+        owned |= set(master_db["books"])
+    books = {bid: info for bid, info in master_db["books"].items()
+             if bid in owned}
     merged: dict[str, dict] = {}
     for s in master_db["songs"]:
         sources = [src for src in s["sources"] if src["book"] in owned]
@@ -103,22 +116,35 @@ def rebuild_index(user_dir: Path, master_db: dict) -> None:
                 merged[s["id"]] = {k: v for k, v in s.items()}
 
     songs = sorted(merged.values(), key=lambda s: s["id"])
+    return {"books": books, "songs": songs}
+
+
+def rebuild_index(user_dir: Path, master_db: dict,
+                  all_master: bool = False) -> None:
+    """Write the user's songs.json from their manifest's indexed books."""
+    index = merged_index(user_dir, master_db, all_master)
     user_dir.mkdir(parents=True, exist_ok=True)
-    (user_dir / "songs.json").write_text(
-        json.dumps({"books": books, "songs": songs}), encoding="utf-8")
+    (user_dir / "songs.json").write_text(json.dumps(index), encoding="utf-8")
 
 
 def add_upload(user_dir: Path, tmp_path: Path, original_name: str,
-               master_db: dict) -> tuple[dict | None, str | None]:
+               master_db: dict, all_master: bool = False
+               ) -> tuple[dict | None, str | None]:
     """Ingest a validated uploaded PDF. Returns (manifest_entry, None) or
     (None, error_message). Caller is responsible for deleting tmp_path on
-    error."""
+    error.
+
+    With all_master set (local mode) the standard books are already part of
+    the library, so uploading another copy of one is refused.
+    """
     digest = sha256_file(tmp_path)
     manifest = load_manifest(user_dir)
     if any(e["sha256"] == digest for e in manifest):
         return None, "That book is already in your library."
 
     book_id = KNOWN_BOOKS.get(digest)
+    if book_id and all_master:
+        return None, "That book is already in your library."
     books_dir = user_dir / "books"
     books_dir.mkdir(parents=True, exist_ok=True)
 
@@ -151,12 +177,17 @@ def add_upload(user_dir: Path, tmp_path: Path, original_name: str,
     tmp_path.replace(books_dir / pdf_name)
     manifest.append(entry)
     save_manifest(user_dir, manifest)
-    rebuild_index(user_dir, master_db)
+    rebuild_index(user_dir, master_db, all_master)
     return entry, None
 
 
-def delete_book(user_dir: Path, digest: str, master_db: dict) -> bool:
-    """Remove a book (by sha256) from the manifest, disk, and index."""
+def delete_book(user_dir: Path, digest: str, master_db: dict,
+                all_master: bool = False) -> bool:
+    """Remove a book (by sha256) from the manifest, disk, and index.
+
+    Only files inside user_dir are touched, so the master PDFs used in local
+    mode can never be deleted from here.
+    """
     manifest = load_manifest(user_dir)
     entry = next((e for e in manifest if e["sha256"] == digest), None)
     if entry is None:
@@ -167,5 +198,5 @@ def delete_book(user_dir: Path, digest: str, master_db: dict) -> bool:
     custom_index_path(user_dir, digest).unlink(missing_ok=True)
     manifest.remove(entry)
     save_manifest(user_dir, manifest)
-    rebuild_index(user_dir, master_db)
+    rebuild_index(user_dir, master_db, all_master)
     return True

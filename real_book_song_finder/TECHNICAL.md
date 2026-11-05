@@ -159,3 +159,81 @@ file (workloads stop rather than bill if exceeded). This app bills only
 while a container is awake (~$0.05–0.15/hour of active use at
 1 CPU / 1 GB); storage for 218 MB is negligible. Practical cost for
 personal use: **$0/month**.
+
+## 7. LOAD, DELETE and Chords (November 2026)
+
+### LOAD and DELETE
+
+| Mode | Library folder | Master PDFs |
+|---|---|---|
+| Local (`python server.py`, `--lan`) | `data/local_library/` | Stay in `BOOKS_DIR`, always included |
+| Multi-user (`MULTI_USER=1`) | `USER_DATA_ROOT/<id>/` | Users upload their own copies |
+| Private cloud (`modal_app.py`) | Off (`LOCAL_LIBRARY=0`) | Modal volume |
+
+- `library_dir()` and `library_key()` hide the difference between the modes, so
+  one set of routes serves both. Local mode uses key `0`, which no account has.
+- `library.merged_index(..., all_master=True)` adds uploads on top of the master
+  index. It is computed in memory for local mode, so a rebuilt master index can't
+  be masked by an old copy.
+- `book_pdf_path()` reads `u_*` books from the library and everything else from
+  `BOOKS_DIR`. `library.delete_book()` only touches files inside the library
+  folder and only acts on manifest entries, so no route can delete a master PDF.
+- **One at a time:** the `_loading` set refuses a second upload until the first
+  has finished indexing, and refuses deletes during that time. If the server
+  stops partway through, `/api/books` reports the book as failed so it can be
+  deleted rather than staying stuck on "indexing".
+- **Confirmation:** the page asks "Are you sure…?" with **Yes, delete it** and
+  **No, keep it** before it sends the `DELETE`.
+- **Cross-site protection:** local mode has no login, so another website could
+  otherwise post to `127.0.0.1`. `app_request_only` requires an `X-Song-Finder`
+  header on upload and delete. Browsers won't send a custom header cross-site
+  without a CORS grant, and this server gives none.
+
+### Chords
+
+```text
+generate_chords.py --> Claude (once per song) --> data/chords.json (concert pitch)
+                                                        |
+browser form --> GET /api/chords/lookup --> chords.transpose_chart() --> chart
+```
+
+- `server.py` has no AI call on this path, so lookups cost nothing and need no
+  API key.
+- `/api/chords/lookup` returns 404 unless the song id is in the master index,
+  and 400 unless the instrument is one of `chords.INSTRUMENTS`.
+- `chords.transpose_chord()` changes only the root and slash bass, so qualities
+  such as `m7b5`, `7#9` and `6/9` pass through unchanged. Sharps or flats follow
+  the written key.
+- `is_servable()`: rejected charts never show, approved charts always show, and
+  anything else needs high confidence and `CHORDS_REVIEWED_ONLY` off.
+- `generate_chords.py --all` is safe to stop and rerun. Songs the model declines
+  go in `data/chord_declined.json` so they aren't paid for twice.
+- Review order is unverified composer or key first (139 songs), then the songs
+  printed in the most books.
+
+## 8. Chord accuracy test (November 2026)
+
+Twenty tunes were run three ways: 12 well known and 8 less common. Results are in
+`data/chord_test/`, which git ignores. Accuracy below is a judgment from knowledge
+of these tunes, not a bar-by-bar comparison with the printed pages.
+
+| Method | Charts returned | Result | Measured cost per song |
+|---|---|---|---|
+| Haiku 5.5, from memory | 8 of 20 | Not usable. Giant Steps and All The Things You Are were wrong. | $0.0005 |
+| Sonnet 5.5, from memory | 13 of 20 | 8 rated high confidence: 5 looked right, 3 had errors. Declined 7 of the 8 less common tunes. | $0.0049 |
+| Sonnet 5.5, reading the printed page | 15 of 20 | 7 looked right, 1 misread (Blue Bossa), 7 need checking. Worked on the less common tunes. | $0.0142 |
+
+Findings:
+
+- The one medium-confidence chart was wrong, so only high confidence shows without
+  review.
+- Generating everything from memory would cost about $9, but with this coverage
+  many songs would stay empty and about 3 in 8 "high confidence" charts could
+  contain errors.
+- Reading the page gave the best coverage, at about $25 for one chart per song.
+  Five pages failed the chart format check because the model added markers such
+  as `(1st` or `1.`. It is **not built into the app**, because saving chords taken
+  from the books needs a copyright decision first.
+- `data/chords.json` holds only the 5 from-memory charts that looked right, marked
+  unreviewed. It is gitignored because `Real_Book_Song_Finder_Aug2026` is public,
+  and is force-added only to the private `real-book-song-finder` repo.
