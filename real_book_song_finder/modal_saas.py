@@ -8,8 +8,8 @@ by fingerprint and indexed from the bundled master index).
 
 One-time setup:
     modal secret create songfinder-saas SESSION_SECRET=<random> \
-        SIGNUP_CODE=<beta invite code> ANTHROPIC_API_KEY=<key> \
-        CHORD_ADMIN_EMAILS=<your account email>
+        SIGNUP_CODE=<beta invite code> ANTHROPIC_API_KEY=<key>
+    modal secret create songfinder-admins CHORD_ADMIN_EMAILS=<your account email>
     # optional later, to turn on payments:
     #   STRIPE_SECRET_KEY / STRIPE_WEBHOOK_SECRET /
     #   STRIPE_PRICE_ANNUAL / STRIPE_PRICE_MONTHLY
@@ -49,7 +49,8 @@ if Path("data/chords.json").exists():
 @app.function(
     image=image,
     volumes={"/userdata": vol},
-    secrets=[modal.Secret.from_name("songfinder-saas")],
+    secrets=[modal.Secret.from_name("songfinder-saas"),
+             modal.Secret.from_name("songfinder-admins")],
     memory=1024,
     timeout=600,          # unknown-book indexing runs inside the request
     max_containers=1,     # SQLite on the volume: keep a single writer
