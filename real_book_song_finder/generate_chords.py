@@ -62,7 +62,9 @@ DECLINED = "declined"
 WRONG_PAGE = "wrong page"
 BATCH_DISCOUNT = 0.5
 BATCH_POLL_SECONDS = 60
-BATCH_MAX_BYTES = 200 * 1024 * 1024  # the API's limit is 256 MB per batch
+# The API allows 256 MB per batch, but a 200 MB upload dropped its connection, so
+# send smaller ones. Each finished upload is saved, so a dropped one loses nothing.
+BATCH_MAX_BYTES = 30 * 1024 * 1024
 MEMORY_BACKUP_PATH = DATA / "chords_from_memory_backup.json"
 BOOKS_DIR = Path(os.environ.get(
     "BOOKS_DIR", r"C:\Users\stats\OneDrive\Desktop\Jazz Night School\Real_Books"))
