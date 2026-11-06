@@ -244,7 +244,14 @@ All 1,775 requests succeeded.
 Findings:
 
 - Far fewer songs rated high than in the test, because the test tunes were
-  unusually famous. Whether the model's "low" is too cautious has not been measured.
+  unusually famous.
+- **The ratings were then tested.** 58 charts were compared bar by bar with the
+  printed page: Opus read each page without seeing its own chart, then Sonnet
+  compared the two. Average bars with the same harmony: **high 89%, medium 54%,
+  low 25%**. The low group is not just cautious: many of its charts have the wrong
+  form or changes unrelated to the printed tune.
+- A difference isn't always a Claude error, because the books have mistakes and
+  tunes have alternate changes. Page readings can also be wrong.
 - `is_servable()` shows high confidence only, so 25 charts appear until more are
   approved. The multi-user app shows none until they are approved.
 - The owner's view is that the Real Book itself has known errors and that Claude's
