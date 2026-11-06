@@ -8,7 +8,8 @@ by fingerprint and indexed from the bundled master index).
 
 One-time setup:
     modal secret create songfinder-saas SESSION_SECRET=<random> \
-        SIGNUP_CODE=<beta invite code> ANTHROPIC_API_KEY=<key>
+        SIGNUP_CODE=<beta invite code> ANTHROPIC_API_KEY=<key> \
+        CHORD_ADMIN_EMAILS=<your account email>
     # optional later, to turn on payments:
     #   STRIPE_SECRET_KEY / STRIPE_WEBHOOK_SECRET /
     #   STRIPE_PRICE_ANNUAL / STRIPE_PRICE_MONTHLY
@@ -33,6 +34,7 @@ image = (
         "USERS_DB": "/userdata/users.db",
         "USER_DATA_ROOT": "/userdata/users",
         "CHORDS_REVIEWED_ONLY": "1",  # customers see approved charts only
+        "CHORD_EDITS_PATH": "/userdata/chord_edits.json",
     })
     .add_local_python_source("server", "multiuser", "library", "index_book",
                              "chords")

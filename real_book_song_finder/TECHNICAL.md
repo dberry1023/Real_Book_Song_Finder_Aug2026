@@ -252,9 +252,39 @@ Findings:
   form or changes unrelated to the printed tune.
 - A difference isn't always a Claude error, because the books have mistakes and
   tunes have alternate changes. Page readings can also be wrong.
-- `is_servable()` shows high confidence only, so 25 charts appear until more are
-  approved. The multi-user app shows none until they are approved.
-- The owner's view is that the Real Book itself has known errors and that Claude's
-  chords are right more often, so reading the printed pages is not planned.
+- iReal Pro and iGigBook appear to use charts entered by people, so the owner chose
+  to read the printed pages and add an editor. Copying chord charts from published
+  books into a paid product should get legal review before launch.
+
+### Reading the printed pages
+
+`generate_chords.py --pages-submit` sends Claude Opus 5.5 at high effort each song's
+page as a 200 DPI greyscale image, through half-price batches split at 200 MB.
+
+- Typeset books are preferred over handwritten ones (`book_order()`).
+- `page_span()` also sends later pages, up to three, when the next song starts later.
+- `page_entry()` saves a chart only if the title printed on the page matches the
+  song, so a wrong page number can't attach another tune's chords.
+- `clean_bar()` removes ending marks and words. A chart with no chords isn't saved.
+- The 80 songs with flagged page numbers are skipped, as are high-confidence charts,
+  approved charts and charts already read.
+- The first results copy `chords.json` to `data/chords_from_memory_backup.json`.
+
+In a 20-song trial, all 20 were saved for $0.53 ($0.0265 each), and 3 of the 20 were
+checked by eye against their pages and matched bar for bar, including 2 handwritten.
+One song (Flags) had no chords printed, which added the rule above. Opus rated 17 of
+the 20 medium, including those matching pages, so `is_servable()` shows charts read
+from the page at high or medium, and charts from memory at high only. The multi-user
+app shows none of these until they are approved.
+
+### Chord editor
+
+- `chart_for()` puts a person's correction ahead of the saved chart. Corrections live
+  in `chord_edits.json`, separate from `chords.json`, with the previous chart kept.
+- `parse_chart_text()` accepts `[Section] chord chord | chord` and refuses anything
+  that isn't a chord symbol, with a plain message.
+- Local mode publishes at once. In multi-user mode, only `CHORD_ADMIN_EMAILS` publish,
+  and everyone else's edit waits in `pending` for approval.
+- Editing is off in the private cloud app, whose disk does not persist.
 - `data/chords.json` is gitignored because `Real_Book_Song_Finder_Aug2026` is
   public, and is force-added only to the private `real-book-song-finder` repo.

@@ -13,6 +13,7 @@ sys.path.insert(0, str(APP_DIR))
 
 ENV_NAMES = ["MULTI_USER", "USERS_DB", "USER_DATA_ROOT", "LOCAL_LIBRARY_DIR", "BOOKS_DIR",
              "CHORDS_PATH", "CHORDS_REVIEWED_ONLY", "CHORD_DAILY_LIMIT",
+             "CHORD_EDITS_PATH", "CHORD_ADMIN_EMAILS",
              "LOCAL_LIBRARY", "ANTHROPIC_API_KEY", "INDEX_SYNC", "STRIPE_SECRET_KEY",
              "SESSION_SECRET", "ACCESS_TOKEN", "SIGNUP_CODE", "REQUIRE_AUTH"]
 
@@ -49,6 +50,7 @@ def start_app(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Iterator[Calla
         monkeypatch.setenv("BOOKS_DIR", str(books))
         monkeypatch.setenv("LOCAL_LIBRARY_DIR", str(tmp_path / "local_library"))
         monkeypatch.setenv("CHORDS_PATH", str(chords_path))
+        monkeypatch.setenv("CHORD_EDITS_PATH", str(tmp_path / "chord_edits.json"))
         monkeypatch.setenv("USERS_DB", str(tmp_path / "users.db"))
         monkeypatch.setenv("USER_DATA_ROOT", str(tmp_path / "users"))
         monkeypatch.setenv("SESSION_SECRET", "test-secret")

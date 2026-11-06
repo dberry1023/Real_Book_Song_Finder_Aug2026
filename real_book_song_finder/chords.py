@@ -35,6 +35,10 @@ _CHORD = re.compile(
     r"(?:/(?P<bass>[A-G][#b]?))?$"
 )
 _MARKERS = {"%", "N.C.", "NC", "-"}
+# Stricter than _CHORD, which alone would accept words such as "Coda" or "Break".
+_QUALITY = re.compile(
+    r"^(?:maj|ma|M|min|mi|m|dim|o|aug|sus|add|alt|omit|no|b|#|\+|-|\d|\(|\)|,|/\d+)*$"
+)
 
 
 def _pitch(note: str) -> int:
@@ -72,6 +76,65 @@ def _spell(note: str, semitones: int, sharps: bool) -> str:
 def is_chord_token(token: str) -> bool:
     """Return True if a token is a chord symbol or a bar marker such as %."""
     return token in _MARKERS or _CHORD.match(token) is not None
+
+
+def is_strict_chord(token: str) -> bool:
+    """Return True only for real chord symbols and bar markers, never for words."""
+    if token in _MARKERS:
+        return True
+    match = _CHORD.match(token)
+    return match is not None and _QUALITY.match(match["quality"]) is not None
+
+
+def clean_bar(bar: str) -> str:
+    """Tidy one bar read from a printed page.
+
+    Keeps chord symbols, unwraps optional chords such as "(Fmaj7/G)", and drops
+    markers such as "1." or "(1st". A bar with no chord left repeats the last one.
+    """
+    kept = []
+    for raw in bar.replace("|", " ").split():
+        token = raw.strip(",")
+        if token.startswith("(") and token.endswith(")") and token.count("(") == 1:
+            token = token[1:-1]
+        token = re.sub(r"^([A-G][#b]?)0(7|6)?$", r"\1dim\2", token)  # B07 for a circle
+        if is_strict_chord(token):
+            kept.append(token)
+    return " ".join(kept) or "%"
+
+
+def chart_to_text(sections: list[dict]) -> str:
+    """Write a chart as editable text, one section per line."""
+    return "\n".join(f"[{s['name']}] " + " | ".join(s["bars"]) for s in sections)
+
+
+def parse_chart_text(text: str) -> tuple[list[dict], str | None]:
+    """Read a chart typed in the editor.
+
+    Each line is one section, with an optional name in square brackets and bars
+    separated by |, for example "[A] Dm7 G7 | Cmaj7 | %".
+
+    Returns:
+        (sections, None), or ([], the problem in plain words).
+    """
+    sections = []
+    for number, line in enumerate(text.splitlines(), 1):
+        line = line.strip()
+        if not line:
+            continue
+        match = re.match(r"^\[([^\]]{1,40})\]\s*(.*)$", line)
+        name, body = (match[1].strip(), match[2]) if match else ("Chords", line)
+        bars = [bar.strip() for bar in body.split("|") if bar.strip()]
+        if not bars:
+            return [], f"Line {number} has no chords."
+        for bar in bars:
+            for token in bar.split():
+                if not is_strict_chord(token):
+                    return [], f"Line {number}: “{token}” isn't a chord symbol."
+        sections.append({"name": name, "bars": bars})
+    if not sections:
+        return [], "Please enter at least one bar of chords."
+    return sections, None
 
 
 def transpose_chord(chord: str, semitones: int, target_key: str = "") -> str:
@@ -140,6 +203,7 @@ def validate_sections(sections: object) -> str | None:
     """
     if not isinstance(sections, list) or not sections:
         return "no sections"
+    has_chord = False
     for section in sections:
         if not isinstance(section, dict) or not section.get("bars"):
             return "section has no bars"
@@ -149,16 +213,20 @@ def validate_sections(sections: object) -> str | None:
             for token in bar.split():
                 if not is_chord_token(token):
                     return f"not a chord: {token}"
-    return None
+                has_chord = has_chord or token not in _MARKERS
+    return None if has_chord else "no chords"
 
 
 def is_servable(entry: dict | None, reviewed_only: bool = False) -> bool:
     """Decide whether a saved chart may be shown to users.
 
     A rejected chart is never shown. An approved chart always is. Anything else
-    is shown only if the app is not limited to reviewed charts and the model
-    rated its own answer high confidence. In the November 2026 test the one
-    medium-confidence chart was wrong, so medium is not enough on its own.
+    needs the app not to be limited to reviewed charts, and enough confidence.
+
+    Charts from memory need high: in the November 2026 check, medium charts agreed
+    with the printed page on only about half their bars. Charts read from the page
+    also show at medium, because the model rates them modestly: the three medium
+    readings checked by eye all matched their pages bar for bar.
     """
     if not entry or entry.get("review") == "rejected":
         return False
@@ -166,7 +234,8 @@ def is_servable(entry: dict | None, reviewed_only: bool = False) -> bool:
         return True
     if reviewed_only:
         return False
-    return entry.get("confidence") == "high"
+    allowed = ("high", "medium") if entry.get("source") == "book" else ("high",)
+    return entry.get("confidence") in allowed
 
 
 def load_store(path: Path) -> dict[str, dict]:
@@ -184,11 +253,30 @@ def load_store(path: Path) -> dict[str, dict]:
     return good
 
 
-def save_store(path: Path, songs: dict[str, dict]) -> None:
-    """Write saved charts, replacing the file only once the write is complete."""
+def _write_json(path: Path, data: dict) -> None:
+    """Write a file, replacing the old one only once the write is complete."""
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_suffix(".tmp")
-    tmp.write_text(
-        json.dumps({"songs": songs}, indent=1, sort_keys=True), encoding="utf-8"
-    )
+    tmp.write_text(json.dumps(data, indent=1, sort_keys=True), encoding="utf-8")
     os.replace(tmp, path)
+
+
+def save_store(path: Path, songs: dict[str, dict]) -> None:
+    """Write saved charts."""
+    _write_json(path, {"songs": songs})
+
+
+def load_edits(path: Path) -> dict:
+    """Load people's corrections, kept apart so a chord run can't overwrite them.
+
+    Returns:
+        {"edits": {song id: edit}, "pending": {suggestion id: suggestion}}.
+    """
+    if not path.exists():
+        return {"edits": {}, "pending": {}}
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def save_edits(path: Path, edits: dict) -> None:
+    """Write people's corrections."""
+    _write_json(path, edits)

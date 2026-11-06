@@ -84,6 +84,7 @@ def test_every_real_book_key_transposes_for_every_instrument() -> None:
         ([{"name": "A", "bars": []}], False),
         ([{"name": "A", "bars": ["hello world"]}], False),
         ([{"name": "A", "bars": ["  "]}], False),
+        ([{"name": "A", "bars": ["%", "%", "N.C."]}], False),
     ],
 )
 def test_validate_sections_accepts_only_real_charts(sections: object, ok: bool) -> None:
@@ -101,6 +102,9 @@ def test_validate_sections_accepts_only_real_charts(sections: object, ok: bool) 
         ({"review": "unreviewed", "confidence": "high"}, True, False),
         ({"review": "unreviewed", "confidence": "medium"}, False, False),
         ({"review": "unreviewed", "confidence": "low"}, False, False),
+        ({"review": "unreviewed", "confidence": "medium", "source": "book"}, False, True),
+        ({"review": "unreviewed", "confidence": "medium", "source": "book"}, True, False),
+        ({"review": "unreviewed", "confidence": "low", "source": "book"}, False, False),
     ],
 )
 def test_is_servable_follows_the_review_rules(

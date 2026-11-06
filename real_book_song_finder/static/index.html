@@ -192,6 +192,14 @@
     padding: 6px 7px; font-size: 13px; font-weight: 600; min-height: 32px;
     overflow-wrap: anywhere;
   }
+  #chordEditText {
+    width: 100%; padding: 8px 10px; font: 13px/1.5 Consolas, monospace; resize: vertical;
+    background: var(--panel2); color: var(--text); border: 1px solid var(--border);
+    border-radius: 7px; outline: none;
+  }
+  #chordEditText:focus { border-color: var(--accent); }
+  .suggestion { border-top: 1px solid var(--border); padding: 10px 0; font-size: 13px; }
+  .suggestion pre { white-space: pre-wrap; font: 12px/1.5 Consolas, monospace; margin: 4px 0; }
   #chordLabel {
     margin-top: 12px; padding: 8px 10px; border-left: 3px solid var(--accent);
     background: var(--panel2); font-size: 12px; color: var(--dim);
@@ -296,6 +304,23 @@
       <div id="chordLabel"></div>
       <div class="dlgBtns"><button id="chordOpen" style="display:none">Open the chart</button></div>
     </div>
+    <div class="dlgBtns">
+      <button id="chordEditBtn" style="display:none">Edit chords</button>
+      <button id="chordReviewBtn" style="display:none">Review suggestions</button>
+    </div>
+    <div id="chordEditor" style="display:none">
+      <p id="chordEditTitle" style="margin-top:14px;font-weight:600"></p>
+      <p class="dim">Type chords in concert pitch. Use one line per section, put the
+        section name in square brackets, and separate bars with |. For example:
+        [A] Dm7 G7 | Cmaj7 | Am7 D7 | Gmaj7</p>
+      <textarea id="chordEditText" rows="10" spellcheck="false"></textarea>
+      <div class="dlgBtns">
+        <button id="chordEditSave" class="active">Save</button>
+        <button id="chordEditCancel">Cancel</button>
+      </div>
+      <div id="chordEditMsg" class="dlgMsg"></div>
+    </div>
+    <div id="chordReview" style="display:none"></div>
   </div>
 </div>
 
@@ -860,6 +885,8 @@ $("libBtn").onclick = () => { $("libOverlay").classList.add("open"); $("libMsg")
 // ---------- Chords: songs from the Real Book index only ----------
 let chordSongs = null;     // title (normalized) -> song
 let chordCurrent = null;   // song whose chart is showing
+let chordEditSong = null;  // song the Edit button acts on
+let chordEditing = { enabled: false, can_publish: false, pending: 0 };
 
 function chordPick() {
   return (chordSongs && chordSongs.get(norm($("chordSong").value))) || null;
@@ -878,6 +905,7 @@ async function openChords() {
   if (!chordSongs) {
     const r = await fetch("/api/chords/songs");
     const d = await r.json();
+    chordEditing = d.editing;
     chordSongs = new Map();
     const options = document.createDocumentFragment();
     for (const s of d.songs) {
@@ -897,13 +925,30 @@ async function openChords() {
   }
   if (cur && !chordPick()) $("chordSong").value = cur.song.title;
   fillComposer();
+  updateReviewButton();
   $("chordSong").focus();
+}
+
+function updateReviewButton() {
+  const n = chordEditing.pending;
+  $("chordReviewBtn").style.display = chordEditing.can_publish && n ? "inline-block" : "none";
+  $("chordReviewBtn").textContent = `Review suggestions (${n})`;
+}
+
+function showEditButton(hasChart) {
+  $("chordEditBtn").style.display = chordEditing.enabled ? "inline-block" : "none";
+  $("chordEditBtn").textContent = chordEditing.can_publish
+    ? (hasChart ? "Edit chords" : "Add chords")
+    : (hasChart ? "Suggest a fix" : "Suggest chords");
 }
 
 async function showChords() {
   const song = chordPick();
   $("chordResult").style.display = "none";
+  $("chordEditor").style.display = "none";
+  $("chordEditBtn").style.display = "none";
   chordCurrent = null;
+  chordEditSong = song;
   if (!song) {
     $("chordMsg").textContent =
       "Please pick a song from the list. Only songs in the Real Book index can be used.";
@@ -917,8 +962,10 @@ async function showChords() {
   const c = await r.json();
   if (!c.available) {
     $("chordMsg").textContent = `Chords for “${c.title}” aren't ready yet.`;
+    showEditButton(false);
     return;
   }
+  showEditButton(true);
   chordCurrent = c;
   $("chordHead").textContent = `${c.title} · ${c.key === "unknown" ? "key not listed" : "Key of " + c.key}`;
   const written = c.key === c.concert_key ? "" : ` · Concert key ${c.concert_key}`;
@@ -943,9 +990,12 @@ async function showChords() {
     box.appendChild(wrap);
   }
   const inBooks = songs.some(s => s.id === c.id);
-  let label = c.reviewed
-    ? "AI-generated chords, checked by Song Finder."
-    : "AI-generated chords. They can contain mistakes and have not been checked yet.";
+  const origin = c.source_book
+    ? `Read by AI from ${c.source_book}, page ${c.source_page}.`
+    : "AI-generated chords.";
+  let label = c.edited ? "Chords corrected by a person."
+    : c.reviewed ? `${origin} Checked by Song Finder.`
+    : `${origin} They can contain mistakes and have not been checked yet.`;
   label += inBooks ? " Check them against the chart in your book."
                    : " This song isn't in the books you have loaded.";
   $("chordLabel").textContent = label;
@@ -967,6 +1017,82 @@ $("chordOpen").onclick = () => {
   if (!song) return;
   $("chordOverlay").classList.remove("open");
   openSong(song, 0);
+};
+
+// ---------- Chord editor ----------
+$("chordEditBtn").onclick = async () => {
+  if (!chordEditSong) return;
+  const r = await fetch(`/api/chords/source?${new URLSearchParams({ song: chordEditSong.id })}`);
+  if (!r.ok) { $("chordMsg").textContent = "Those chords could not be opened."; return; }
+  const d = await r.json();
+  $("chordEditTitle").textContent = d.title;
+  $("chordEditText").value = d.text;
+  $("chordEditMsg").textContent = "";
+  $("chordEditSave").textContent = chordEditing.can_publish ? "Save" : "Send suggestion";
+  $("chordEditor").style.display = "block";
+  $("chordReview").style.display = "none";
+  $("chordEditText").focus();
+};
+$("chordEditCancel").onclick = () => { $("chordEditor").style.display = "none"; };
+$("chordEditSave").onclick = async () => {
+  if (!chordEditSong) return;
+  const r = await fetch("/api/chords/edit", {
+    method: "POST", headers: { ...APP_HEADERS, "Content-Type": "application/json" },
+    body: JSON.stringify({ song: chordEditSong.id, text: $("chordEditText").value }),
+  });
+  if (!r.ok) {
+    const type = r.headers.get("Content-Type") || "";
+    $("chordEditMsg").textContent = type.includes("json")
+      ? (await r.json()).message : "Those chords could not be saved.";
+    return;
+  }
+  const d = await r.json();
+  $("chordEditor").style.display = "none";
+  if (d.published) {
+    await showChords();
+  } else {
+    $("chordMsg").textContent = "Thanks. Your suggestion was sent for review.";
+  }
+};
+
+// ---------- Reviewing suggested corrections ----------
+async function loadSuggestions() {
+  const r = await fetch("/api/chords/pending");
+  if (!r.ok) return;
+  const { pending } = await r.json();
+  chordEditing.pending = pending.length;
+  updateReviewButton();
+  const box = $("chordReview");
+  box.innerHTML = "";
+  if (!pending.length) { box.style.display = "none"; return; }
+  for (const item of pending) {
+    const row = document.createElement("div");
+    row.className = "suggestion";
+    row.innerHTML = `<b></b> <span class="dim"></span>
+      <div class="dim">Current chords</div><pre class="cur"></pre>
+      <div class="dim">Suggested chords</div><pre class="new"></pre>
+      <div class="dlgBtns"><button class="ok active">Approve</button>
+      <button class="no">Reject</button></div>`;
+    row.querySelector("b").textContent = item.title;
+    row.querySelector("span").textContent = `from ${item.by}`;
+    row.querySelector(".cur").textContent = item.current || "(none)";
+    row.querySelector(".new").textContent = item.text;
+    const decide = action => async () => {
+      await fetch(`/api/chords/pending/${item.id}`, {
+        method: "POST", headers: { ...APP_HEADERS, "Content-Type": "application/json" },
+        body: JSON.stringify({ action }),
+      });
+      loadSuggestions();
+    };
+    row.querySelector(".ok").onclick = decide("approve");
+    row.querySelector(".no").onclick = decide("reject");
+    box.appendChild(row);
+  }
+  box.style.display = "block";
+}
+$("chordReviewBtn").onclick = () => {
+  $("chordEditor").style.display = "none";
+  loadSuggestions();
 };
 
 // ---------- Upgrade / billing ----------

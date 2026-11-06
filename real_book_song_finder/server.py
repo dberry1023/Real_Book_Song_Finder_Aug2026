@@ -55,6 +55,15 @@ CHORDS_PATH = Path(os.environ.get(
     "CHORDS_PATH", str(APP_DIR / "data" / "chords.json")))
 CHORDS_REVIEWED_ONLY = os.environ.get("CHORDS_REVIEWED_ONLY") == "1"
 CHORD_DAILY_LIMIT = int(os.environ.get("CHORD_DAILY_LIMIT", "200"))
+# People's corrections. On your own PC they apply at once. In multi-user mode
+# they wait for approval, and only CHORD_ADMIN_EMAILS can approve them.
+CHORD_EDITS_PATH = Path(os.environ.get(
+    "CHORD_EDITS_PATH", str(APP_DIR / "data" / "chord_edits.json")))
+CHORD_EDITS_ENABLED = LIBRARY_ENABLED
+CHORD_ADMIN_EMAILS = {
+    e.strip().lower() for e in os.environ.get("CHORD_ADMIN_EMAILS", "").split(",")
+    if e.strip()}
+MAX_CHART_TEXT = 6000
 
 if MULTI_USER:
     import multiuser
@@ -107,6 +116,7 @@ def _load_db(songs_path: Path, meta_path: Path) -> dict:
 
 DB = _load_db(APP_DIR / "data" / "songs.json", APP_DIR / "data" / "metadata.json")
 CHORDS = chord_store.load_store(CHORDS_PATH)
+CHORD_EDITS = chord_store.load_edits(CHORD_EDITS_PATH)
 
 # Library indexes, loaded lazily (keyed by user id, or LOCAL_LIBRARY_KEY).
 _user_dbs: dict[int, dict] = {}
@@ -552,6 +562,37 @@ def _over_chord_limit() -> bool:
         return counts[uid] > CHORD_DAILY_LIMIT
 
 
+def index_song(song_id: str) -> dict | None:
+    """A song from the Real Book index, or None if it isn't listed."""
+    return next((s for s in DB["songs"] if s["id"] == song_id), None)
+
+
+def chart_for(song_id: str) -> dict | None:
+    """The chart to use: a person's correction if there is one, else the saved one."""
+    edit = CHORD_EDITS["edits"].get(song_id)
+    base = CHORDS.get(song_id)
+    if not edit:
+        return base
+    song = index_song(song_id) or {}
+    return {"key": song.get("key", "unknown"), **(base or {}),
+            "sections": edit["sections"], "review": "approved", "edited": True}
+
+
+def can_publish() -> bool:
+    """Whether this person's corrections apply straight away."""
+    return not MULTI_USER or session.get("email", "") in CHORD_ADMIN_EMAILS
+
+
+def _publish_edit(song_id: str, sections: list[dict], by: str) -> None:
+    """Apply a correction. Call with _chord_lock held."""
+    old = chart_for(song_id)
+    CHORD_EDITS["edits"][song_id] = {
+        "sections": sections, "by": by,
+        "at": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds"),
+        "previous": old["sections"] if old else None,
+    }
+
+
 @app.route("/api/chords/songs")
 @auth_required
 def chord_songs() -> Response:
@@ -562,11 +603,102 @@ def chord_songs() -> Response:
         "songs": [
             {"id": s["id"], "title": s["title"],
              "composer": s.get("composer", "unknown"),
-             "ready": chord_store.is_servable(CHORDS.get(s["id"]),
+             "ready": chord_store.is_servable(chart_for(s["id"]),
                                               CHORDS_REVIEWED_ONLY)}
             for s in sorted(DB["songs"], key=lambda s: s["id"])
         ],
+        "editing": {"enabled": CHORD_EDITS_ENABLED, "can_publish": can_publish(),
+                    "pending": (len(CHORD_EDITS["pending"])
+                                if can_publish() else 0)},
     })
+
+
+@app.route("/api/chords/source")
+@auth_required
+def chord_source() -> Response:
+    """A song's chart as editable text, always in concert pitch."""
+    if not CHORD_EDITS_ENABLED:
+        abort(404)
+    song = index_song(request.args.get("song", ""))
+    if song is None:
+        abort(404, "That song is not in the Real Book index.")
+    chart = chart_for(song["id"])
+    return jsonify({"title": song["title"],
+                    "text": chord_store.chart_to_text(chart["sections"]) if chart else ""})
+
+
+@app.route("/api/chords/edit", methods=["POST"])
+@auth_required
+@app_request_only
+def chord_edit() -> Response:
+    """Save a correction, or hold it for approval in multi-user mode."""
+    if not CHORD_EDITS_ENABLED:
+        abort(404)
+    body = request.get_json(silent=True) or {}
+    song = index_song(str(body.get("song", "")))
+    if song is None:
+        abort(404, "That song is not in the Real Book index.")
+    text = str(body.get("text", ""))
+    if len(text) > MAX_CHART_TEXT:
+        abort(400, "That chart is too long.")
+    sections, problem = chord_store.parse_chart_text(text)
+    if problem:
+        return app.response_class(json.dumps({"message": problem}), status=400,
+                                  mimetype="application/json")
+    if _over_chord_limit():
+        return app.response_class(
+            json.dumps({"message": "You've reached today's limit. Please try "
+                                   "again tomorrow."}),
+            status=429, mimetype="application/json")
+    by = session.get("email", "owner")
+    published = can_publish()
+    with _chord_lock:
+        if published:
+            _publish_edit(song["id"], sections, by)
+        else:
+            CHORD_EDITS["pending"][secrets.token_hex(6)] = {
+                "song": song["id"], "title": song["title"],
+                "sections": sections, "by": by,
+                "at": datetime.datetime.now(
+                    datetime.timezone.utc).isoformat(timespec="seconds"),
+            }
+        chord_store.save_edits(CHORD_EDITS_PATH, CHORD_EDITS)
+    return jsonify({"published": published})
+
+
+@app.route("/api/chords/pending")
+@auth_required
+def chord_pending() -> Response:
+    """Suggested corrections waiting for approval."""
+    if not CHORD_EDITS_ENABLED or not can_publish():
+        abort(403, "only the owner can review suggestions")
+    return jsonify({"pending": [
+        {"id": key, "title": item["title"], "by": item["by"],
+         "text": chord_store.chart_to_text(item["sections"]),
+         "current": (chord_store.chart_to_text(chart_for(item["song"])["sections"])
+                     if chart_for(item["song"]) else "")}
+        for key, item in CHORD_EDITS["pending"].items()
+    ]})
+
+
+@app.route("/api/chords/pending/<key>", methods=["POST"])
+@auth_required
+@app_request_only
+def chord_pending_decide(key: str) -> Response:
+    """Approve or reject one suggested correction."""
+    if not CHORD_EDITS_ENABLED or not can_publish():
+        abort(403, "only the owner can review suggestions")
+    action = (request.get_json(silent=True) or {}).get("action")
+    if action not in ("approve", "reject"):
+        abort(400, "unknown action")
+    with _chord_lock:
+        item = CHORD_EDITS["pending"].pop(key, None)
+        if item is None:
+            abort(404, "suggestion not found")
+        if action == "approve":
+            _publish_edit(item["song"], item["sections"], item["by"])
+        chord_store.save_edits(CHORD_EDITS_PATH, CHORD_EDITS)
+    return jsonify({"done": True})
 
 
 @app.route("/api/chords/lookup")
@@ -575,7 +707,7 @@ def chord_lookup() -> Response:
     """Saved chords for one Real Book song, written for one instrument."""
     song_id = request.args.get("song", "")
     instrument = request.args.get("instrument", "concert")
-    song = next((s for s in DB["songs"] if s["id"] == song_id), None)
+    song = index_song(song_id)
     if song is None:
         abort(404, "That song is not in the Real Book index.")
     if instrument not in chord_store.INSTRUMENTS:
@@ -585,7 +717,7 @@ def chord_lookup() -> Response:
             json.dumps({"message": "You've reached today's chord lookup limit. "
                                    "Please try again tomorrow."}),
             status=429, mimetype="application/json")
-    entry = CHORDS.get(song_id)
+    entry = chart_for(song_id)
     if not chord_store.is_servable(entry, CHORDS_REVIEWED_ONLY):
         return jsonify({"id": song_id, "title": song["title"],
                         "composer": song.get("composer", "unknown"),
@@ -596,6 +728,9 @@ def chord_lookup() -> Response:
         "composer": song.get("composer", "unknown"),
         "available": True,
         "reviewed": entry.get("review") == "approved",
+        "edited": bool(entry.get("edited")),
+        "source_book": entry.get("source_book"),
+        "source_page": entry.get("source_page"),
     })
 
 
