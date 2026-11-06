@@ -277,6 +277,14 @@ the 20 medium, including those matching pages, so `is_servable()` shows charts r
 from the page at high or medium, and charts from memory at high only. The multi-user
 app shows none of these until they are approved.
 
+The full run read 1,658 charts for **$43.70** in total, rated 418 high, 1,228 medium
+and 12 low. With the 25 high-confidence charts from memory, **1,671 of 1,780 songs
+show**. The other 109 are 78 songs with flagged page numbers, 19 where nothing could
+be saved (no chords printed, unreadable, or another title on the page), and 12
+low-confidence readings. Five readings checked by eye all matched. Seven charts are
+more than 30% blank bars and should be looked at: Fox Hunt, Golden Notebooks, Horizon,
+Hotel Vamp, In Case You Haven't Heard, Mysterious Traveller and Señor Mouse.
+
 ### Chord editor
 
 - `chart_for()` puts a person's correction ahead of the saved chart. Corrections live
