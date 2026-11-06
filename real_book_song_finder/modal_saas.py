@@ -33,7 +33,6 @@ image = (
         "INDEX_SYNC": "1",          # threads don't survive scale-down
         "USERS_DB": "/userdata/users.db",
         "USER_DATA_ROOT": "/userdata/users",
-        "CHORDS_REVIEWED_ONLY": "1",  # customers see approved charts only
         "CHORD_EDITS_PATH": "/userdata/chord_edits.json",
     })
     .add_local_python_source("server", "multiuser", "library", "index_book",

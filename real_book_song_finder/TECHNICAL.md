@@ -253,8 +253,8 @@ Findings:
 - A difference isn't always a Claude error, because the books have mistakes and
   tunes have alternate changes. Page readings can also be wrong.
 - iReal Pro and iGigBook appear to use charts entered by people, so the owner chose
-  to read the printed pages and add an editor. Copying chord charts from published
-  books into a paid product should get legal review before launch.
+  to read the printed pages and add an editor. The owner, an attorney, reviewed and
+  approved showing these charts to customers on 5 November 2026.
 
 ### Reading the printed pages
 
@@ -274,8 +274,9 @@ In a 20-song trial, all 20 were saved for $0.53 ($0.0265 each), and 3 of the 20 
 checked by eye against their pages and matched bar for bar, including 2 handwritten.
 One song (Flags) had no chords printed, which added the rule above. Opus rated 17 of
 the 20 medium, including those matching pages, so `is_servable()` shows charts read
-from the page at high or medium, and charts from memory at high only. The multi-user
-app shows none of these until they are approved.
+from the page at high or medium, and charts from memory at high only. This applies
+in the multi-user app too, with `CHORDS_REVIEWED_ONLY=1` available to limit it to
+approved charts.
 
 The full run read 1,658 charts for **$43.70** in total, rated 418 high, 1,228 medium
 and 12 low. With the 25 high-confidence charts from memory, **1,671 of 1,780 songs

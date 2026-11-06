@@ -120,14 +120,14 @@ pick an **instrument**.
   F up a fifth, and bass at concert pitch.
 - Every chart is labelled AI-generated, with an **Open the chart** button when
   the song is in your books.
-- Unreviewed charts appear only if the model rated them high confidence. The
-  multi-user app shows approved charts only (`CHORDS_REVIEWED_ONLY=1`).
+- Charts read from the pages appear at high or medium confidence, and charts from
+  memory at high only. Set `CHORDS_REVIEWED_ONLY=1` to show approved charts only.
 - Accounts in the multi-user app get 200 lookups a day (`CHORD_DAILY_LIMIT`).
   This protects the saved charts from being copied wholesale.
 
 **Current state:** 1,671 of the 1,780 songs show chords on your PC. 1,646 were read
 from the printed pages by Claude Opus 5.5, and 25 are high-confidence charts from
-memory. The multi-user app shows approved charts only. See
+memory. Each one carries an AI label in every mode. See
 [TECHNICAL.md](TECHNICAL.md#8-chord-accuracy-test-november-2026).
 
 **Fixing chords:** click **Edit chords** after showing a song. Type chords in concert
