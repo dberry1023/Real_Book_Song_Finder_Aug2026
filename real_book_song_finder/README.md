@@ -1,9 +1,28 @@
 # Real Book Song Finder
 
-A local web app that finds any song across your Real Book collection and
-displays the sheet music instantly in your browser.
+A web app that finds any song across your Real Book collection, displays the
+sheet music from the books you own, and gives the chords for your instrument.
 
-**1,780 songs · 2,491 charts · 7 books**
+**1,780 songs · 2,491 charts · 7 books · 1,671 songs with chords**
+
+## Ways to use it
+
+| Version | Where | Who | Start or update it |
+|---|---|---|---|
+| Local | `http://127.0.0.1:8765` on this PC | You, no password | `Start_Song_Finder.bat` or `python server.py` |
+| Phone and other devices | Tailscale link with `?key=` | You, access token | `Start_Song_Finder_LAN.bat` (also starts at login) |
+| Private online | `https://statsias--real-book-finder-web.modal.run` | You, one password | `python -m modal deploy modal_app.py` |
+| Multi-user online (beta) | `https://statsias--song-finder-saas-web.modal.run` | Accounts, invite code | `python -m modal deploy modal_saas.py` |
+| Landing page | `songfinder.statsias.com` (GitHub Pages) | Public | Repo `dberry1023/songfinder-site` |
+
+Features in every version: search with composer, key and book filters, edition
+tabs, page turning, zoom, print, **Chords** for five instrument groups, and the
+**◀ Hide list** button. LOAD, DELETE and the chord editor are in the local and
+multi-user versions only.
+
+The landing page needs a Wix DNS record before it loads: a `CNAME` with host
+`songfinder` pointing to `dberry1023.github.io`. Then turn on **Enforce HTTPS**
+in the repo's Pages settings.
 
 > **Two GitHub repos hold this code.** `real-book-song-finder` is private.
 > `Real_Book_Song_Finder_Aug2026` is **public**. Both hold code and an index
@@ -22,6 +41,21 @@ Since July 2026 the app is also deployed privately on
 - The 7 PDFs live in the private Modal volume `real-books` — not in this
   repo, not in the container image.
 - Redeploy after code changes: `python -m modal deploy modal_app.py`
+
+## ☁️ Multi-user version (Modal, beta)
+
+Deployed on 5 November 2026 at `https://statsias--song-finder-saas-web.modal.run`.
+
+- People sign up with an email, a password and the invite code (`SIGNUP_CODE` in
+  the Modal secret `songfinder-saas`). The landing page sends them to you by email
+  for the code.
+- Each account has its own private library in the Modal volume `songfinder-users`.
+- Customers see the same chord charts as you, with the AI label. Their chord
+  corrections wait for approval by the email in the Modal secret
+  `songfinder-admins` (`CHORD_ADMIN_EMAILS`).
+- Stripe billing is built but off until Stripe keys are added to the secret.
+- Redeploy from this folder with
+  `$env:PYTHONUTF8=1; python -m modal deploy modal_saas.py`.
 
 See **[TECHNICAL.md](TECHNICAL.md)** for the full architecture writeup
 (what changed in `server.py`, how the Modal image/volume/secret fit
@@ -72,6 +106,18 @@ which files it expects to find there.
 `python server.py`). Your browser opens automatically at
 <http://127.0.0.1:8765>.
 
+**If you see `ModuleNotFoundError: No module named 'pymupdf'`,** your terminal
+has the Practice `.venv` active, and that environment doesn't have the app's
+libraries. Run `deactivate` first, or install them into it with
+`python -m pip install -r requirements.txt`.
+
+**If new buttons are missing,** an older copy is still running. Stop every copy
+and start again:
+
+```powershell
+Get-CimInstance Win32_Process -Filter "Name like 'python%'" | Where-Object { $_.CommandLine -like '*server.py*' } | ForEach-Object { Stop-Process -Id $_.ProcessId }; python server.py
+```
+
 **From your phone/laptop too:** see [Using it from other devices](#using-it-from-other-devices-tailscale)
 below — it's already set to auto-start in that mode every time you log
 into this PC, so you usually don't need to launch anything manually.
@@ -121,8 +167,8 @@ pick an **instrument**.
   someone looks up chords**, so a lookup costs nothing.
 - Instruments are handled in code: Bb up a whole step, Eb up a major sixth,
   F up a fifth, and bass at concert pitch.
-- Every chart is labelled AI-generated, with an **Open the chart** button when
-  the song is in your books.
+- Every chart carries a label, such as *"Read by AI from Real Book 6th Edition,
+  page 141"*, with an **Open the chart** button when the song is in your books.
 - Charts read from the pages appear at high or medium confidence, and charts from
   memory at high only. Set `CHORDS_REVIEWED_ONLY=1` to show approved charts only.
 - Accounts in the multi-user app get 200 lookups a day (`CHORD_DAILY_LIMIT`).
@@ -164,7 +210,7 @@ Restart the app after changing `data/chords.json`.
 python -m pytest tests -q
 ```
 
-The tests use temporary folders and a placeholder API key, so they can't touch
+The 115 tests use temporary folders and a placeholder API key, so they can't touch
 your books or spend money.
 
 ## The books

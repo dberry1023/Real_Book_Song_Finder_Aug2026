@@ -1,7 +1,30 @@
-# Technical Overview: From Local App to Password-Protected Cloud Deployment
+# Technical Overview
 
 *How the Real Book Song Finder went from a localhost-only Flask app to a
-private web app reachable from anywhere — July 2026.*
+private web app reachable from anywhere (July 2026), then gained per-user
+libraries, chords for every instrument and a chord editor (November 2026).
+Sections 1 to 6 describe the July work as it was done. Sections 7 onward
+describe what came after.*
+
+## Current state (9 November 2026)
+
+| Piece | What it is |
+|---|---|
+| `server.py` | Flask app. Search, page rendering, LOAD and DELETE, chords, editor, auth, billing |
+| `static/index.html` | Single-file frontend, including the Hide list button |
+| `library.py`, `index_book.py` | Book libraries and automatic indexing of uploaded books |
+| `chords.py` | Saved charts, transposition, chart checks and the editor's text format |
+| `generate_chords.py` | Builds `data/chords.json`, from memory or from the printed pages |
+| `multiuser.py` | Accounts and plans for multi-user mode |
+| `modal_app.py` | Private single-password cloud app (`real-book-finder`) |
+| `modal_saas.py` | Multi-user cloud app (`song-finder-saas`), live since 5 November 2026 |
+| `tests/` | 115 pytest tests |
+
+Main routes: `/api/songs`, `/api/page/<book>/<page>`, `/api/books`,
+`/api/books/upload`, `DELETE /api/books/<sha256>`, `/api/chords/songs`,
+`/api/chords/lookup`, `/api/chords/source`, `POST /api/chords/edit`,
+`/api/chords/pending` and `POST /api/chords/pending/<id>`. Every change to a
+library or a chart needs the `X-Song-Finder: 1` header.
 
 ## 1. Starting point
 
@@ -205,7 +228,8 @@ browser form --> GET /api/chords/lookup --> chords.transpose_chart() --> chart
   such as `m7b5`, `7#9` and `6/9` pass through unchanged. Sharps or flats follow
   the written key.
 - `is_servable()`: rejected charts never show, approved charts always show, and
-  anything else needs high confidence and `CHORDS_REVIEWED_ONLY` off.
+  anything else needs `CHORDS_REVIEWED_ONLY` off and enough confidence: high for
+  charts from memory, high or medium for charts read from the page (see below).
 - `generate_chords.py --all` is safe to stop and rerun. Songs the model declines
   go in `data/chord_declined.json` so they aren't paid for twice.
 - Review order is unverified composer or key first (139 songs), then the songs
@@ -259,7 +283,10 @@ Findings:
 ### Reading the printed pages
 
 `generate_chords.py --pages-submit` sends Claude Opus 5.5 at high effort each song's
-page as a 200 DPI greyscale image, through half-price batches split at 200 MB.
+page as a 200 DPI greyscale image, through half-price batches split at 30 MB. A
+first attempt at 200 MB lost its connection during the upload, and Anthropic's
+batch list confirmed it never arrived. Each finished upload is saved straight away,
+so a dropped one costs nothing and a rerun sends only the songs left.
 
 - Typeset books are preferred over handwritten ones (`book_order()`).
 - `page_span()` also sends later pages, up to three, when the next song starts later.
@@ -297,3 +324,35 @@ Hotel Vamp, In Case You Haven't Heard, Mysterious Traveller and Señor Mouse.
 - Editing is off in the private cloud app, whose disk does not persist.
 - `data/chords.json` is gitignored because `Real_Book_Song_Finder_Aug2026` is
   public, and is force-added only to the private `real-book-song-finder` repo.
+
+## 9. Hide list (9 November 2026)
+
+- **◀ Hide list**, at the left of the toolbar, or the `\` key adds the
+  `list-hidden` class to `<body>`, which hides `#sidebar`.
+- `applyZoom()` caps **Fit** at 1,100 px with the list showing and at `ZOOM_MAX`
+  (2,600 px) with it hidden, so the music uses the whole window. In testing,
+  500 Miles High went from 1,100 to 1,890 px wide on a 1,920 px screen.
+- `/` shows the list again and focuses search. The `\` key is ignored while
+  typing in a box. The choice is kept in `localStorage`, wrapped in `try`, so
+  the page still works where storage is blocked.
+
+## 10. The multi-user deployment (5 November 2026)
+
+| Modal resource | Holds |
+|---|---|
+| App `song-finder-saas` | `https://statsias--song-finder-saas-web.modal.run` |
+| Secret `songfinder-saas` | `SESSION_SECRET`, `SIGNUP_CODE`, `ANTHROPIC_API_KEY`, later Stripe keys |
+| Secret `songfinder-admins` | `CHORD_ADMIN_EMAILS`, kept apart so the main secret needn't be retyped |
+| Volume `songfinder-users` | `users.db`, each account's books and indexes, `chord_edits.json` |
+
+- The image bundles `data/chords.json` when it exists, so redeploy after
+  regenerating charts. The chord data stays out of the public GitHub repo.
+- `CHORDS_REVIEWED_ONLY` is not set, so customers see the same charts as the
+  owner. The owner approved this on 5 November 2026.
+- Checks after deploy: login and signup pages load, and every private route
+  returns 403 without a session. Inside the running container (read-only, through
+  `modal container exec`): 1,757 charts loaded, 1,671 showing, the admin email
+  set, and the page carrying LOAD, DELETE, Chords and the editor. Nobody signed in
+  on the live site, to keep test accounts out of the real user list.
+- `max_containers=1` keeps a single writer for SQLite, and `INDEX_SYNC=1` indexes
+  uploads inside the request because threads don't survive scale-down.
