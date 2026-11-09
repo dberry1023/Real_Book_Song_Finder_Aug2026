@@ -86,6 +86,9 @@ into this PC, so you usually don't need to launch anything manually.
 - Use **◀ ▶** or the **arrow keys** to flip pages for multi-page tunes.
 - **− / Fit / +** control zoom · **/** jumps to the search box ·
   **🎲 Random song** picks one for practice.
+- **◀ Hide list** (or the `\` key) hides the song list so the music fills the
+  window, and **Fit** then uses the full width. **▶ Show list** or `/` brings it
+  back. The app remembers your choice on that device.
 
 ## Load and delete your own books
 

@@ -39,6 +39,8 @@
     width: 360px; flex: 0 0 auto; display: flex; flex-direction: column;
     background: var(--panel); border-right: 1px solid var(--border); min-height: 0;
   }
+  body.list-hidden #sidebar { display: none; }
+  #sideToggle { font-weight: 600; }
   #searchWrap { padding: 12px 12px 8px; }
   #filters {
     padding: 0 12px 10px; border-bottom: 1px solid var(--border);
@@ -362,6 +364,8 @@
 
   <div id="main">
     <div id="toolbar">
+      <button id="sideToggle" aria-controls="sidebar" aria-expanded="true"
+              title="Hide the song list to make the music bigger (press \)">&#9664; Hide list</button>
       <span id="songTitle"></span>
       <span id="srcTabs"></span>
       <span id="pageCtl" style="display:none">
@@ -381,7 +385,7 @@
         or click one in the list to display its sheet music.<br><br>
         <kbd>/</kbd> search &nbsp; <kbd>&larr;</kbd><kbd>&rarr;</kbd> flip pages &nbsp;
         <kbd>Enter</kbd> open first match &nbsp; <kbd>+</kbd><kbd>&minus;</kbd> zoom &nbsp;
-        <kbd>0</kbd> fit width
+        <kbd>0</kbd> fit width &nbsp; <kbd>\</kbd> hide or show the song list
       </div>
       <div id="spinner">Loading page&hellip;</div>
       <img id="pageImg" alt="sheet music page">
@@ -391,6 +395,7 @@
 
 <script>
 "use strict";
+const ZOOM_MIN = 320, ZOOM_MAX = 2600;
 const BOOK_SHORT = {bk1:"RB1", bk2:"RB2", bk3:"RB3", bk4:"RB4", bk5:"5th Ed", bk6:"6th Ed", xmas:"Xmas"};
 const KEY_ORDER = ["C","Db","D","Eb","E","F","F#","Gb","G","Ab","A","Bb","B",
                    "Cm","C#m","Dm","Ebm","Em","Fm","F#m","Gm","G#m","Am","Bbm","Bm"];
@@ -586,8 +591,27 @@ function loadPage() {
 
 function applyZoom() {
   const img = $("pageImg"), viewer = $("viewer");
-  if (cur.zoom === 0) img.style.width = Math.min(viewer.clientWidth - 30, 1100) + "px";
+  // With the song list hidden, Fit uses the whole width instead of stopping at 1100px.
+  const cap = document.body.classList.contains("list-hidden") ? ZOOM_MAX : 1100;
+  if (cur.zoom === 0) img.style.width = Math.min(viewer.clientWidth - 30, cap) + "px";
   else img.style.width = cur.zoom + "px";
+}
+
+// ---------- Hide or show the song list ----------
+const LIST_KEY = "songFinder.listHidden";
+
+function setListHidden(hidden) {
+  document.body.classList.toggle("list-hidden", hidden);
+  $("sideToggle").innerHTML = hidden ? "&#9654; Show list" : "&#9664; Hide list";
+  $("sideToggle").title = (hidden ? "Show the song list" : "Hide the song list to make the music bigger")
+                          + " (press \\)";
+  $("sideToggle").setAttribute("aria-expanded", String(!hidden));
+  try { localStorage.setItem(LIST_KEY, hidden ? "1" : "0"); } catch (e) { /* storage blocked */ }
+  if (cur && cur.zoom === 0) applyZoom();
+}
+
+function listHiddenSaved() {
+  try { return localStorage.getItem(LIST_KEY) === "1"; } catch (e) { return false; }
 }
 
 function flip(delta) {
@@ -612,7 +636,8 @@ $("search").addEventListener("keydown", e => {
 });
 $("prevPg").onclick = () => flip(-1);
 $("nextPg").onclick = () => flip(1);
-const ZOOM_MIN = 320, ZOOM_MAX = 2600;
+$("sideToggle").onclick = () =>
+  setListHidden(!document.body.classList.contains("list-hidden"));
 function zoomIn() {
   if (!cur) return;
   cur.zoom = Math.min($("pageImg").clientWidth * 1.2, ZOOM_MAX);
@@ -644,7 +669,15 @@ document.addEventListener("keydown", e => {
     if (e.key === "Escape") e.target.blur();
     return;
   }
-  if (e.key === "/") { e.preventDefault(); $("search").focus(); $("search").select(); }
+  if (e.key === "/") {
+    e.preventDefault();
+    setListHidden(false);
+    $("search").focus(); $("search").select();
+  }
+  else if (e.key === "\\") {
+    e.preventDefault();
+    setListHidden(!document.body.classList.contains("list-hidden"));
+  }
   else if (e.key === "ArrowLeft") flip(-1);
   else if (e.key === "ArrowRight") flip(1);
   else if (e.key === "+" || e.key === "=") { e.preventDefault(); zoomIn(); }
@@ -695,6 +728,8 @@ async function loadSongs() {
   buildFilterControls();
   applyFilter();
 }
+
+setListHidden(listHiddenSaved());
 
 function closeViewer() {
   cur = null; selId = null;
